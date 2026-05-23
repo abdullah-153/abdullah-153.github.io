@@ -1208,43 +1208,82 @@ h1, h2, h3, h4 {
     background: rgba(234, 88, 12, 0.02);
 }
 
-.editor-contents select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: transparent;
-    border: none;
-    border-bottom: 1px dashed var(--accent-green);
-    color: var(--accent-green);
+/* Custom Select Container & Options Dropdown styling */
+.custom-select-container {
+    display: inline-block;
+    position: relative;
+    user-select: none;
     font-family: var(--font-mono);
     font-size: 13px;
-    font-weight: 500;
+    vertical-align: middle;
+}
+
+.custom-select-trigger {
+    color: var(--accent-green);
+    border-bottom: 1px dashed var(--accent-green);
     cursor: pointer;
-    padding: 0 16px 0 4px;
-    width: auto;
-    border-radius: 0;
-    outline: none;
+    padding-right: 14px;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%2316a34a' d='M2 3.5l3 3 3-3z'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 2px center;
+    background-position: right center;
     background-size: 10px 10px;
     transition: all 0.2s ease;
 }
 
-.editor-contents select:hover,
-.editor-contents select:focus {
+.custom-select-container.open .custom-select-trigger,
+.custom-select-trigger:hover {
+    color: var(--accent-orange);
     border-bottom-style: solid;
     border-bottom-color: var(--accent-orange);
-    color: var(--accent-orange);
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%23ea580c' d='M2 3.5l3 3 3-3z'/></svg>");
 }
 
-.editor-contents select option {
-    background-color: var(--bg-light);
-    color: var(--text-main);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    padding: 6px;
+.custom-select-options {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    z-index: 50;
+    min-width: 80px;
+    background: #fdfbf7;
+    border: 1px solid var(--border-card);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+    padding: 4px 0;
+    overflow: hidden;
+    animation: selectFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes selectFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-select-container.open .custom-select-options {
+    display: block;
+}
+
+.custom-select-option {
+    padding: 6px 12px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.custom-select-option:hover {
+    background: rgba(234, 88, 12, 0.05);
+    color: var(--accent-orange);
+}
+
+.custom-select-option.selected {
+    color: var(--accent-green);
+    font-weight: 600;
 }
 
 .editor-contents input:focus {

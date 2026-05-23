@@ -237,7 +237,7 @@ function initTextScramble() {
 /* ==========================================
    2. Dual-Mode Spacetime & Data Pipeline Canvas
    ========================================== */
-let activeCanvasMode = "infra"; // "ai" (gravity warp) vs "infra" (data flow)
+let activeCanvasMode = "ai"; // "ai" (gravity warp) vs "infra" (data flow)
 
 function initSynapticCanvas() {
     const canvas = document.getElementById("bg-canvas");
@@ -249,7 +249,6 @@ function initSynapticCanvas() {
     
     let mouse = { x: -1000, y: -1000, active: false };
     let points = [];
-    let dataPackets = [];
     let time = 0;
     
     const spacing = 55; // Grid cell spacing
@@ -293,7 +292,6 @@ function initSynapticCanvas() {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
         initGrid();
-        initPackets();
     });
 
     class GridPoint {
@@ -347,66 +345,6 @@ function initSynapticCanvas() {
         }
     }
 
-    // Data packets that stream along grid lines in Infrastructure mode
-    class DataPacket {
-        constructor(col, row, isHorizontal) {
-            this.c = col;
-            this.r = row;
-            this.isHorizontal = isHorizontal;
-            this.progress = Math.random();
-            this.speed = 0.015 + Math.random() * 0.025;
-            this.opacity = 0.3 + Math.random() * 0.7;
-        }
-
-        update(cols, rows) {
-            this.progress += this.speed;
-            if (this.progress >= 1.0) {
-                this.progress = 0;
-                // Move index along the grid axis
-                if (this.isHorizontal) {
-                    this.c = (this.c + 1) % (cols - 1);
-                } else {
-                    this.r = (this.r + 1) % (rows - 1);
-                }
-                this.speed = 0.015 + Math.random() * 0.025;
-            }
-        }
-
-        draw(points) {
-            const p1 = points[this.c] ? points[this.c][this.r] : null;
-            let p2 = null;
-            
-            if (this.isHorizontal && points[this.c + 1]) {
-                p2 = points[this.c + 1][this.r];
-            } else if (!this.isHorizontal && points[this.c]) {
-                p2 = points[this.c][this.r + 1];
-            }
-
-            if (p1 && p2) {
-                // Interpolate packet position
-                const x = p1.x + (p2.x - p1.x) * this.progress;
-                const y = p1.y + (p2.y - p1.y) * this.progress;
-
-                // Draw glowing core packet
-                ctx.beginPath();
-                ctx.arc(x, y, 2.2, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(234, 88, 12, ${this.opacity * 0.75})`;
-                ctx.fill();
-
-                // Draw streaming tail
-                ctx.beginPath();
-                const tailProgress = Math.max(0, this.progress - 0.09);
-                const tx = p1.x + (p2.x - p1.x) * tailProgress;
-                const ty = p1.y + (p2.y - p1.y) * tailProgress;
-                ctx.moveTo(x, y);
-                ctx.lineTo(tx, ty);
-                ctx.lineWidth = 1.2;
-                ctx.strokeStyle = `rgba(234, 88, 12, ${this.opacity * 0.25})`;
-                ctx.stroke();
-            }
-        }
-    }
-
     let cols = 0;
     let rows = 0;
 
@@ -425,19 +363,7 @@ function initSynapticCanvas() {
         }
     }
 
-    function initPackets() {
-        dataPackets = [];
-        const numPackets = 65; // Total active packets streaming concurrently
-        for (let i = 0; i < numPackets; i++) {
-            const randCol = Math.floor(Math.random() * (cols - 1));
-            const randRow = Math.floor(Math.random() * (rows - 1));
-            const isHorizontal = Math.random() > 0.5;
-            dataPackets.push(new DataPacket(randCol, randRow, isHorizontal));
-        }
-    }
-
     initGrid();
-    initPackets();
 
     function animate() {
         ctx.clearRect(0, 0, width, height);
@@ -544,13 +470,7 @@ function initSynapticCanvas() {
             ctx.restore();
         }
 
-        // Draw Flowing Data Stream Packets (Infrastructure mode only)
-        if (activeCanvasMode === "infra") {
-            for (let i = 0; i < dataPackets.length; i++) {
-                dataPackets[i].update(cols, rows);
-                dataPackets[i].draw(points);
-            }
-        }
+        // Data packets removed
 
         requestAnimationFrame(animate);
     }
@@ -560,10 +480,6 @@ function initSynapticCanvas() {
     // Export toggle method to global window context
     window.setCanvasMode = (mode) => {
         activeCanvasMode = mode;
-        // Re-inject random positions to start stream afresh on swap
-        if (mode === "infra") {
-            initPackets();
-        }
     };
 }
 
@@ -788,10 +704,9 @@ function initSpecializationMorph() {
             }
         });
 
-        // 5. Update canvas graphics engine mode (mapped to corresponding visualizations)
+        // 5. Update canvas graphics engine mode
         if (window.setCanvasMode) {
-            const canvasMode = newMode === "ai" ? "infra" : "ai";
-            window.setCanvasMode(canvasMode);
+            window.setCanvasMode(newMode);
         }
     }
 
@@ -889,6 +804,36 @@ function initContactAPI() {
     if (!form || !submitBtn || !logOutput || !statusLabel) return;
 
     const terminalDot = submitBtn.querySelector(".btn-terminal-dot");
+
+    // Custom dropdown components
+    const selectContainer = document.querySelector(".custom-select-container");
+    const selectTrigger = document.getElementById("select-recruiter-trigger");
+    const selectOptions = document.querySelectorAll(".custom-select-option");
+    const hiddenInput = document.getElementById("form-mode");
+
+    if (selectContainer && selectTrigger && hiddenInput) {
+        selectTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            selectContainer.classList.toggle("open");
+        });
+
+        selectOptions.forEach(option => {
+            option.addEventListener("click", () => {
+                const val = option.getAttribute("data-value");
+                selectTrigger.innerText = val;
+                hiddenInput.value = val;
+                
+                selectOptions.forEach(opt => opt.classList.remove("selected"));
+                option.classList.add("selected");
+                
+                selectContainer.classList.remove("open");
+            });
+        });
+
+        document.addEventListener("click", () => {
+            selectContainer.classList.remove("open");
+        });
+    }
     
     submitBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -897,7 +842,7 @@ function initContactAPI() {
         const email = document.getElementById("form-email").value.trim();
         const subject = document.getElementById("form-subject").value.trim();
         const payload = document.getElementById("form-message").value.trim();
-        const mode = document.getElementById("form-mode").value;
+        const mode = hiddenInput ? hiddenInput.value : "true";
         
         logOutput.innerHTML = "";
         
@@ -943,10 +888,25 @@ function initContactAPI() {
             appendLine(`\n{`);
             appendLine(`  "status": "delivered",`);
             appendLine(`  "socket_token": "${Math.random().toString(16).substring(2, 10).toUpperCase()}",`);
-            appendLine(`  "response": "Thank you for reaching out, Abdullah will ping you back shortly."`);
+            appendLine(`  "response": "Routing contact payload to kanpeki.dev@gmail.com..."`);
             appendLine(`}`, "success");
             
             form.reset();
+            if (hiddenInput && selectTrigger) {
+                hiddenInput.value = "true";
+                selectTrigger.innerText = "true";
+                selectOptions.forEach(opt => {
+                    if (opt.getAttribute("data-value") === "true") {
+                        opt.classList.add("selected");
+                    } else {
+                        opt.classList.remove("selected");
+                    }
+                });
+            }
+
+            // Route contact requests to mail client
+            const mailtoUrl = `mailto:kanpeki.dev@gmail.com?subject=${encodeURIComponent(subject || 'Collaboration Opportunity')}&body=${encodeURIComponent(`Hello Abdullah,\n\nMy name is ${name} (${email}).\n\nMessage:\n${payload}\n\nRecruiter: ${mode}`)}`;
+            window.location.href = mailtoUrl;
 
             // Revert success state after 4 seconds
             setTimeout(() => {

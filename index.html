@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ea580c'/%3E%3Ctext x='50%25' y='62%25' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='15' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EAK%3C/text%3E%3C/svg%3E">
 </head>
 <body class="structured-portfolio">
 
@@ -78,8 +79,8 @@
                     <span class="btn-tag">// CONNECT</span>
                 </a>
                 <div class="social-chips">
-                    <a href="https://github.com/abdullahkhan" target="_blank" class="chip">GitHub ↗</a>
-                    <a href="https://linkedin.com/in/abdullahkhan" target="_blank" class="chip">LinkedIn ↗</a>
+                    <a href="https://github.com/abdullah-153" target="_blank" class="chip">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/abdullah-khan-331914214/" target="_blank" class="chip">LinkedIn ↗</a>
                 </div>
             </div>
         </section>
@@ -375,7 +376,17 @@
                                     <div class="line-indent"><span class="json-key">"email"</span>: <input type="email" id="form-email" placeholder="&quot;your.email@org.com&quot;" required></div>
                                     <div class="line-indent"><span class="json-key">"subject"</span>: <input type="text" id="form-subject" placeholder="&quot;Collaboration Opportunity&quot;"></div>
                                     <div class="line-indent"><span class="json-key">"payload"</span>: <input type="text" id="form-message" placeholder="&quot;Write message block...&quot;" required></div>
-                                    <div class="line-indent"><span class="json-key">"recruiter"</span>: <select id="form-mode"><option value="true">true</option><option value="false">false</option></select></div>
+                                    <div class="line-indent">
+                                        <span class="json-key">"recruiter"</span>: 
+                                        <div class="custom-select-container">
+                                            <div class="custom-select-trigger" id="select-recruiter-trigger">true</div>
+                                            <div class="custom-select-options" id="select-recruiter-options">
+                                                <div class="custom-select-option selected" data-value="true">true</div>
+                                                <div class="custom-select-option" data-value="false">false</div>
+                                            </div>
+                                            <input type="hidden" id="form-mode" value="true">
+                                        </div>
+                                    </div>
                                     <div>}</div>
                                 </div>
                             </div>
@@ -420,9 +431,9 @@
                 <div class="footer-grid-cell">
                     <span class="cell-label">ESTABLISHED_SOCKETS</span>
                     <div class="footer-links">
-                        <a href="https://github.com/abdullahkhan" target="_blank" class="footer-link-port"><span class="port-num">P_443:</span> GitHub</a>
-                        <a href="https://linkedin.com/in/abdullahkhan" target="_blank" class="footer-link-port"><span class="port-num">P_80:</span> LinkedIn</a>
-                        <a href="mailto:abdullah@khan.dev" class="footer-link-port"><span class="port-num">P_25:</span> Email</a>
+                        <a href="https://github.com/abdullah-153" target="_blank" class="footer-link-port"><span class="port-num">P_443:</span> GitHub</a>
+                        <a href="https://www.linkedin.com/in/abdullah-khan-331914214/" target="_blank" class="footer-link-port"><span class="port-num">P_80:</span> LinkedIn</a>
+                        <a href="mailto:kanpeki.dev@gmail.com" class="footer-link-port"><span class="port-num">P_25:</span> Email</a>
                     </div>
                 </div>
             </div>
