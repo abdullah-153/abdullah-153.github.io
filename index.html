@@ -102,38 +102,38 @@
                 <!-- Project 1 -->
                 <div class="project-row-block" id="project-agentic-flow" 
                      data-ai-title="OMNIVLA"
-                     data-ai-tags="Python / VLM / PyTorch / Agent Orchestration"
-                     data-ai-desc="A hardware-constrained local general UI automation multi-agent system. Runs a distilled visual-language-action (VLA) model locally on edge compute to orchestrate lock-free desktop and browser automation tasks."
-                     data-ai-metrics='[{"label":"VRAM_USAGE","val":"3.8 GB","class":"green"},{"label":"LOOP_SPEED","val":"7.8 Hz","class":"cyan"},{"label":"TASK_SUCCESS","val":"91.2%","class":"orange"}]'
+                     data-ai-tags="Python / PyTorch / LoRA / ChromaDB"
+                     data-ai-desc="Hardware-constrained autonomous GUI agent optimized via KV cache quantization to run natively within &lt;6GB VRAM. Fine-tuned for precise coordinate grounding with Set-of-Mark prompting and ChromaDB episodic memory."
+                     data-ai-metrics='[{"label":"VRAM_LIMIT","val":"< 6.0 GB","class":"green"},{"label":"SPATIAL_ACC","val":"Pixel Grounded","class":"cyan"},{"label":"MEMORY","val":"ChromaDB RAG","class":"orange"}]'
                      data-infra-title="STRIDE"
-                     data-infra-tags="Flutter / TensorFlow Lite / Mediapipe / Pose Detection"
-                     data-infra-desc="An AI-powered mobile fitness tracker built with Flutter. Runs local MediaPipe pose detection models for real-time rep counting and utilizes local LLM adapters to generate customized meal and workout plans."
-                     data-infra-metrics='[{"label":"INFERENCE","val":"14ms","class":"green"},{"label":"POSE_ACCURACY","val":"98.4%","class":"cyan"},{"label":"THERMAL_TEMP","val":"Safe / 38°C","class":"orange"}]'>
+                     data-infra-tags="Flutter / Riverpod / Gemini API / Firebase"
+                     data-infra-desc="A production-grade physiological fitness tracking application built using Flutter and Riverpod. Integrates custom-trained ML models with Gemini API for workout routine serving and serverless Firebase/Firestore."
+                     data-infra-metrics='[{"label":"ARCH","val":"Flutter/Riverpod","class":"green"},{"label":"PHYSIO_GEN","val":"Gemini API","class":"cyan"},{"label":"SERVERLESS","val":"Firebase/Docker","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_01</span>
                         <h3 class="project-title" id="title-agentic-flow">OMNIVLA</h3>
                         <div class="project-tags-container">
-                            <span class="project-tags" id="tags-agentic-flow">Python / VLM / PyTorch / Agent Orchestration</span>
+                            <span class="project-tags" id="tags-agentic-flow">Python / PyTorch / LoRA / ChromaDB</span>
                         </div>
                         <p class="project-desc" id="desc-agentic-flow">
-                            A hardware-constrained local general UI automation multi-agent system. Runs a distilled visual-language-action (VLA) model locally on edge compute to orchestrate lock-free desktop and browser automation tasks.
+                            Hardware-constrained autonomous GUI agent optimized via KV cache quantization to run natively within &lt;6GB VRAM. Fine-tuned for precise coordinate grounding with Set-of-Mark prompting and ChromaDB episodic memory.
                         </p>
                     </div>
                     
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-1">VRAM_USAGE</span>
-                                <span class="metric-value green" id="val-metric-af-1">3.8 GB</span>
+                                <span class="metric-label" id="lbl-metric-af-1">VRAM_LIMIT</span>
+                                <span class="metric-value green" id="val-metric-af-1">&lt; 6.0 GB</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-2">LOOP_SPEED</span>
-                                <span class="metric-value cyan" id="val-metric-af-2">7.8 Hz</span>
+                                <span class="metric-label" id="lbl-metric-af-2">SPATIAL_ACC</span>
+                                <span class="metric-value cyan" id="val-metric-af-2">Pixel Grounded</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-3">TASK_SUCCESS</span>
-                                <span class="metric-value orange" id="val-metric-af-3">91.2%</span>
+                                <span class="metric-label" id="lbl-metric-af-3">MEMORY</span>
+                                <span class="metric-value orange" id="val-metric-af-3">ChromaDB RAG</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
@@ -145,87 +145,43 @@
 
                 <!-- Project 2 -->
                 <div class="project-row-block" id="project-rag-search"
-                     data-ai-title="CHROMA_RAG"
-                     data-ai-tags="ChromaDB / Python / LlamaIndex / Semantic Search"
-                     data-ai-desc="An enterprise-scale hybrid retrieval system combining BM25 keyword matching and dense vector search via ChromaDB. Features automated chunking, parent-child token embeddings, and cross-encoder rerankers."
-                     data-ai-metrics='[{"label":"RETRIEVAL_MRR","val":"0.912","class":"green"},{"label":"CHROMA_LATENCY","val":"18ms","class":"cyan"},{"label":"CONTEXT_RECALL","val":"96.5%","class":"orange"}]'
+                     data-ai-title="QuantPDC"
+                     data-ai-tags="C++ / CUDA / MPI / OpenMP"
+                     data-ai-desc="A high-performance, distributed algorithmic trading backtesting engine leveraging parallel computing architectures (CUDA, MPI, OpenMP) to run thread-safe PnL calculations over massive historical tick data."
+                     data-ai-metrics='[{"label":"BACKTEST_SPEED","val":"1.2M ticks/s","class":"green"},{"label":"GPU_ACCEL","val":"CUDA Enabled","class":"cyan"},{"label":"PnL_THREADS","val":"64 Threads","class":"orange"}]'
                      data-infra-title="SOUS"
-                     data-infra-tags="Flutter / On-Device CNN / Recipe Inference / Dart"
-                     data-infra-desc="A Flutter application utilizing mobile vision classifiers to recognize raw ingredients from camera frames. Runs offline recipes reasoning models to generate step-by-step culinary instructions."
-                     data-infra-metrics='[{"label":"IMAGE_RECOG","val":"94.2%","class":"green"},{"label":"ON_DEV_LATENCY","val":"82ms","class":"cyan"},{"label":"RECIPE_BUILD","val":"1.4s","class":"orange"}]'>
+                     data-infra-tags="Flutter / Dart / REST APIs / Docker"
+                     data-infra-desc="A cross-platform recipe recommendation engine built in Flutter with a chef persona. Combines a decoupled containerized Python ML microservice via REST APIs with ingredient-based sorting logic."
+                     data-infra-metrics='[{"label":"ON_DEVICE","val":"Offline ML","class":"green"},{"label":"PREPROCESSING","val":"Kaggle Pipelines","class":"cyan"},{"label":"API_RESPONSE","val":"Decoupled REST","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_02</span>
-                        <h3 class="project-title" id="title-rag-search">CHROMA_RAG</h3>
+                        <h3 class="project-title" id="title-rag-search">QuantPDC</h3>
                         <div class="project-tags-container">
-                            <span class="project-tags" id="tags-rag-search">ChromaDB / Python / LlamaIndex / Semantic Search</span>
+                            <span class="project-tags" id="tags-rag-search">C++ / CUDA / MPI / OpenMP</span>
                         </div>
                         <p class="project-desc" id="desc-rag-search">
-                            An enterprise-scale hybrid retrieval system combining BM25 keyword matching and dense vector search via ChromaDB. Features automated chunking, parent-child token embeddings, and cross-encoder rerankers.
+                            A high-performance, distributed algorithmic trading backtesting engine leveraging parallel computing architectures (CUDA, MPI, OpenMP) to run thread-safe PnL calculations over massive historical tick data.
                         </p>
                     </div>
                     
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-1">RETRIEVAL_MRR</span>
-                                <span class="metric-value green" id="val-metric-rs-1">0.912</span>
+                                <span class="metric-label" id="lbl-metric-rs-1">BACKTEST_SPEED</span>
+                                <span class="metric-value green" id="val-metric-rs-1">1.2M ticks/s</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-2">CHROMA_LATENCY</span>
-                                <span class="metric-value cyan" id="val-metric-rs-2">18ms</span>
+                                <span class="metric-label" id="lbl-metric-rs-2">GPU_ACCEL</span>
+                                <span class="metric-value cyan" id="val-metric-rs-2">CUDA Enabled</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-3">CONTEXT_RECALL</span>
-                                <span class="metric-value orange" id="val-metric-rs-3">96.5%</span>
+                                <span class="metric-label" id="lbl-metric-rs-3">PnL_THREADS</span>
+                                <span class="metric-value orange" id="val-metric-rs-3">64 Threads</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
-                            <span class="project-status-badge">// CLUSTER INTEGRATED</span>
-                            <span class="project-case-link">Case Study coming soon ↗</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-row-block" id="project-vision-edge"
-                     data-ai-title="FINE_TUNER"
-                     data-ai-tags="PyTorch / LoRA / Llama-3 / Model Quantization"
-                     data-ai-desc="An end-to-end model optimization pipeline fine-tuning open-source LLMs (Llama-3/Mistral-7B) using PEFT/LoRA. Compresses models through 4-bit AWQ/GGUF quantization and distills knowledge into lightweight student SLMs."
-                     data-ai-metrics='[{"label":"COMPRESSION","val":"4-Bit AWQ","class":"green"},{"label":"VRAM_SAVINGS","val":"68%","class":"cyan"},{"label":"ACCURACY_LOSS","val":"-0.8%","class":"orange"}]'
-                     data-infra-title="IRIS"
-                     data-infra-tags="Flutter / Mobile CLIP / Embeddings / SQLite"
-                     data-infra-desc="A Flutter visual search application hosting an on-device quantized CLIP model. Enables natural language semantic searches across local phone gallery directories completely offline using SQLite vector structures."
-                     data-infra-metrics='[{"label":"CLIP_SEARCH","val":"54ms","class":"green"},{"label":"MAX_INDEX_SIZE","val":"100k+","class":"cyan"},{"label":"LOCAL_MEM","val":"42MB","class":"orange"}]'>
-                    
-                    <div class="project-info-pane">
-                        <span class="project-num">PROJECT_03</span>
-                        <h3 class="project-title" id="title-vision-edge">FINE_TUNER</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-vision-edge">PyTorch / LoRA / Llama-3 / Model Quantization</span>
-                        </div>
-                        <p class="project-desc" id="desc-vision-edge">
-                            An end-to-end model optimization pipeline fine-tuning open-source LLMs (Llama-3/Mistral-7B) using PEFT/LoRA. Compresses models through 4-bit AWQ/GGUF quantization and distills knowledge into lightweight student SLMs.
-                        </p>
-                    </div>
-                    
-                    <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
-                            <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-1">COMPRESSION</span>
-                                <span class="metric-value green" id="val-metric-ve-1">4-Bit AWQ</span>
-                            </div>
-                            <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-2">VRAM_SAVINGS</span>
-                                <span class="metric-value cyan" id="val-metric-ve-2">68%</span>
-                            </div>
-                            <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-3">ACCURACY_LOSS</span>
-                                <span class="metric-value orange" id="val-metric-ve-3">-0.8%</span>
-                            </div>
-                        </div>
-                        <div class="project-action-hud">
-                            <span class="project-status-badge">// COMPILED EDGE ASSET</span>
+                            <span class="project-status-badge">// HPT ENGINE</span>
                             <span class="project-case-link">Case Study coming soon ↗</span>
                         </div>
                     </div>
@@ -244,32 +200,32 @@
                 
                 <!-- Group 1 -->
                 <div class="skills-grid-col" data-specialization="infra">
-                    <h3 class="skills-col-title">01 // AI Mobile Applications</h3>
+                    <h3 class="skills-col-title">01 // Mobile & Web Development</h3>
                     <div class="skills-cards-wrapper">
                         
                         <div class="skill-card-module" data-node="flutter">
                             <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">Flutter & Dart</h4>
+                            <h4 class="skill-card-name">Flutter, Dart & Riverpod</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="tflite">
+                        <div class="skill-card-module" data-node="database-backends">
                             <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">TensorFlow Lite</h4>
+                            <h4 class="skill-card-name">Custom Backends & Firebase</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="ondevice-llm">
-                            <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">On-Device LLMs</h4>
+                        <div class="skill-card-module" data-node="web-architecture">
+                            <span class="skill-tag-prefix">[web]</span>
+                            <h4 class="skill-card-name">Full-Stack Web Arch</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="kotlin-ai">
+                        <div class="skill-card-module" data-node="cross-platform">
                             <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">Kotlin & Mobile AI</h4>
+                            <h4 class="skill-card-name">Cross-Platform Arch</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="metal">
+                        <div class="skill-card-module" data-node="premium-ui">
                             <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">Metal GPU Shaders</h4>
+                            <h4 class="skill-card-name">Premium UI/UX Design</h4>
                         </div>
 
                     </div>
@@ -277,32 +233,32 @@
 
                 <!-- Group 2 -->
                 <div class="skills-grid-col" data-specialization="both">
-                    <h3 class="skills-col-title">02 // Systems & Integration</h3>
+                    <h3 class="skills-col-title">02 // Systems & Software Eng</h3>
                     <div class="skills-cards-wrapper">
 
-                        <div class="skill-card-module" data-node="fastapi">
+                        <div class="skill-card-module" data-node="postgresql">
                             <span class="skill-tag-prefix">[sys]</span>
-                            <h4 class="skill-card-name">FastAPI Backends</h4>
+                            <h4 class="skill-card-name">PostgreSQL & Supabase</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="e2e-llm">
+                        <div class="skill-card-module" data-node="docker">
                             <span class="skill-tag-prefix">[sys]</span>
-                            <h4 class="skill-card-name">End-to-End LLM</h4>
+                            <h4 class="skill-card-name">Docker & Railway Hosting</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="python">
+                        <div class="skill-card-module" data-node="rest-api">
                             <span class="skill-tag-prefix">[sys]</span>
-                            <h4 class="skill-card-name">Concurrent Python</h4>
+                            <h4 class="skill-card-name">RESTful APIs & CI/CD</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="cicd">
+                        <div class="skill-card-module" data-node="system-architecture">
                             <span class="skill-tag-prefix">[sys]</span>
-                            <h4 class="skill-card-name">Git & CI/CD Pipelines</h4>
+                            <h4 class="skill-card-name">System Arch & SDLC</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="orchestration">
+                        <div class="skill-card-module" data-node="qa-refactoring">
                             <span class="skill-tag-prefix">[sys]</span>
-                            <h4 class="skill-card-name">API Orchestration</h4>
+                            <h4 class="skill-card-name">QA & Code Refactoring</h4>
                         </div>
 
                     </div>
@@ -310,32 +266,32 @@
 
                 <!-- Group 3 -->
                 <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">03 // AI / ML Engineering</h3>
+                    <h3 class="skills-col-title">03 // AI / ML & Parallel Computing</h3>
                     <div class="skills-cards-wrapper">
 
                         <div class="skill-card-module" data-node="finetuning">
                             <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Fine-Tuning (LoRA)</h4>
+                            <h4 class="skill-card-name">PEFT/LoRA (Unsloth)</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="rag-pipelines">
+                        <div class="skill-card-module" data-node="rag-chroma">
                             <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">RAG Pipelines</h4>
+                            <h4 class="skill-card-name">RAG & ChromaDB Memory</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="chromadb">
+                        <div class="skill-card-module" data-node="quantization">
                             <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">ChromaDB Vector DB</h4>
+                            <h4 class="skill-card-name">Quantization & KV Cache</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="pytorch">
+                        <div class="skill-card-module" data-node="cuda">
                             <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">PyTorch Modeling</h4>
+                            <h4 class="skill-card-name">GPU Acceleration (CUDA)</h4>
                         </div>
 
-                        <div class="skill-card-module" data-node="frameworks">
+                        <div class="skill-card-module" data-node="parallel-computing">
                             <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">LangChain / LlamaIndex</h4>
+                            <h4 class="skill-card-name">Parallel Comp (MPI/OpenMP)</h4>
                         </div>
 
                     </div>

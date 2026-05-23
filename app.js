@@ -534,7 +534,7 @@ function measureRowHeight(row, mode) {
     
     metrics.forEach((m, idx) => {
         const boxIdx = idx + 1;
-        const prefixId = projectId === "agentic-flow" ? "af" : projectId === "rag-search" ? "rs" : "ve";
+        const prefixId = projectId === "agentic-flow" ? "af" : "rs";
         const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
         const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
         if (labelSpan && valueSpan) {
@@ -680,7 +680,7 @@ function initSpecializationMorph() {
             const metrics = JSON.parse(row.getAttribute(`data-${newMode}-metrics`));
             metrics.forEach((m, idx) => {
                 const boxIdx = idx + 1;
-                const prefixId = projectId === "agentic-flow" ? "af" : projectId === "rag-search" ? "rs" : "ve";
+                const prefixId = projectId === "agentic-flow" ? "af" : "rs";
                 const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
                 const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
 
@@ -802,16 +802,12 @@ function initCVDownload() {
     });
     
     function triggerFileDownload() {
-        const mockContent = "Abdullah Khan - AI & Systems Infrastructure Engineer Resume Payload.";
-        const blob = new Blob([mockContent], { type: "text/plain" });
-        const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
-        a.href = url;
-        a.download = "abdullah_khan_resume.txt";
+        a.href = "./resume.pdf";
+        a.download = "Muhammad_Abdullah_Khan_Resume.pdf";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        URL.revokeObjectURL(url);
     }
 }
 
