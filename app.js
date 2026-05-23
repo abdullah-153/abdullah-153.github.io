@@ -621,6 +621,8 @@ function initSpecializationMorph() {
     const labelAI = document.getElementById("label-ai");
     const labelInfra = document.getElementById("label-infra");
     const wrapper = document.querySelector(".specialization-toggle-wrapper");
+    const indicatorMode = document.getElementById("projects-focus-mode");
+    const indicatorShortcut = document.getElementById("projects-toggle-shortcut");
 
     let currentSpecialization = "ai"; // default state
 
@@ -708,6 +710,19 @@ function initSpecializationMorph() {
         if (window.setCanvasMode) {
             window.setCanvasMode(newMode);
         }
+
+        // Update projects section indicator text
+        if (indicatorMode && indicatorShortcut) {
+            if (newMode === "infra") {
+                indicatorMode.innerText = "AI MOBILE APPLICATIONS";
+                indicatorShortcut.innerText = "(Click to swap to AI/ML Engineering Projects)";
+                indicatorMode.style.color = "var(--accent-amber)";
+            } else {
+                indicatorMode.innerText = "AI / ML ENGINEERING";
+                indicatorShortcut.innerText = "(Click to swap to Mobile AI Projects)";
+                indicatorMode.style.color = "var(--accent-green)";
+            }
+        }
     }
 
     // Set initial focus highlight state for ML Engineering skills (ai)
@@ -734,6 +749,15 @@ function initSpecializationMorph() {
 
     if (labelInfra) {
         labelInfra.addEventListener("click", () => switchMode("infra"));
+    }
+
+    // Wire up projects context indicator shortcut
+    const projectsIndicator = document.querySelector(".projects-context-indicator");
+    if (projectsIndicator) {
+        projectsIndicator.addEventListener("click", () => {
+            const target = currentSpecialization === "ai" ? "infra" : "ai";
+            switchMode(target);
+        });
     }
 }
 
