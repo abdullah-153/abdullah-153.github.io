@@ -877,46 +877,69 @@ function initContactAPI() {
         appendLine(`  "recruiter": ${mode}`);
         appendLine(`}`);
         
-        setTimeout(() => {
-            statusLabel.innerText = "201 CREATED";
-            statusLabel.className = "http-status-label success";
-            if (terminalDot) terminalDot.className = "btn-terminal-dot success";
-            
-            appendLine(`\n<<< HTTP/1.1 201 CREATED`, "success");
-            appendLine(`Content-Type: application/json`, "muted");
-            appendLine(`X-Inference-Time: 82ms`, "muted");
-            appendLine(`\n{`);
-            appendLine(`  "status": "delivered",`);
-            appendLine(`  "socket_token": "${Math.random().toString(16).substring(2, 10).toUpperCase()}",`);
-            appendLine(`  "response": "Routing contact payload to kanpeki.dev@gmail.com..."`);
-            appendLine(`}`, "success");
-            
-            form.reset();
-            if (hiddenInput && selectTrigger) {
-                hiddenInput.value = "true";
-                selectTrigger.innerText = "true";
-                selectOptions.forEach(opt => {
-                    if (opt.getAttribute("data-value") === "true") {
-                        opt.classList.add("selected");
-                    } else {
-                        opt.classList.remove("selected");
-                    }
+        fetch("https://formspree.io/kanpeki.dev@gmail.com", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                _replyto: email,
+                email: email,
+                subject: subject || "Portfolio Collaboration Opportunity",
+                message: payload,
+                recruiter: mode
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                statusLabel.innerText = "201 CREATED";
+                statusLabel.className = "http-status-label success";
+                if (terminalDot) terminalDot.className = "btn-terminal-dot success";
+                
+                appendLine(`\n<<< HTTP/1.1 201 CREATED`, "success");
+                appendLine(`Content-Type: application/json`, "muted");
+                appendLine(`X-Inference-Time: 120ms`, "muted");
+                appendLine(`\n{`);
+                appendLine(`  "status": "delivered",`);
+                appendLine(`  "recipient": "kanpeki.dev@gmail.com",`);
+                appendLine(`  "info": "Submission routed. Check email for activation if first run."`);
+                appendLine(`}`, "success");
+                
+                form.reset();
+                if (hiddenInput && selectTrigger) {
+                    hiddenInput.value = "true";
+                    selectTrigger.innerText = "true";
+                    selectOptions.forEach(opt => {
+                        if (opt.getAttribute("data-value") === "true") {
+                            opt.classList.add("selected");
+                        } else {
+                            opt.classList.remove("selected");
+                        }
+                    });
+                }
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error || "Formspree routing failed");
                 });
             }
-
-            // Route contact requests to mail client
-            const mailtoUrl = `mailto:kanpeki.dev@gmail.com?subject=${encodeURIComponent(subject || 'Collaboration Opportunity')}&body=${encodeURIComponent(`Hello Abdullah,\n\nMy name is ${name} (${email}).\n\nMessage:\n${payload}\n\nRecruiter: ${mode}`)}`;
-            window.location.href = mailtoUrl;
-
-            // Revert success state after 4 seconds
+        })
+        .catch(err => {
+            statusLabel.innerText = "500 SERVER_ERROR";
+            statusLabel.className = "http-status-label error";
+            if (terminalDot) terminalDot.className = "btn-terminal-dot error";
+            appendLine(`\n<<< HTTP/1.1 500 INTERNAL SERVER ERROR`, "error");
+            appendLine(`Error: ${err.message}`, "error");
+        })
+        .finally(() => {
+            // Revert state after 4 seconds
             setTimeout(() => {
-                if (statusLabel.innerText === "201 CREATED") {
-                    statusLabel.innerText = "200 READY";
-                    statusLabel.className = "http-status-label";
-                    if (terminalDot) terminalDot.className = "btn-terminal-dot";
-                }
+                statusLabel.innerText = "200 READY";
+                statusLabel.className = "http-status-label";
+                if (terminalDot) terminalDot.className = "btn-terminal-dot";
             }, 4000);
-        }, 1100);
+        });
     });
     
     function appendLine(text, type = "") {
