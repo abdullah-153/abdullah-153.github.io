@@ -43,6 +43,11 @@
     padding: 0;
 }
 
+/* Visibility Helper Utilities */
+.mobile-only {
+    display: none !important;
+}
+
 html {
     scroll-behavior: smooth;
     background-color: var(--bg-light);
@@ -1184,7 +1189,7 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
-.editor-contents input, .editor-contents select {
+.editor-contents input {
     background: transparent;
     border: none;
     border-bottom: 1px dashed var(--text-disabled);
@@ -1197,10 +1202,49 @@ h1, h2, h3, h4 {
     transition: all 0.2s ease;
 }
 
+.editor-contents input:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--accent-orange);
+    background: rgba(234, 88, 12, 0.02);
+}
+
 .editor-contents select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--accent-green);
     color: var(--accent-green);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
+    padding: 0 16px 0 4px;
     width: auto;
+    border-radius: 0;
+    outline: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%2316a34a' d='M2 3.5l3 3 3-3z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 10px 10px;
+    transition: all 0.2s ease;
+}
+
+.editor-contents select:hover,
+.editor-contents select:focus {
+    border-bottom-style: solid;
+    border-bottom-color: var(--accent-orange);
+    color: var(--accent-orange);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path fill='%23ea580c' d='M2 3.5l3 3 3-3z'/></svg>");
+}
+
+.editor-contents select option {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 6px;
 }
 
 .editor-contents input:focus {
@@ -1625,6 +1669,53 @@ h1, h2, h3, h4 {
         align-items: center;
         text-align: center;
     }
+    
+    /* Responsive specialization toggle & hero modifications */
+    .desktop-only {
+        display: none !important;
+    }
+    .mobile-only {
+        display: inline !important;
+    }
+    .specialization-toggle-wrapper {
+        display: flex;
+        width: 100%;
+        max-width: 320px;
+        margin: 16px auto 28px auto;
+        justify-content: space-between;
+        gap: 6px;
+        padding: 5px 10px;
+    }
+    .toggle-label {
+        font-size: 9.5px;
+        letter-spacing: 0.02em;
+    }
+    .specialization-toggle-bar {
+        width: 48px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+    .toggle-slider-handle {
+        width: 14px;
+        height: 14px;
+        top: 2px;
+        left: 2px;
+    }
+    .specialization-toggle-wrapper.infra-active .toggle-slider-handle {
+        transform: translateX(30px);
+    }
+    .hero-title {
+        font-size: clamp(23px, 6vw, 34px) !important;
+        line-height: 1.25;
+    }
+    .hero-subtitle {
+        font-size: 13.5px;
+        line-height: 1.55;
+        margin-bottom: 24px;
+    }
+    .section-title {
+        font-size: 22px !important;
+    }
 }
 
 /* Dynamic layout stability handled via JavaScript measurements */
@@ -1646,14 +1737,14 @@ h1, h2, h3, h4 {
 /* Scroll Reveal Viewport Animations for Mobile and Desktop */
 .reveal-element {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(12px) scale(0.99);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
 }
 
 .reveal-element.active-reveal {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1.0);
 }
 
 /* Staggered Delay Utilities for Lists and Grids */

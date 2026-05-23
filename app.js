@@ -266,6 +266,28 @@ function initSynapticCanvas() {
         mouse.x = -1000;
         mouse.y = -1000;
     });
+
+    window.addEventListener("touchstart", (e) => {
+        if (e.touches && e.touches.length > 0) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+            mouse.active = true;
+        }
+    });
+
+    window.addEventListener("touchmove", (e) => {
+        if (e.touches && e.touches.length > 0) {
+            mouse.x = e.touches[0].clientX;
+            mouse.y = e.touches[0].clientY;
+            mouse.active = true;
+        }
+    });
+
+    window.addEventListener("touchend", () => {
+        mouse.active = false;
+        mouse.x = -1000;
+        mouse.y = -1000;
+    });
     
     window.addEventListener("resize", () => {
         width = canvas.width = window.innerWidth;
@@ -288,28 +310,29 @@ function initSynapticCanvas() {
         }
 
         update() {
-            // Elastic breathing wobble (stronger in AI mode, muted in Infra mode)
-            const breathingScale = activeCanvasMode === "ai" ? 6 : 1.5;
+            // Elastic breathing wobble (active in both states, slightly adjusted)
+            const breathingScale = activeCanvasMode === "ai" ? 6 : 4;
             const wobbleX = Math.sin(time * this.speed + this.phase) * breathingScale;
             const wobbleY = Math.cos(time * this.speed * 0.8 + this.phase) * breathingScale;
 
             // Scroll-linked ripple wave (ripples dynamically as user scrolls)
             const scrollY = window.scrollY || 0;
-            const scrollWobble = Math.sin(scrollY * 0.0035 + this.phase) * (activeCanvasMode === "ai" ? 4.5 : 1.2);
+            const scrollWobble = Math.sin(scrollY * 0.0035 + this.phase) * (activeCanvasMode === "ai" ? 4.5 : 3.0);
 
             let targetX = this.baseX + wobbleX;
             let targetY = this.baseY + wobbleY + scrollWobble;
 
-            // Mouse gravity well repulsion physics (AI mode only)
-            if (activeCanvasMode === "ai" && mouse.active) {
+            // Mouse/Touch gravity well repulsion physics (active in both states)
+            if (mouse.active) {
                 const dx = mouse.x - this.baseX;
                 const dy = mouse.y - this.baseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < gravityDist) {
                     const force = (gravityDist - dist) / gravityDist;
                     // Bends/indents the mesh to show high-effort 3D displacement
-                    targetX -= (dx / (dist || 1)) * force * 38;
-                    targetY -= (dy / (dist || 1)) * force * 38;
+                    const repelForce = activeCanvasMode === "ai" ? 38 : 28;
+                    targetX -= (dx / (dist || 1)) * force * repelForce;
+                    targetY -= (dy / (dist || 1)) * force * repelForce;
                     this.glow = force;
                 } else {
                     this.glow += (0 - this.glow) * 0.08;
@@ -488,20 +511,22 @@ function initSynapticCanvas() {
                     ctx.stroke();
                 }
 
-                // Intersecting nodes (glow dots) in AI Mode
-                if (activeCanvasMode === "ai" && pt.glow > 0.02) {
+                // Intersecting nodes (glow dots)
+                if (pt.glow > 0.02) {
                     ctx.beginPath();
                     ctx.arc(pt.x, pt.y, 1.2 + pt.glow * 1.5, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(234, 88, 12, ${pt.glow * 0.35})`;
+                    const opacityScale = activeCanvasMode === "ai" ? 0.35 : 0.22;
+                    ctx.fillStyle = `rgba(234, 88, 12, ${pt.glow * opacityScale})`;
                     ctx.fill();
                 }
             }
         }
 
-        // Draw Interactive Crosshair (AI/Warp mode only)
-        if (activeCanvasMode === "ai" && mouse.active) {
+        // Draw Interactive Crosshair (active in both states, subtle styling variance)
+        if (mouse.active) {
             ctx.save();
-            ctx.strokeStyle = "rgba(234, 88, 12, 0.14)";
+            const crosshairOpacity = activeCanvasMode === "ai" ? 0.14 : 0.08;
+            ctx.strokeStyle = `rgba(234, 88, 12, ${crosshairOpacity})`;
             ctx.lineWidth = 0.6;
             ctx.setLineDash([4, 4]);
 
@@ -751,15 +776,15 @@ function initSpecializationMorph() {
             });
         });
 
-        // 4. Glow target columns in Skills Matrix grid
+        // 4. Glow target columns in Skills Matrix grid (using classList to preserve scroll reveals)
         document.querySelectorAll(".skills-grid-col").forEach(col => {
             const colSpec = col.getAttribute("data-specialization");
-            if (colSpec === "both") {
-                col.className = "skills-grid-col active-focus";
-            } else if (colSpec === newMode) {
-                col.className = "skills-grid-col active-focus";
+            if (colSpec === "both" || colSpec === newMode) {
+                col.classList.add("active-focus");
+                col.classList.remove("inactive-focus");
             } else {
-                col.className = "skills-grid-col inactive-focus";
+                col.classList.remove("active-focus");
+                col.classList.add("inactive-focus");
             }
         });
 
@@ -1054,8 +1079,8 @@ function initCustomCursor() {
 function setupScrollReveals() {
     const observerOptions = {
         root: null,
-        rootMargin: "0px 0px -8% 0px", // triggers slightly before entering the center viewport
-        threshold: 0.08
+        rootMargin: "0px 0px -4% 0px", // eager trigger bounds
+        threshold: 0.02 // triggers immediately when entering viewport
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {

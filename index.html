@@ -55,11 +55,17 @@
 
             <!-- Specialization Morphing Toggle Slider -->
             <div class="specialization-toggle-wrapper">
-                <span class="toggle-label label-left active" id="label-ai">AI / ML ENGINEERING</span>
+                <span class="toggle-label label-left active" id="label-ai">
+                    <span class="desktop-only">AI / ML ENGINEERING</span>
+                    <span class="mobile-only">AI / ML ENG</span>
+                </span>
                 <div class="specialization-toggle-bar" id="spec-toggle-bar" title="Drag or click to toggle specialization focus">
                     <div class="toggle-slider-handle" id="spec-slider-handle"></div>
                 </div>
-                <span class="toggle-label label-right" id="label-infra">AI MOBILE APPLICATIONS (FLUTTER)</span>
+                <span class="toggle-label label-right" id="label-infra">
+                    <span class="desktop-only">AI MOBILE APPLICATIONS</span>
+                    <span class="mobile-only">AI MOBILE</span>
+                </span>
             </div>
 
             <div class="hero-actions">
@@ -234,9 +240,9 @@
                     <h3 class="skills-col-title">01 // AI Mobile Applications</h3>
                     <div class="skills-cards-wrapper">
                         
-                        <div class="skill-card-module" data-node="coreml">
+                        <div class="skill-card-module" data-node="flutter">
                             <span class="skill-tag-prefix">[mob]</span>
-                            <h4 class="skill-card-name">CoreML & Swift</h4>
+                            <h4 class="skill-card-name">Flutter & Dart</h4>
                         </div>
 
                         <div class="skill-card-module" data-node="tflite">
