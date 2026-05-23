@@ -236,7 +236,7 @@ function initTextScramble() {
 /* ==========================================
    2. Dual-Mode Spacetime & Data Pipeline Canvas
    ========================================== */
-let activeCanvasMode = "ai"; // "ai" (gravity warp) vs "infra" (data flow)
+let activeCanvasMode = "infra"; // "ai" (gravity warp) vs "infra" (data flow)
 
 function initSynapticCanvas() {
     const canvas = document.getElementById("bg-canvas");
@@ -551,7 +551,7 @@ const morphData = {
         infra: "I architect end-to-end LLM pipelines and fine-tuned ML engines."
     },
     subtitle: {
-        ai: "Hello, I'm Abdullah Khan. I specialize in integrating CoreML, TensorFlow Lite, and local LLMs into responsive iOS and Android applications. Focused on bringing high-performance AI directly to the edge.",
+        ai: "Hello, I'm Abdullah Khan. I specialize in integrating TensorFlow Lite, MediaPipe, and local LLMs into responsive Flutter applications. Focused on bringing high-performance AI directly to the edge.",
         infra: "Hello, I'm Abdullah Khan. I design production-grade RAG pipelines, fine-tune open-source LLMs, and configure distributed vector databases like ChromaDB. Focused on robust server-side ML engineering."
     },
     projectsTitle: {
@@ -559,7 +559,7 @@ const morphData = {
         infra: "End-to-End ML Infrastructure"
     },
     projectsDesc: {
-        ai: "A curated index of production-ready mobile applications running local inference, on-device vector search, and smart agent runtimes.",
+        ai: "A curated index of production-ready Flutter mobile applications running pose detection, local visual search, and smart agent runtimes.",
         infra: "High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards."
     }
 };
@@ -676,7 +676,7 @@ function initSpecializationMorph() {
     const labelInfra = document.getElementById("label-infra");
     const wrapper = document.querySelector(".specialization-toggle-wrapper");
 
-    let currentSpecialization = "ai"; // default state
+    let currentSpecialization = "infra"; // default state
 
     function switchMode(newMode) {
         if (newMode === currentSpecialization) return;
@@ -764,10 +764,10 @@ function initSpecializationMorph() {
         }
     }
 
-    // Set initial focus highlight state for NLP skills
+    // Set initial focus highlight state for ML Engineering skills (infra)
     document.querySelectorAll(".skills-grid-col").forEach(col => {
         const colSpec = col.getAttribute("data-specialization");
-        if (colSpec === "ai" || colSpec === "both") {
+        if (colSpec === "infra" || colSpec === "both") {
             col.classList.add("active-focus");
         } else {
             col.classList.add("inactive-focus");
