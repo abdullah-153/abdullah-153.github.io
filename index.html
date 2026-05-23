@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Khan — AI & Mobile AI Engineer Portfolio</title>
+    <meta name="description" content="AI Engineer specializing in Mobile AI apps, RAG pipelines, ChromaDB vector databases, and End-to-End LLM integrations.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="structured-portfolio">
+
+    <!-- Custom Interactive Cursor -->
+    <div id="custom-cursor-dot"></div>
+    <div id="custom-cursor-ring"></div>
+
+    <!-- Ambient Grid Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Ambient Radial Glows (Background Visuals) -->
+    <div class="radial-glow glow-top-left"></div>
+    <div class="radial-glow glow-bottom-right"></div>
+
+    <!-- Main Container -->
+    <div class="portfolio-container">
+        
+        <!-- Header -->
+        <header class="portfolio-header">
+            <div class="header-brand-badge">
+                <div class="logo-monogram-box">
+                    <span class="logo-monogram">AK</span>
+                </div>
+                <span class="logo-divider">//</span>
+                <span class="logo-name" data-scramble="ABDULLAH.KHAN">ABDULLAH.KHAN</span>
+            </div>
+            <nav class="header-nav">
+                <a href="#projects-section" class="nav-link"><span class="nav-index">01.</span> Projects</a>
+                <a href="#skills-section" class="nav-link"><span class="nav-index">02.</span> Skills</a>
+                <a href="#contact-section" class="nav-link"><span class="nav-index">03.</span> Contact</a>
+                <a href="#" class="btn-cv-download" id="btn-cv-download"><span class="btn-prompt">$</span> Download CV <span class="btn-cursor">_</span></a>
+            </nav>
+        </header>
+
+        <!-- Hero Hook -->
+        <section class="hero-section">
+            <h1 class="hero-title" id="hero-title">
+                I build autonomous agent systems and high-throughput neural pipelines.
+            </h1>
+            <p class="hero-subtitle" id="hero-subtitle">
+                Hello, I'm <strong>Abdullah Khan</strong>. I design distributed LLM orchestration frameworks, Parent-Child vector retrievers, and low-latency edge inference segmenters. Focused on building robust, scalable ML infrastructure.
+            </p>
+
+            <!-- Specialization Morphing Toggle Slider -->
+            <div class="specialization-toggle-wrapper">
+                <span class="toggle-label label-left active" id="label-ai">AI MOBILE APPLICATIONS</span>
+                <div class="specialization-toggle-bar" id="spec-toggle-bar" title="Drag or click to toggle specialization focus">
+                    <div class="toggle-slider-handle" id="spec-slider-handle"></div>
+                </div>
+                <span class="toggle-label label-right" id="label-infra">AI / ML ENGINEERING</span>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#projects-section" class="btn btn-primary">
+                    <span class="btn-text">Inspect Projects</span>
+                    <span class="btn-arrow">↓</span>
+                </a>
+                <a href="#contact-section" class="btn btn-secondary">
+                    <span class="btn-text">Get In Touch</span>
+                    <span class="btn-tag">// CONNECT</span>
+                </a>
+                <div class="social-chips">
+                    <a href="https://github.com/abdullahkhan" target="_blank" class="chip">GitHub ↗</a>
+                    <a href="https://linkedin.com/in/abdullahkhan" target="_blank" class="chip">LinkedIn ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects-section" class="section-container">
+            <div class="section-tag">01. PRODUCTION SHARDS</div>
+            <h2 class="section-title" id="projects-title">Featured Engineering Deployments</h2>
+            <p class="section-desc" id="projects-desc">A curated index of production-ready machine learning architectures and latency-optimized pipeline systems.</p>
+            
+            <div class="project-dashboard-list">
+                
+                <!-- Project 1 -->
+                <div class="project-row-block" id="project-agentic-flow" 
+                     data-ai-title="NATIVE_AGENT"
+                     data-ai-tags="SwiftUI / CoreML / On-Device LLM / Local RAG"
+                     data-ai-desc="A native mobile assistant running a pruned local LLM for offline agentic planning and document interaction. Executes tasks on-device using custom CoreML adapters and local system contexts."
+                     data-ai-metrics='[{"label":"ON_DEVICE_LATENCY","val":"32ms","class":"green"},{"label":"BATTERY_DRAW","val":"-40%","class":"cyan"},{"label":"MODEL_SIZE","val":"1.8GB","class":"orange"}]'
+                     data-infra-title="LLM_ORCHESTRATOR"
+                     data-infra-tags="Python / FastAPI / ChromaDB / Fine-Tuning"
+                     data-infra-desc="An enterprise-scale end-to-end LLM integration backend orchestrating fine-tuned model shards. Employs ChromaDB vector storage and automated evaluation pipelines for zero-shot task routing."
+                     data-infra-metrics='[{"label":"PIPELINE_QPS","val":"125 req/s","class":"cyan"},{"label":"CHROMA_LATENCY","val":"14ms","class":"green"},{"label":"TUNING_LOSS","val":"0.18","class":"orange"}]'>
+                    
+                    <div class="project-info-pane">
+                        <span class="project-num">PROJECT_01</span>
+                        <h3 class="project-title" id="title-agentic-flow">NATIVE_AGENT</h3>
+                        <div class="project-tags-container">
+                            <span class="project-tags" id="tags-agentic-flow">SwiftUI / CoreML / On-Device LLM / Local RAG</span>
+                        </div>
+                        <p class="project-desc" id="desc-agentic-flow">
+                            A native mobile assistant running a pruned local LLM for offline agentic planning and document interaction. Executes tasks on-device using custom CoreML adapters and local system contexts.
+                        </p>
+                    </div>
+                    
+                    <div class="project-metrics-pane">
+                        <div class="metrics-grid-hud">
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-af-1">ON_DEVICE_LATENCY</span>
+                                <span class="metric-value green" id="val-metric-af-1">32ms</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-af-2">BATTERY_DRAW</span>
+                                <span class="metric-value cyan" id="val-metric-af-2">-40%</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-af-3">MODEL_SIZE</span>
+                                <span class="metric-value orange" id="val-metric-af-3">1.8GB</span>
+                            </div>
+                        </div>
+                        <div class="project-action-hud">
+                            <span class="project-status-badge">// STABLE DEPLOYMENT</span>
+                            <span class="project-case-link">Case Study coming soon ↗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-row-block" id="project-rag-search"
+                     data-ai-title="MOBILE_RAG"
+                     data-ai-tags="Kotlin / SQLite / Vector Search / On-Device"
+                     data-ai-desc="A low-latency Android application hosting a local vector database index. Retrieves, ranks, and highlights semantic search results directly on-device using a lightweight mobile cross-encoder."
+                     data-ai-metrics='[{"label":"LOCAL_MRR","val":"0.852","class":"cyan"},{"label":"MEM_FOOTPRINT","val":"48MB","class":"green"},{"label":"INDEX_CAPACITY","val":"50k Docs","class":"orange"}]'
+                     data-infra-title="HYBRID_RAG"
+                     data-infra-tags="LlamaIndex / ChromaDB / Reranking / PyTorch"
+                     data-infra-desc="A server-side hybrid RAG pipeline combining sparse BM25 and dense vector retrieval via ChromaDB. Optimizes query expansion and dense reranking to extract high-accuracy context from enterprise corpuses."
+                     data-infra-metrics='[{"label":"CONTEXT_RECALL","val":"97.8%","class":"green"},{"label":"RERANK_TIME","val":"38ms","class":"cyan"},{"label":"INDEX_SCALE","val":"8.5M Docs","class":"orange"}]'>
+                    
+                    <div class="project-info-pane">
+                        <span class="project-num">PROJECT_02</span>
+                        <h3 class="project-title" id="title-rag-search">MOBILE_RAG</h3>
+                        <div class="project-tags-container">
+                            <span class="project-tags" id="tags-rag-search">Kotlin / SQLite / Vector Search / On-Device</span>
+                        </div>
+                        <p class="project-desc" id="desc-rag-search">
+                            A low-latency Android application hosting a local vector database index. Retrieves, ranks, and highlights semantic search results directly on-device using a lightweight mobile cross-encoder.
+                        </p>
+                    </div>
+                    
+                    <div class="project-metrics-pane">
+                        <div class="metrics-grid-hud">
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-rs-1">LOCAL_MRR</span>
+                                <span class="metric-value cyan" id="val-metric-rs-1">0.852</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-rs-2">MEM_FOOTPRINT</span>
+                                <span class="metric-value green" id="val-metric-rs-2">48MB</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-rs-3">INDEX_CAPACITY</span>
+                                <span class="metric-value orange" id="val-metric-rs-3">50k Docs</span>
+                            </div>
+                        </div>
+                        <div class="project-action-hud">
+                            <span class="project-status-badge">// CLUSTER INTEGRATED</span>
+                            <span class="project-case-link">Case Study coming soon ↗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-row-block" id="project-vision-edge"
+                     data-ai-title="VISION_CORE"
+                     data-ai-tags="SwiftUI / TensorFlow Lite / CNN / Metal API"
+                     data-ai-desc="Real-time on-device object segmentation and convolutional detection compiled for iOS. Utilizes Apple's Metal API for GPU-accelerated frame analysis and low-power edge performance."
+                     data-ai-metrics='[{"label":"FRAME_RATE","val":"60 FPS","class":"cyan"},{"label":"GPU_UTIL","val":"24%","class":"green"},{"label":"WEIGHTS_SIZE","val":"12MB","class":"orange"}]'
+                     data-infra-title="MODEL_DISTILLER"
+                     data-infra-tags="PyTorch / Fine-Tuning / ONNX / Quantization"
+                     data-infra-desc="A distillation and fine-tuning pipeline compressing large LLM and vision models. Deploys optimized, quantized FP16 weights to cloud shards with continuous performance evaluation tracking."
+                     data-infra-metrics='[{"label":"DISTILL_RATIO","val":"4.2x","class":"cyan"},{"label":"EVAL_ACCURACY","val":"94.5%","class":"green"},{"label":"SHARD_COUNT","val":"12 Nodes","class":"orange"}]'>
+                    
+                    <div class="project-info-pane">
+                        <span class="project-num">PROJECT_03</span>
+                        <h3 class="project-title" id="title-vision-edge">VISION_CORE</h3>
+                        <div class="project-tags-container">
+                            <span class="project-tags" id="tags-vision-edge">SwiftUI / TensorFlow Lite / CNN / Metal API</span>
+                        </div>
+                        <p class="project-desc" id="desc-vision-edge">
+                            Real-time on-device object segmentation and convolutional detection compiled for iOS. Utilizes Apple's Metal API for GPU-accelerated frame analysis and low-power edge performance.
+                        </p>
+                    </div>
+                    
+                    <div class="project-metrics-pane">
+                        <div class="metrics-grid-hud">
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-ve-1">FRAME_RATE</span>
+                                <span class="metric-value cyan" id="val-metric-ve-1">60 FPS</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-ve-2">GPU_UTIL</span>
+                                <span class="metric-value green" id="val-metric-ve-2">24%</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-ve-3">WEIGHTS_SIZE</span>
+                                <span class="metric-value orange" id="val-metric-ve-3">12MB</span>
+                            </div>
+                        </div>
+                        <div class="project-action-hud">
+                            <span class="project-status-badge">// COMPILED EDGE ASSET</span>
+                            <span class="project-case-link">Case Study coming soon ↗</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills-section" class="section-container">
+            <div class="section-tag">02. SYSTEM COEFFICIENTS</div>
+            <h2 class="section-title">Technical Skills Matrix</h2>
+            <p class="section-desc">Key engineering proficiencies classified by domain areas. Highlights dynamically shift based on the active specialization.</p>
+            
+            <div class="skills-dashboard-grid">
+                
+                <!-- Group 1 -->
+                <div class="skills-grid-col" data-specialization="ai">
+                    <h3 class="skills-col-title">01 // AI Mobile Applications</h3>
+                    <div class="skills-cards-wrapper">
+                        
+                        <div class="skill-card-module" data-node="coreml">
+                            <span class="skill-tag-prefix">[mob]</span>
+                            <h4 class="skill-card-name">CoreML & Swift</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="tflite">
+                            <span class="skill-tag-prefix">[mob]</span>
+                            <h4 class="skill-card-name">TensorFlow Lite</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="ondevice-llm">
+                            <span class="skill-tag-prefix">[mob]</span>
+                            <h4 class="skill-card-name">On-Device LLMs</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="kotlin-ai">
+                            <span class="skill-tag-prefix">[mob]</span>
+                            <h4 class="skill-card-name">Kotlin & Mobile AI</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="metal">
+                            <span class="skill-tag-prefix">[mob]</span>
+                            <h4 class="skill-card-name">Metal GPU Shaders</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="skills-grid-col" data-specialization="both">
+                    <h3 class="skills-col-title">02 // Systems & Integration</h3>
+                    <div class="skills-cards-wrapper">
+
+                        <div class="skill-card-module" data-node="fastapi">
+                            <span class="skill-tag-prefix">[sys]</span>
+                            <h4 class="skill-card-name">FastAPI Backends</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="e2e-llm">
+                            <span class="skill-tag-prefix">[sys]</span>
+                            <h4 class="skill-card-name">End-to-End LLM</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="python">
+                            <span class="skill-tag-prefix">[sys]</span>
+                            <h4 class="skill-card-name">Concurrent Python</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="cicd">
+                            <span class="skill-tag-prefix">[sys]</span>
+                            <h4 class="skill-card-name">Git & CI/CD Pipelines</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="orchestration">
+                            <span class="skill-tag-prefix">[sys]</span>
+                            <h4 class="skill-card-name">API Orchestration</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="skills-grid-col" data-specialization="infra">
+                    <h3 class="skills-col-title">03 // AI / ML Engineering</h3>
+                    <div class="skills-cards-wrapper">
+
+                        <div class="skill-card-module" data-node="finetuning">
+                            <span class="skill-tag-prefix">[eng]</span>
+                            <h4 class="skill-card-name">Fine-Tuning (LoRA)</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="rag-pipelines">
+                            <span class="skill-tag-prefix">[eng]</span>
+                            <h4 class="skill-card-name">RAG Pipelines</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="chromadb">
+                            <span class="skill-tag-prefix">[eng]</span>
+                            <h4 class="skill-card-name">ChromaDB Vector DB</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="pytorch">
+                            <span class="skill-tag-prefix">[eng]</span>
+                            <h4 class="skill-card-name">PyTorch Modeling</h4>
+                        </div>
+
+                        <div class="skill-card-module" data-node="frameworks">
+                            <span class="skill-tag-prefix">[eng]</span>
+                            <h4 class="skill-card-name">LangChain / LlamaIndex</h4>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact-section" class="section-container">
+            <div class="section-tag">03. REQUEST INFERENCE</div>
+            <h2 class="section-title">Contact API Client</h2>
+            <p class="section-desc">Transmit a POST request payload. The server response streams back in real-time.</p>
+            
+            <div class="contact-card-box">
+                <!-- Mac-Style Window Top Bar -->
+                <div class="window-header-bar">
+                    <div class="window-controls">
+                        <span class="ctrl-dot close"></span>
+                        <span class="ctrl-dot minimize"></span>
+                        <span class="ctrl-dot expand"></span>
+                    </div>
+                    <div class="window-path">// api.abdullahkhan.dev/v1/contact</div>
+                    <div class="window-space"></div>
+                </div>
+                
+                <div class="api-workspace-grid">
+                    <!-- Left Editor Pane -->
+                    <div class="editor-pane">
+                        <div class="pane-tab-bar">
+                            <div class="editor-tab active">
+                                <span class="tab-icon">{}</span>
+                                <span class="tab-name">request.json</span>
+                            </div>
+                        </div>
+                        <form id="contact-form" class="api-form" onsubmit="event.preventDefault();">
+                            <div class="code-editor-client">
+                                <div class="line-numbers">
+                                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                                </div>
+                                <div class="editor-contents">
+                                    <div>{</div>
+                                    <div class="line-indent"><span class="json-key">"name"</span>: <input type="text" id="form-name" placeholder="&quot;Your Name&quot;" required></div>
+                                    <div class="line-indent"><span class="json-key">"email"</span>: <input type="email" id="form-email" placeholder="&quot;your.email@org.com&quot;" required></div>
+                                    <div class="line-indent"><span class="json-key">"subject"</span>: <input type="text" id="form-subject" placeholder="&quot;Collaboration Opportunity&quot;"></div>
+                                    <div class="line-indent"><span class="json-key">"payload"</span>: <input type="text" id="form-message" placeholder="&quot;Write message block...&quot;" required></div>
+                                    <div class="line-indent"><span class="json-key">"recruiter"</span>: <select id="form-mode"><option value="true">true</option><option value="false">false</option></select></div>
+                                    <div>}</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-submit" id="btn-send-message">
+                                <span class="btn-terminal-dot"></span>
+                                <span class="btn-label">Execute POST Request</span>
+                                <span class="btn-cmd">v1/dispatch</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Right Console Pane -->
+                    <div class="editor-pane">
+                        <div class="pane-tab-bar">
+                            <div class="editor-tab active">
+                                <span class="tab-icon">❯_</span>
+                                <span class="tab-name">response.log</span>
+                                <span class="http-status-label" id="response-status">200 READY</span>
+                            </div>
+                        </div>
+                        <div class="api-response-panel">
+                            <div class="response-console-logs" id="api-log-output">
+                                <div class="console-line">// Connection open. Dispatch payload to trigger network sockets.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="portfolio-footer">
+            <div class="footer-grid">
+                <div class="footer-grid-cell">
+                    <span class="cell-label">SYS_LOC</span>
+                    <span class="cell-val">Lahore, Pakistan // Remote</span>
+                </div>
+                <div class="footer-grid-cell">
+                    <span class="cell-label">LOCAL_TIME</span>
+                    <span class="cell-val" id="footer-local-time">--:-- PKT</span>
+                </div>
+                <div class="footer-grid-cell">
+                    <span class="cell-label">ESTABLISHED_SOCKETS</span>
+                    <div class="footer-links">
+                        <a href="https://github.com/abdullahkhan" target="_blank" class="footer-link-port"><span class="port-num">P_443:</span> GitHub</a>
+                        <a href="https://linkedin.com/in/abdullahkhan" target="_blank" class="footer-link-port"><span class="port-num">P_80:</span> LinkedIn</a>
+                        <a href="mailto:abdullah@khan.dev" class="footer-link-port"><span class="port-num">P_25:</span> Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <div class="copyright-text">© 2026 ABDULLAH.KHAN. ALL RIGHTS RESERVED.</div>
+                <a href="#" class="back-to-top-btn" id="btn-back-to-top">
+                    <span class="btn-prompt">./</span>execute_top.sh <span class="btn-arrow">↑</span>
+                </a>
+            </div>
+        </footer>
+
+    </div>
+    
+    <!-- Curriculum Vitae Prompt Box (Mock Download) -->
+    <div id="cv-modal" class="cv-modal">
+        <div class="cv-modal-content">
+            <h3 class="modal-title">Retrieve CV Payload</h3>
+            <p class="modal-desc">Simulating download stream for 'abdullah_khan_resume.pdf'...</p>
+            <div class="modal-progress-bar"><div class="fill" id="cv-download-progress"></div></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="btn-cv-confirm">Close Dialog</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
