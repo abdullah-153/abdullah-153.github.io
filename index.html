@@ -54,12 +54,12 @@
             </p>
 
             <!-- Specialization Morphing Toggle Slider -->
-            <div class="specialization-toggle-wrapper infra-active">
-                <span class="toggle-label label-left" id="label-ai">AI MOBILE APPLICATIONS (FLUTTER)</span>
+            <div class="specialization-toggle-wrapper">
+                <span class="toggle-label label-left active" id="label-ai">AI / ML ENGINEERING</span>
                 <div class="specialization-toggle-bar" id="spec-toggle-bar" title="Drag or click to toggle specialization focus">
                     <div class="toggle-slider-handle" id="spec-slider-handle"></div>
                 </div>
-                <span class="toggle-label label-right active" id="label-infra">AI / ML ENGINEERING</span>
+                <span class="toggle-label label-right" id="label-infra">AI MOBILE APPLICATIONS (FLUTTER)</span>
             </div>
 
             <div class="hero-actions">
@@ -88,14 +88,14 @@
                 
                 <!-- Project 1 -->
                 <div class="project-row-block" id="project-agentic-flow" 
-                     data-ai-title="STRIDE"
-                     data-ai-tags="Flutter / TensorFlow Lite / Mediapipe / Pose Detection"
-                     data-ai-desc="An AI-powered mobile fitness tracker built with Flutter. Runs local MediaPipe pose detection models for real-time rep counting and utilizes local LLM adapters to generate customized meal and workout plans."
-                     data-ai-metrics='[{"label":"DETECTION_FPS","val":"45 FPS","class":"green"},{"label":"ACCURACY","val":"98.4%","class":"cyan"},{"label":"BATTERY_UTIL","val":"-35%","class":"orange"}]'
-                     data-infra-title="OMNIVLA"
-                     data-infra-tags="Python / VLM / PyTorch / Agent Orchestration"
-                     data-infra-desc="A hardware-constrained local general UI automation multi-agent system. Runs a distilled visual-language-action (VLA) model locally on edge compute to orchestrate lock-free desktop and browser automation tasks."
-                     data-infra-metrics='[{"label":"DEVICE_MEM","val":"3.8GB","class":"green"},{"label":"STEP_LATENCY","val":"142ms","class":"cyan"},{"label":"SUCCESS_RATE","val":"91.2%","class":"orange"}]'>
+                     data-ai-title="OMNIVLA"
+                     data-ai-tags="Python / VLM / PyTorch / Agent Orchestration"
+                     data-ai-desc="A hardware-constrained local general UI automation multi-agent system. Runs a distilled visual-language-action (VLA) model locally on edge compute to orchestrate lock-free desktop and browser automation tasks."
+                     data-ai-metrics='[{"label":"VRAM_USAGE","val":"3.8 GB","class":"green"},{"label":"LOOP_SPEED","val":"7.8 Hz","class":"cyan"},{"label":"TASK_SUCCESS","val":"91.2%","class":"orange"}]'
+                     data-infra-title="STRIDE"
+                     data-infra-tags="Flutter / TensorFlow Lite / Mediapipe / Pose Detection"
+                     data-infra-desc="An AI-powered mobile fitness tracker built with Flutter. Runs local MediaPipe pose detection models for real-time rep counting and utilizes local LLM adapters to generate customized meal and workout plans."
+                     data-infra-metrics='[{"label":"INFERENCE","val":"14ms","class":"green"},{"label":"POSE_ACCURACY","val":"98.4%","class":"cyan"},{"label":"THERMAL_TEMP","val":"Safe / 38°C","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_01</span>
@@ -111,15 +111,15 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-1">DEVICE_MEM</span>
-                                <span class="metric-value green" id="val-metric-af-1">3.8GB</span>
+                                <span class="metric-label" id="lbl-metric-af-1">VRAM_USAGE</span>
+                                <span class="metric-value green" id="val-metric-af-1">3.8 GB</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-2">STEP_LATENCY</span>
-                                <span class="metric-value cyan" id="val-metric-af-2">142ms</span>
+                                <span class="metric-label" id="lbl-metric-af-2">LOOP_SPEED</span>
+                                <span class="metric-value cyan" id="val-metric-af-2">7.8 Hz</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-3">SUCCESS_RATE</span>
+                                <span class="metric-label" id="lbl-metric-af-3">TASK_SUCCESS</span>
                                 <span class="metric-value orange" id="val-metric-af-3">91.2%</span>
                             </div>
                         </div>
@@ -132,14 +132,14 @@
 
                 <!-- Project 2 -->
                 <div class="project-row-block" id="project-rag-search"
-                     data-ai-title="SOUS"
-                     data-ai-tags="Flutter / On-Device CNN / Recipe Inference / Dart"
-                     data-ai-desc="A Flutter application utilizing mobile vision classifiers to recognize raw ingredients from camera frames. Runs offline recipes reasoning models to generate step-by-step culinary instructions."
-                     data-ai-metrics='[{"label":"RECOG_ACCURACY","val":"94.2%","class":"green"},{"label":"INFERENCE_TIME","val":"82ms","class":"cyan"},{"label":"OFFLINE_MODES","val":"100%","class":"orange"}]'
-                     data-infra-title="CHROMA_RAG"
-                     data-infra-tags="ChromaDB / Python / LlamaIndex / Semantic Search"
-                     data-infra-desc="An enterprise-scale hybrid retrieval system combining BM25 keyword matching and dense vector search via ChromaDB. Features automated chunking, parent-child token embeddings, and cross-encoder rerankers."
-                     data-infra-metrics='[{"label":"RETRIEVE_MRR","val":"0.912","class":"green"},{"label":"CHROMA_QPS","val":"420 QPS","class":"cyan"},{"label":"INDEX_SCALE","val":"12M Docs","class":"orange"}]'>
+                     data-ai-title="CHROMA_RAG"
+                     data-ai-tags="ChromaDB / Python / LlamaIndex / Semantic Search"
+                     data-ai-desc="An enterprise-scale hybrid retrieval system combining BM25 keyword matching and dense vector search via ChromaDB. Features automated chunking, parent-child token embeddings, and cross-encoder rerankers."
+                     data-ai-metrics='[{"label":"RETRIEVAL_MRR","val":"0.912","class":"green"},{"label":"CHROMA_LATENCY","val":"18ms","class":"cyan"},{"label":"CONTEXT_RECALL","val":"96.5%","class":"orange"}]'
+                     data-infra-title="SOUS"
+                     data-infra-tags="Flutter / On-Device CNN / Recipe Inference / Dart"
+                     data-infra-desc="A Flutter application utilizing mobile vision classifiers to recognize raw ingredients from camera frames. Runs offline recipes reasoning models to generate step-by-step culinary instructions."
+                     data-infra-metrics='[{"label":"IMAGE_RECOG","val":"94.2%","class":"green"},{"label":"ON_DEV_LATENCY","val":"82ms","class":"cyan"},{"label":"RECIPE_BUILD","val":"1.4s","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_02</span>
@@ -155,16 +155,16 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-1">RETRIEVE_MRR</span>
+                                <span class="metric-label" id="lbl-metric-rs-1">RETRIEVAL_MRR</span>
                                 <span class="metric-value green" id="val-metric-rs-1">0.912</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-2">CHROMA_QPS</span>
-                                <span class="metric-value cyan" id="val-metric-rs-2">420 QPS</span>
+                                <span class="metric-label" id="lbl-metric-rs-2">CHROMA_LATENCY</span>
+                                <span class="metric-value cyan" id="val-metric-rs-2">18ms</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-3">INDEX_SCALE</span>
-                                <span class="metric-value orange" id="val-metric-rs-3">12M Docs</span>
+                                <span class="metric-label" id="lbl-metric-rs-3">CONTEXT_RECALL</span>
+                                <span class="metric-value orange" id="val-metric-rs-3">96.5%</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
@@ -176,14 +176,14 @@
 
                 <!-- Project 3 -->
                 <div class="project-row-block" id="project-vision-edge"
-                     data-ai-title="IRIS"
-                     data-ai-tags="Flutter / Mobile CLIP / Embeddings / SQLite"
-                     data-ai-desc="A Flutter visual search application hosting an on-device quantized CLIP model. Enables natural language semantic searches across local phone gallery directories completely offline using SQLite vector structures."
-                     data-ai-metrics='[{"label":"SEARCH_LATENCY","val":"54ms","class":"green"},{"label":"IMAGE_COUNT","val":"25k Images","class":"cyan"},{"label":"MEM_USE","val":"62MB","class":"orange"}]'
-                     data-infra-title="FINE_TUNER"
-                     data-infra-tags="PyTorch / LoRA / Llama-3 / Model Quantization"
-                     data-infra-desc="An end-to-end model optimization pipeline fine-tuning open-source LLMs (Llama-3/Mistral-7B) using PEFT/LoRA. Compresses models through 4-bit AWQ/GGUF quantization and distills knowledge into lightweight student SLMs."
-                     data-infra-metrics='[{"label":"COMPRESS_RATIO","val":"4.8x","class":"green"},{"label":"TUNING_LOSS","val":"0.14","class":"cyan"},{"label":"DISTILL_ACC","val":"92.6%","class":"orange"}]'>
+                     data-ai-title="FINE_TUNER"
+                     data-ai-tags="PyTorch / LoRA / Llama-3 / Model Quantization"
+                     data-ai-desc="An end-to-end model optimization pipeline fine-tuning open-source LLMs (Llama-3/Mistral-7B) using PEFT/LoRA. Compresses models through 4-bit AWQ/GGUF quantization and distills knowledge into lightweight student SLMs."
+                     data-ai-metrics='[{"label":"COMPRESSION","val":"4-Bit AWQ","class":"green"},{"label":"VRAM_SAVINGS","val":"68%","class":"cyan"},{"label":"ACCURACY_LOSS","val":"-0.8%","class":"orange"}]'
+                     data-infra-title="IRIS"
+                     data-infra-tags="Flutter / Mobile CLIP / Embeddings / SQLite"
+                     data-infra-desc="A Flutter visual search application hosting an on-device quantized CLIP model. Enables natural language semantic searches across local phone gallery directories completely offline using SQLite vector structures."
+                     data-infra-metrics='[{"label":"CLIP_SEARCH","val":"54ms","class":"green"},{"label":"MAX_INDEX_SIZE","val":"100k+","class":"cyan"},{"label":"LOCAL_MEM","val":"42MB","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_03</span>
@@ -199,16 +199,16 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-1">COMPRESS_RATIO</span>
-                                <span class="metric-value green" id="val-metric-ve-1">4.8x</span>
+                                <span class="metric-label" id="lbl-metric-ve-1">COMPRESSION</span>
+                                <span class="metric-value green" id="val-metric-ve-1">4-Bit AWQ</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-2">TUNING_LOSS</span>
-                                <span class="metric-value cyan" id="val-metric-ve-2">0.14</span>
+                                <span class="metric-label" id="lbl-metric-ve-2">VRAM_SAVINGS</span>
+                                <span class="metric-value cyan" id="val-metric-ve-2">68%</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-ve-3">DISTILL_ACC</span>
-                                <span class="metric-value orange" id="val-metric-ve-3">92.6%</span>
+                                <span class="metric-label" id="lbl-metric-ve-3">ACCURACY_LOSS</span>
+                                <span class="metric-value orange" id="val-metric-ve-3">-0.8%</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
@@ -230,7 +230,7 @@
             <div class="skills-dashboard-grid">
                 
                 <!-- Group 1 -->
-                <div class="skills-grid-col" data-specialization="ai">
+                <div class="skills-grid-col" data-specialization="infra">
                     <h3 class="skills-col-title">01 // AI Mobile Applications</h3>
                     <div class="skills-cards-wrapper">
                         
@@ -296,7 +296,7 @@
                 </div>
 
                 <!-- Group 3 -->
-                <div class="skills-grid-col" data-specialization="infra">
+                <div class="skills-grid-col" data-specialization="ai">
                     <h3 class="skills-col-title">03 // AI / ML Engineering</h3>
                     <div class="skills-cards-wrapper">
 

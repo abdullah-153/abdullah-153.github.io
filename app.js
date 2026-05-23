@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCustomCursor();
     stabilizeLayoutHeights();
     initFooterTime();
+    setupScrollReveals();
 });
 
 // Re-stabilize layout heights once fonts are fully loaded
@@ -292,8 +293,12 @@ function initSynapticCanvas() {
             const wobbleX = Math.sin(time * this.speed + this.phase) * breathingScale;
             const wobbleY = Math.cos(time * this.speed * 0.8 + this.phase) * breathingScale;
 
+            // Scroll-linked ripple wave (ripples dynamically as user scrolls)
+            const scrollY = window.scrollY || 0;
+            const scrollWobble = Math.sin(scrollY * 0.0035 + this.phase) * (activeCanvasMode === "ai" ? 4.5 : 1.2);
+
             let targetX = this.baseX + wobbleX;
-            let targetY = this.baseY + wobbleY;
+            let targetY = this.baseY + wobbleY + scrollWobble;
 
             // Mouse gravity well repulsion physics (AI mode only)
             if (activeCanvasMode === "ai" && mouse.active) {
@@ -547,20 +552,20 @@ initSynapticCanvas();
 // Copy Content Mapping for both focus states
 const morphData = {
     title: {
-        ai: "I build intelligent on-device mobile apps and native AI integrations.",
-        infra: "I architect end-to-end LLM pipelines and fine-tuned ML engines."
+        ai: "I architect end-to-end LLM pipelines and fine-tuned ML engines.",
+        infra: "I build intelligent on-device mobile apps and native AI integrations."
     },
     subtitle: {
-        ai: "Hello, I'm Abdullah Khan. I specialize in integrating TensorFlow Lite, MediaPipe, and local LLMs into responsive Flutter applications. Focused on bringing high-performance AI directly to the edge.",
-        infra: "Hello, I'm Abdullah Khan. I design production-grade RAG pipelines, fine-tune open-source LLMs, and configure distributed vector databases like ChromaDB. Focused on robust server-side ML engineering."
+        ai: "Hello, I'm Abdullah Khan. I design production-grade RAG pipelines, fine-tune open-source LLMs, and configure distributed vector databases like ChromaDB. Focused on robust server-side ML engineering.",
+        infra: "Hello, I'm Abdullah Khan. I specialize in integrating TensorFlow Lite, MediaPipe, and local LLMs into responsive Flutter applications. Focused on bringing high-performance AI directly to the edge."
     },
     projectsTitle: {
-        ai: "Featured Mobile AI Deployments",
-        infra: "End-to-End ML Infrastructure"
+        ai: "End-to-End ML Infrastructure",
+        infra: "Featured Mobile AI Deployments"
     },
     projectsDesc: {
-        ai: "A curated index of production-ready Flutter mobile applications running pose detection, local visual search, and smart agent runtimes.",
-        infra: "High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards."
+        ai: "High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards.",
+        infra: "A curated index of production-ready Flutter mobile applications running pose detection, local visual search, and smart agent runtimes."
     }
 };
 
@@ -676,7 +681,7 @@ function initSpecializationMorph() {
     const labelInfra = document.getElementById("label-infra");
     const wrapper = document.querySelector(".specialization-toggle-wrapper");
 
-    let currentSpecialization = "infra"; // default state
+    let currentSpecialization = "ai"; // default state
 
     function switchMode(newMode) {
         if (newMode === currentSpecialization) return;
@@ -758,16 +763,17 @@ function initSpecializationMorph() {
             }
         });
 
-        // 5. Update canvas graphics engine mode
+        // 5. Update canvas graphics engine mode (mapped to corresponding visualizations)
         if (window.setCanvasMode) {
-            window.setCanvasMode(newMode);
+            const canvasMode = newMode === "ai" ? "infra" : "ai";
+            window.setCanvasMode(canvasMode);
         }
     }
 
-    // Set initial focus highlight state for ML Engineering skills (infra)
+    // Set initial focus highlight state for ML Engineering skills (ai)
     document.querySelectorAll(".skills-grid-col").forEach(col => {
         const colSpec = col.getAttribute("data-specialization");
-        if (colSpec === "infra" || colSpec === "both") {
+        if (colSpec === "ai" || colSpec === "both") {
             col.classList.add("active-focus");
         } else {
             col.classList.add("inactive-focus");
@@ -1041,5 +1047,30 @@ function initCustomCursor() {
                 document.body.classList.remove("cursor-hover");
             }
         }
+    });
+}
+
+// Viewport Scroll Reveal System for Mobile & Desktop
+function setupScrollReveals() {
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -8% 0px", // triggers slightly before entering the center viewport
+        threshold: 0.08
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active-reveal");
+                observer.unobserve(entry.target); // only reveal once
+            }
+        });
+    }, observerOptions);
+
+    // Track targets: project cards, skill columns, contact box, footer sections, headers
+    const selectors = ".project-row-block, .skills-grid-col, .contact-card-box, .footer-grid-cell, .hero-section > *, .section-tag, .section-title, .section-desc";
+    document.querySelectorAll(selectors).forEach(el => {
+        el.classList.add("reveal-element");
+        revealObserver.observe(el);
     });
 }
