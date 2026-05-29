@@ -177,8 +177,13 @@ body.cursor-hover #custom-cursor-dot {
     height: 100%;
     background: radial-gradient(circle var(--spotlight-radius, 0px) at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(234, 88, 12, 0.12) 0%, rgba(234, 88, 12, 0.08) 80%, transparent 100%);
     pointer-events: none;
-    opacity: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
     z-index: 0;
+}
+
+.skill-card-module:hover::before, .btn:hover::before, .chip:hover::before, .metric-hud-box:hover::before, .project-row-block:hover::before, .specialization-toggle-bar:hover::before, .back-to-top-btn:hover::before, .nav-link:hover::before, .footer-link-port:hover::before, .logo-monogram-box:hover::before {
+    opacity: 1;
 }
 
 @keyframes titleReveal {
@@ -1956,6 +1961,17 @@ h1, h2, h3, h4 {
 .skill-card-name,
 .logo-name,
 .section-title {
+    color: var(--text-main);
+    background: none;
+    -webkit-text-fill-color: initial;
+    transition: color 0.3s ease;
+}
+
+.hero-section:hover .hero-title,
+.project-row-block:hover .project-title,
+.skill-card-module:hover .skill-card-name,
+.header-brand-badge:hover .logo-name,
+.section-container:hover .section-title {
     background: radial-gradient(circle var(--spotlight-radius, 0px) at var(--mouse-x, -999px) var(--mouse-y, -999px), var(--accent-orange) 0%, var(--accent-orange) 85%, #cc4700 95%, var(--text-main) 100%);
     background-size: 100% 100%;
     -webkit-background-clip: text !important;
