@@ -22,19 +22,20 @@ if (document.fonts) {
     document.fonts.ready.then(stabilizeLayoutHeights);
 }
 
-// Global spotlight tracker for relative mouse position with lerping (liquid hover effects)
+// Global spotlight tracker for relative mouse/touch position with lerping (liquid hover effects)
 const activeSpotlights = new Map();
 
-document.addEventListener("mousemove", (e) => {
+const updateSpotlightCoordinates = (clientX, clientY, target) => {
+    if (!target) return;
     const currentHovered = new Set();
-    let current = e.target;
+    let current = target;
     const selector = ".section-container, .hero-section, .skill-card-module, .btn, .chip, .metric-hud-box, .project-row-block, .specialization-toggle-bar, .back-to-top-btn, .nav-link, .footer-link-port, .logo-monogram-box, .logo-name, .header-brand-badge, .toggle-label, .hero-title, .project-title, .skill-card-name, .section-title";
     
     const updateTarget = (el) => {
         currentHovered.add(el);
         const rect = el.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
         
         // Calculate max diagonal length to ensure full color cover
         const diagonal = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
@@ -81,10 +82,34 @@ document.addEventListener("mousemove", (e) => {
         if (!currentHovered.has(el)) {
             data.active = false;
             if (data.rect) {
-                data.targetX = e.clientX - data.rect.left;
-                data.targetY = e.clientY - data.rect.top;
+                data.targetX = clientX - data.rect.left;
+                data.targetY = clientY - data.rect.top;
             }
         }
+    }
+};
+
+document.addEventListener("mousemove", (e) => {
+    updateSpotlightCoordinates(e.clientX, e.clientY, e.target);
+});
+
+document.addEventListener("touchstart", (e) => {
+    if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        updateSpotlightCoordinates(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+    }
+}, { passive: true });
+
+document.addEventListener("touchmove", (e) => {
+    if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        updateSpotlightCoordinates(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
+    }
+}, { passive: true });
+
+document.addEventListener("touchend", () => {
+    for (const [el, data] of activeSpotlights.entries()) {
+        data.active = false;
     }
 });
 
