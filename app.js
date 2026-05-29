@@ -793,27 +793,53 @@ function initSpecializationMorph() {
         labelInfra.addEventListener("click", () => switchMode("infra"));
     }
 
-    // Wire up projects context segmented toggle click
-    if (pTogglePill) {
-        pTogglePill.addEventListener("click", (e) => {
-            const target = currentSpecialization === "ai" ? "infra" : "ai";
-            switchMode(target);
-            // Immediately drop focus so browser removes :focus outline border
-            pTogglePill.blur();
-        });
-    }
-
+    // Wire up the projects-context segmented toggle
+    // The pill wraps two labels. We attach click handlers only to the labels
+    // to avoid double-firing when a label is clicked (label click would also
+    // bubble up to a pill-level handler and toggle back to the wrong state).
     if (pLabelAI) {
         pLabelAI.addEventListener("click", (e) => {
+            e.stopPropagation(); // prevent bubble to pill
             switchMode("ai");
-            e.currentTarget.blur();
+            flashToggleBorder();
+            pTogglePill && pTogglePill.blur();
         });
     }
 
     if (pLabelInfra) {
         pLabelInfra.addEventListener("click", (e) => {
+            e.stopPropagation(); // prevent bubble to pill
             switchMode("infra");
-            e.currentTarget.blur();
+            flashToggleBorder();
+            pTogglePill && pTogglePill.blur();
+        });
+    }
+
+    // Clicking the pill itself (slider bar / gap between labels) still toggles
+    if (pTogglePill) {
+        pTogglePill.addEventListener("click", (e) => {
+            // Only fire if the click was NOT on a label (labels stop propagation above)
+            const target = currentSpecialization === "ai" ? "infra" : "ai";
+            switchMode(target);
+            flashToggleBorder();
+            pTogglePill.blur();
+        });
+    }
+
+    // Brief border flash on toggle — adds a class that animates in then fades out
+    function flashToggleBorder() {
+        if (!pTogglePill) return;
+        pTogglePill.classList.remove("toggle-flash");
+        // Force reflow so re-adding the class restarts the animation from frame 0
+        void pTogglePill.offsetWidth;
+        pTogglePill.classList.add("toggle-flash");
+    }
+
+    // Auto-remove the flash class once its animation finishes so the pill
+    // is in a clean resting state before the next interaction
+    if (pTogglePill) {
+        pTogglePill.addEventListener("animationend", () => {
+            pTogglePill.classList.remove("toggle-flash");
         });
     }
 }

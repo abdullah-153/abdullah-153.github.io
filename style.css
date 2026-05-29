@@ -835,11 +835,21 @@ h1, h2, h3, h4 {
     }
 }
 
-/* Suppress browser focus/active outline ghost border that appears after click */
+/* Suppress any browser-default outline entirely */
 .projects-toggle-pill:focus,
 .projects-toggle-pill:focus-visible {
     outline: none;
-    box-shadow: inset 0 1px 3px rgba(28, 25, 23, 0.08);
+}
+
+/* Flash animation: border briefly pulses orange then fades back to the resting border */
+@keyframes toggle-flash-border {
+    0%   { border-color: var(--border-card); box-shadow: inset 0 1px 3px rgba(28,25,23,0.08); }
+    20%  { border-color: rgba(234, 88, 12, 0.6); box-shadow: 0 0 0 3px rgba(234,88,12,0.10), inset 0 1px 3px rgba(28,25,23,0.08); }
+    100% { border-color: var(--border-card); box-shadow: inset 0 1px 3px rgba(28,25,23,0.08); }
+}
+
+.projects-toggle-pill.toggle-flash {
+    animation: toggle-flash-border 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Vertical separator line */
