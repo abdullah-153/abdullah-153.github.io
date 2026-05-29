@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initFooterTime();
     initHeaderScroll();
     setupScrollReveals();
+    initMobileNav();
 });
 
 // Re-stabilize layout heights once fonts are fully loaded
@@ -1194,4 +1195,64 @@ function initHeaderScroll() {
             });
         });
     }
+}
+
+
+/* ==========================================
+   Mobile Hamburger Navigation
+   ========================================== */
+function initMobileNav() {
+    const toggleBtn = document.getElementById("mobile-nav-toggle");
+    const overlay   = document.getElementById("mobile-nav-overlay");
+    if (!toggleBtn || !overlay) return;
+
+    let isOpen = false;
+
+    function openMenu() {
+        isOpen = true;
+        toggleBtn.classList.add("open");
+        overlay.classList.add("open");
+        toggleBtn.blur(); // drop focus immediately so :active doesn't linger
+    }
+
+    function closeMenu() {
+        isOpen = false;
+        toggleBtn.classList.remove("open");
+        overlay.classList.remove("open");
+        toggleBtn.blur();
+    }
+
+    toggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        isOpen ? closeMenu() : openMenu();
+    });
+
+    // Close when any nav link inside the overlay is tapped
+    overlay.querySelectorAll("[data-close-menu]").forEach(link => {
+        link.addEventListener("click", () => closeMenu());
+    });
+
+    // Wire the mobile CV button to the same download modal as the desktop button
+    const mobileCvBtn = document.getElementById("mobile-btn-cv-download");
+    const desktopCvBtn = document.getElementById("btn-cv-download");
+    if (mobileCvBtn && desktopCvBtn) {
+        mobileCvBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            closeMenu();
+            // Delegate to the desktop button click handler (which opens the modal)
+            setTimeout(() => desktopCvBtn.click(), 200);
+        });
+    }
+
+    // Close when tapping outside the overlay or the toggle button
+    document.addEventListener("click", (e) => {
+        if (isOpen && !overlay.contains(e.target) && !toggleBtn.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close on scroll (so it doesn't cover content while reading)
+    window.addEventListener("scroll", () => {
+        if (isOpen) closeMenu();
+    }, { passive: true });
 }

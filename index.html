@@ -43,7 +43,21 @@
                 <a href="#contact-section" class="nav-link"><span class="nav-index">03.</span> Contact</a>
                 <a href="#" class="btn-cv-download" id="btn-cv-download"><span class="btn-prompt">$</span> Download CV <span class="btn-cursor">_</span></a>
             </nav>
+            <!-- Mobile hamburger button (hidden on desktop) -->
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
+                <span class="burger-bar"></span>
+                <span class="burger-bar"></span>
+                <span class="burger-bar"></span>
+            </button>
         </header>
+
+        <!-- Mobile slide-down nav overlay -->
+        <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+            <a href="#projects-section" class="mobile-nav-link" data-close-menu>Projects</a>
+            <a href="#skills-section" class="mobile-nav-link" data-close-menu>Skills</a>
+            <a href="#contact-section" class="mobile-nav-link" data-close-menu>Contact</a>
+            <a href="#" class="mobile-nav-link mobile-cv-link" id="mobile-btn-cv-download"><span class="btn-prompt">$</span> Download CV <span class="btn-cursor">_</span></a>
+        </div>
 
         <!-- Hero Hook -->
         <section class="hero-section">
