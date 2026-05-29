@@ -224,7 +224,7 @@ body.cursor-hover #custom-cursor-dot {
     letter-spacing: 0.15em;
     margin-bottom: 12px;
     text-transform: uppercase;
-    transition: letter-spacing 0.5s ease;
+    transition: letter-spacing 0.35s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s ease;
 }
 
 .section-tag:hover {
@@ -632,27 +632,45 @@ h1, h2, h3, h4 {
 
 /* Sections guidelines - Frosted Glassmorphic Cards */
 .section-container, .hero-section {
-    background: radial-gradient(var(--spotlight-radius, 0px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.48) 0%, rgba(253, 251, 247, 0.42) 100%);
+    position: relative;
+    background: rgba(253, 251, 247, 0.22);
     border: 1.5px solid var(--border-card);
     border-radius: 24px;
-    backdrop-filter: blur(20px) saturate(110%);
-    -webkit-backdrop-filter: blur(20px) saturate(110%);
     padding: 48px;
     margin: 36px 0;
-    box-shadow: 0 10px 30px rgba(28, 25, 23, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    position: relative;
+    box-shadow: 0 10px 30px rgba(28, 25, 23, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    z-index: 1;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.section-tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--accent-orange);
-    letter-spacing: 0.15em;
-    margin-bottom: 12px;
-    text-transform: uppercase;
+.section-container::before, .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    border-radius: 22px;
+    background: rgba(253, 251, 247, 0.65);
+    backdrop-filter: blur(28px) saturate(125%);
+    -webkit-backdrop-filter: blur(28px) saturate(125%);
+    
+    /* Radial gradient mask: transparent center (sharp mesh), black edges (fully blurred mesh) */
+    -webkit-mask-image: radial-gradient(var(--spotlight-radius, 0px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, black 85%);
+    mask-image: radial-gradient(var(--spotlight-radius, 0px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, black 85%);
+    
+    pointer-events: none;
 }
+
+.section-container::after, .hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    border-radius: 22px;
+    background: radial-gradient(var(--spotlight-radius, 0px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.3) 0%, transparent 80%);
+    pointer-events: none;
+}
+
+/* Section Typography */
 
 .section-title {
     font-size: 28px;
@@ -1961,6 +1979,34 @@ h1, h2, h3, h4 {
 .reveal-element.active-reveal {
     opacity: 1;
     transform: translateY(0) scale(1.0);
+}
+
+/* Blend custom hover/interaction transitions with reveal transitions to avoid overriding */
+.section-tag.reveal-element {
+    transition: letter-spacing 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+                color 0.3s ease, 
+                opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-row-block.reveal-element {
+    transition: background-color 0.35s ease, 
+                opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills-grid-col.reveal-element {
+    transition: opacity 0.4s ease, 
+                filter 0.4s ease, 
+                background-color 0.4s ease, 
+                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-card-box.reveal-element {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Staggered Delay Utilities for Lists and Grids */
