@@ -1088,7 +1088,7 @@ function initCustomCursor() {
     });
 
     // Bind hover states to interactive elements using dynamic delegation
-    const hoverElements = "a, button, select, input, .specialization-toggle-bar, .toggle-label, .skill-card-module, .back-to-top-btn";
+    const hoverElements = "a, button, select, input, .specialization-toggle-bar, .toggle-label, .skill-card-module, .back-to-top-btn, .projects-toggle-pill, .projects-toggle-label";
     
     document.addEventListener("mouseover", (e) => {
         if (isTouchDevice) return;

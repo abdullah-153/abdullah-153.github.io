@@ -75,7 +75,9 @@ body.has-custom-cursor .specialization-toggle-bar,
 body.has-custom-cursor .toggle-label, 
 body.has-custom-cursor .skill-card-module,
 body.has-custom-cursor .back-to-top-btn,
-body.has-custom-cursor .footer-link-port {
+body.has-custom-cursor .footer-link-port,
+body.has-custom-cursor .projects-toggle-pill,
+body.has-custom-cursor .projects-toggle-label {
     cursor: none !important;
 }
 
@@ -102,6 +104,7 @@ body.has-custom-cursor #custom-cursor-ring {
     border-radius: 50%;
     filter: none !important;
     backdrop-filter: none !important;
+    box-shadow: 0 0 0 1px #ffffff, 0 1px 3px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes liquidBlob {
@@ -131,6 +134,7 @@ body.has-custom-cursor #custom-cursor-ring {
                 border-style 0.25s ease,
                 opacity 0.25s ease;
     animation: liquidBlob 5s ease-in-out infinite;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 body.cursor-hover #custom-cursor-ring {
@@ -144,6 +148,7 @@ body.cursor-hover #custom-cursor-ring {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     animation: cursorSpin 8s linear infinite;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.55);
 }
 
 @keyframes cursorSpin {
@@ -669,6 +674,15 @@ h1, h2, h3, h4 {
     border-radius: 22px;
     background: radial-gradient(var(--spotlight-radius, 0px) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(234, 88, 12, 0.20) 0%, rgba(255, 255, 255, 0.32) 45%, transparent 80%);
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Hide parent spotlight when hovering inside individual card components to avoid visual overlaps */
+.section-container:has(.project-row-block:hover)::after,
+.section-container:has(.skill-card-module:hover)::after,
+.section-container:has(.contact-card-box:hover)::after {
+    opacity: 0;
 }
 
 /* Section Typography */
