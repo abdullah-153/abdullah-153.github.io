@@ -28,7 +28,7 @@ const activeSpotlights = new Map();
 document.addEventListener("mousemove", (e) => {
     const currentHovered = new Set();
     let current = e.target;
-    const selector = ".skill-card-module, .btn, .chip, .metric-hud-box, .project-row-block, .specialization-toggle-bar, .back-to-top-btn, .nav-link, .footer-link-port, .logo-monogram-box, .logo-name, .header-brand-badge, .toggle-label, .hero-title, .project-title, .skill-card-name, .section-title";
+    const selector = ".section-container, .hero-section, .skill-card-module, .btn, .chip, .metric-hud-box, .project-row-block, .specialization-toggle-bar, .back-to-top-btn, .nav-link, .footer-link-port, .logo-monogram-box, .logo-name, .header-brand-badge, .toggle-label, .hero-title, .project-title, .skill-card-name, .section-title";
     
     const updateTarget = (el) => {
         currentHovered.add(el);
@@ -404,17 +404,32 @@ function initSynapticCanvas() {
                         Math.sqrt((mouse.x - ptRight.x)**2 + (mouse.y - ptRight.y)**2)
                     ) : 9999;
 
-                    let alpha = activeCanvasMode === "ai" ? 0.14 : 0.09; // defined base grid (more visible in all lighting)
+                    let alpha = activeCanvasMode === "ai" ? 0.14 : 0.09;
+                    let isGlowing = false;
+                    let glowFactor = 0;
                     if (distMouse < gravityDist) {
-                        const glowFactor = (gravityDist - distMouse) / gravityDist;
+                        glowFactor = (gravityDist - distMouse) / gravityDist;
                         alpha += glowFactor * (activeCanvasMode === "ai" ? 0.22 : 0.12);
+                        isGlowing = true;
                     }
                     
-                    ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
-                    ctx.beginPath();
-                    ctx.moveTo(pt.x, pt.y);
-                    ctx.lineTo(ptRight.x, ptRight.y);
-                    ctx.stroke();
+                    if (isGlowing) {
+                        ctx.save();
+                        ctx.shadowBlur = glowFactor * 10;
+                        ctx.shadowColor = `rgba(234, 88, 12, ${glowFactor * 0.45})`;
+                        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(pt.x, pt.y);
+                        ctx.lineTo(ptRight.x, ptRight.y);
+                        ctx.stroke();
+                        ctx.restore();
+                    } else {
+                        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(pt.x, pt.y);
+                        ctx.lineTo(ptRight.x, ptRight.y);
+                        ctx.stroke();
+                    }
                 }
 
                 // Draw vertical line segment
@@ -426,16 +441,31 @@ function initSynapticCanvas() {
                     ) : 9999;
 
                     let alpha = activeCanvasMode === "ai" ? 0.14 : 0.09;
+                    let isGlowing = false;
+                    let glowFactor = 0;
                     if (distMouse < gravityDist) {
-                        const glowFactor = (gravityDist - distMouse) / gravityDist;
+                        glowFactor = (gravityDist - distMouse) / gravityDist;
                         alpha += glowFactor * (activeCanvasMode === "ai" ? 0.22 : 0.12);
+                        isGlowing = true;
                     }
 
-                    ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
-                    ctx.beginPath();
-                    ctx.moveTo(pt.x, pt.y);
-                    ctx.lineTo(ptDown.x, ptDown.y);
-                    ctx.stroke();
+                    if (isGlowing) {
+                        ctx.save();
+                        ctx.shadowBlur = glowFactor * 10;
+                        ctx.shadowColor = `rgba(234, 88, 12, ${glowFactor * 0.45})`;
+                        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(pt.x, pt.y);
+                        ctx.lineTo(ptDown.x, ptDown.y);
+                        ctx.stroke();
+                        ctx.restore();
+                    } else {
+                        ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.moveTo(pt.x, pt.y);
+                        ctx.lineTo(ptDown.x, ptDown.y);
+                        ctx.stroke();
+                    }
                 }
 
                 // Draw Intersection node dot
