@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCustomCursor();
     stabilizeLayoutHeights();
     initFooterTime();
+    initHeaderScroll();
     setupScrollReveals();
 });
 
@@ -1100,5 +1101,18 @@ function setupScrollReveals() {
     document.querySelectorAll(selectors).forEach(el => {
         el.classList.add("reveal-element");
         revealObserver.observe(el);
+    });
+}
+
+function initHeaderScroll() {
+    const header = document.querySelector(".portfolio-header");
+    if (!header) return;
+    
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 40) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
     });
 }

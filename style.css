@@ -30,7 +30,7 @@
     --font-mono: 'JetBrains Mono', monospace;
     
     /* Custom Shadows & Borders */
-    --border-card: rgba(28, 25, 23, 0.07);
+    --border-card: rgba(28, 25, 23, 0.16);
     --border-hover: rgba(234, 88, 12, 0.28);
     --card-shadow: 0 6px 24px rgba(28, 25, 23, 0.015);
     --card-shadow-hover: 0 16px 36px rgba(234, 88, 12, 0.05);
@@ -295,19 +295,29 @@ body.cursor-hover #custom-cursor-dot {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 72px;
-    padding: 0 24px;
-    margin-top: 16px;
-    border: 1px solid var(--border-card);
-    border-radius: 14px;
-    background: var(--bg-header);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    height: 64px;
+    padding: 0 28px;
+    margin: 20px auto 0 auto;
+    width: calc(100% - 40px);
+    max-width: var(--max-width);
+    border: 1.5px solid var(--border-card);
+    border-radius: 40px;
+    background: rgba(253, 251, 247, 0.65);
+    backdrop-filter: blur(24px) saturate(120%);
+    -webkit-backdrop-filter: blur(24px) saturate(120%);
     position: sticky;
-    top: 16px;
+    top: 20px;
     z-index: 100;
-    box-shadow: 0 4px 24px rgba(28, 25, 23, 0.03);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(28, 25, 23, 0.05);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-header.scrolled {
+    height: 56px;
+    background: rgba(253, 251, 247, 0.85);
+    border-color: rgba(28, 25, 23, 0.22);
+    box-shadow: 0 12px 36px rgba(28, 25, 23, 0.08), 0 2px 8px rgba(28, 25, 23, 0.02);
+    transform: translateY(2px) scale(0.985);
 }
 
 .header-brand-badge {
@@ -1609,6 +1619,9 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
     .portfolio-header {
         height: 72px;
+        width: calc(100% - 32px);
+        margin: 16px auto 0 auto;
+        top: 16px;
     }
     
     .logo-name, .logo-divider {
