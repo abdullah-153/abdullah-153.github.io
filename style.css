@@ -191,6 +191,29 @@ body.cursor-hover #custom-cursor-dot {
     opacity: 1;
 }
 
+/* ── Fully suppress all spotlight glow layers on touch/mobile devices.
+   On touch screens the :hover state sticks after a tap and the JS spotlight
+   has no mouseleave to cancel it, leaving persistent orange blobs on screen. ── */
+@media (hover: none) {
+    .skill-card-module::before, .btn::before, .chip::before, .metric-hud-box::before,
+    .project-row-block::before, .specialization-toggle-bar::before,
+    .back-to-top-btn::before, .nav-link::before, .footer-link-port::before,
+    .logo-monogram-box::before,
+    .skill-card-module:hover::before, .btn:hover::before, .chip:hover::before,
+    .metric-hud-box:hover::before, .project-row-block:hover::before,
+    .specialization-toggle-bar:hover::before, .back-to-top-btn:hover::before,
+    .nav-link:hover::before, .footer-link-port:hover::before,
+    .logo-monogram-box:hover::before {
+        opacity: 0 !important;
+        transition: none !important;
+    }
+
+    .section-container::after, .hero-section::after {
+        opacity: 0 !important;
+        transition: none !important;
+    }
+}
+
 @keyframes titleReveal {
     0% {
         opacity: 0;
@@ -852,9 +875,12 @@ h1, h2, h3, h4 {
     opacity: 1;
 }
 
-.projects-toggle-label:hover {
-    opacity: 1;
-    color: var(--text-main);
+/* Hover tint only on pointer devices — prevents sticky states on touch */
+@media (hover: hover) {
+    .projects-toggle-label:hover {
+        opacity: 1;
+        color: var(--text-main);
+    }
 }
 
 .projects-toggle-slider {

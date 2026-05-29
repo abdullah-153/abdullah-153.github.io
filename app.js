@@ -94,25 +94,11 @@ document.addEventListener("mousemove", (e) => {
     updateSpotlightCoordinates(e.clientX, e.clientY, e.target);
 });
 
-document.addEventListener("touchstart", (e) => {
-    if (e.touches && e.touches.length > 0) {
-        const touch = e.touches[0];
-        updateSpotlightCoordinates(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
-    }
-}, { passive: true });
+// Spotlight tracking is intentionally disabled for touch/mobile devices.
+// On touch screens there is no persistent cursor, so the glow fires on tap
+// and then lingers with no natural exit event — causing visible ghost blobs.
+// The effect works exclusively with a pointing device (mouse / trackpad).
 
-document.addEventListener("touchmove", (e) => {
-    if (e.touches && e.touches.length > 0) {
-        const touch = e.touches[0];
-        updateSpotlightCoordinates(touch.clientX, touch.clientY, document.elementFromPoint(touch.clientX, touch.clientY));
-    }
-}, { passive: true });
-
-document.addEventListener("touchend", () => {
-    for (const [el, data] of activeSpotlights.entries()) {
-        data.active = false;
-    }
-});
 
 // Continuously update active spotlights in sync with screen refresh
 function animateSpotlights() {
