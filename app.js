@@ -1143,4 +1143,14 @@ function initHeaderScroll() {
             header.classList.remove("scrolled");
         }
     });
+
+    const brandBadge = header.querySelector(".header-brand-badge");
+    if (brandBadge) {
+        brandBadge.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
 }

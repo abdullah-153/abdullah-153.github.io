@@ -209,11 +209,7 @@ body.cursor-hover #custom-cursor-dot {
     font-weight: 600;
     font-size: 14px;
     letter-spacing: 0.05em;
-    transition: letter-spacing 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.logo-name:hover {
-    letter-spacing: 0.15em;
+    transition: letter-spacing 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
 }
 
 .section-tag {
@@ -332,7 +328,7 @@ body.cursor-hover #custom-cursor-dot {
     display: flex;
     align-items: center;
     gap: 12px;
-    cursor: default;
+    cursor: pointer;
     transition: all 0.25s ease;
 }
 
@@ -356,6 +352,11 @@ body.cursor-hover #custom-cursor-dot {
 .header-brand-badge:hover .logo-monogram-box {
     transform: scale(1.1) rotate(-4deg);
     background: #d04e0a;
+}
+
+.header-brand-badge:hover .logo-name {
+    letter-spacing: 0.15em;
+    color: var(--accent-orange);
 }
 
 .logo-divider {
