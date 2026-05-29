@@ -808,9 +808,25 @@ function initSpecializationMorph() {
 
     // Wire up projects context segmented toggle click
     if (pTogglePill) {
-        pTogglePill.addEventListener("click", () => {
+        pTogglePill.addEventListener("click", (e) => {
             const target = currentSpecialization === "ai" ? "infra" : "ai";
             switchMode(target);
+            // Immediately drop focus so browser removes :focus outline border
+            pTogglePill.blur();
+        });
+    }
+
+    if (pLabelAI) {
+        pLabelAI.addEventListener("click", (e) => {
+            switchMode("ai");
+            e.currentTarget.blur();
+        });
+    }
+
+    if (pLabelInfra) {
+        pLabelInfra.addEventListener("click", (e) => {
+            switchMode("infra");
+            e.currentTarget.blur();
         });
     }
 }

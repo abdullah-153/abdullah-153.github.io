@@ -424,6 +424,9 @@ body.cursor-hover #custom-cursor-dot {
 
 .btn-cv-download {
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
     color: var(--text-main);
     text-decoration: none;
@@ -802,8 +805,16 @@ h1, h2, h3, h4 {
 }
 
 .projects-toggle-pill:hover {
-    border-color: var(--accent-orange);
+    border-color: rgba(234, 88, 12, 0.35);
     background: #e2dcd0;
+}
+
+/* Suppress browser focus/active outline ghost border that appears after click */
+.projects-toggle-pill:focus,
+.projects-toggle-pill:focus-visible,
+.projects-toggle-pill:active {
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(28, 25, 23, 0.08);
 }
 
 /* Vertical separator line */
@@ -1801,33 +1812,39 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
     .portfolio-header {
         height: 52px;
-        width: calc(100% - 24px);
-        margin: 12px auto 0 auto;
-        top: 12px;
-        padding: 0 14px;
-        flex-wrap: wrap;
-        overflow: hidden;
+        width: calc(100% - 20px);
+        margin: 10px auto 0 auto;
+        top: 10px;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
     }
     
     .logo-name {
         display: inline-block;
-        font-size: 11.5px;
-        letter-spacing: 0.02em;
+        font-size: 11px;
+        letter-spacing: 0.01em;
     }
     
     .logo-divider {
         display: inline-block;
-        margin: 0 2px;
+        margin: 0 1px;
     }
     
     .header-nav {
-        gap: 8px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
     }
     
     .nav-link {
         display: inline-flex;
-        font-size: 11.5px;
-        padding: 4px 6px;
+        align-items: center;
+        font-size: 11px;
+        padding: 4px 5px;
     }
     
     .nav-index {
@@ -1835,8 +1852,22 @@ h1, h2, h3, h4 {
     }
     
     .btn-cv-download {
-        font-size: 10.5px;
-        padding: 6px 10px;
+        display: inline-flex;
+        align-items: center;
+        font-size: 10px;
+        padding: 5px 8px;
+        margin-left: 2px;
+    }
+    
+    .logo-monogram-box {
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+    
+    .header-brand-badge {
+        gap: 6px;
     }
     
     .section-container, .hero-section {
@@ -1897,8 +1928,35 @@ h1, h2, h3, h4 {
         border-bottom: 1px solid var(--border-card);
     }
     
+    /* Add clearer INPUT/OUTPUT visual divider between stacked panes on mobile */
     .editor-pane:last-child {
         border-bottom: none;
+        position: relative;
+    }
+
+    .editor-pane:last-child::before {
+        content: 'OUTPUT ↓ Response Console';
+        display: block;
+        font-family: var(--font-mono);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-orange);
+        opacity: 0.7;
+        text-align: center;
+        padding: 4px 0;
+        background: rgba(234, 88, 12, 0.04);
+        border-top: 1px dashed rgba(234, 88, 12, 0.2);
+    }
+
+    .editor-tab .tab-name {
+        font-size: 10px;
+    }
+
+    .editor-tab .http-status-label {
+        font-size: 8px;
+        margin-left: 4px;
     }
     
     .editor-contents input {
