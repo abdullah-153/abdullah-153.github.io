@@ -309,14 +309,14 @@ function initSynapticCanvas() {
         }
 
         update() {
-            // Elastic breathing wobble (active in both states, slightly adjusted)
-            const breathingScale = activeCanvasMode === "ai" ? 6 : 4;
+            // Elastic breathing wobble (active in both states, made highly subtle)
+            const breathingScale = activeCanvasMode === "ai" ? 1.5 : 1.0;
             const wobbleX = Math.sin(time * this.speed + this.phase) * breathingScale;
             const wobbleY = Math.cos(time * this.speed * 0.8 + this.phase) * breathingScale;
 
-            // Scroll-linked ripple wave (ripples dynamically as user scrolls)
+            // Scroll-linked ripple wave (ripples dynamically as user scrolls, made highly subtle)
             const scrollY = window.scrollY || 0;
-            const scrollWobble = Math.sin(scrollY * 0.0035 + this.phase) * (activeCanvasMode === "ai" ? 4.5 : 3.0);
+            const scrollWobble = Math.sin(scrollY * 0.0035 + this.phase) * (activeCanvasMode === "ai" ? 1.2 : 0.8);
 
             let targetX = this.baseX + wobbleX;
             let targetY = this.baseY + wobbleY + scrollWobble;
@@ -328,8 +328,8 @@ function initSynapticCanvas() {
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < gravityDist) {
                     const force = (gravityDist - dist) / gravityDist;
-                    // Bends/indents the mesh to show high-effort 3D displacement
-                    const repelForce = activeCanvasMode === "ai" ? 38 : 28;
+                    // Bends/indents the mesh gently under the cursor
+                    const repelForce = activeCanvasMode === "ai" ? 12 : 8;
                     targetX -= (dx / (dist || 1)) * force * repelForce;
                     targetY -= (dy / (dist || 1)) * force * repelForce;
                     this.glow = force;
@@ -404,10 +404,10 @@ function initSynapticCanvas() {
                         Math.sqrt((mouse.x - ptRight.x)**2 + (mouse.y - ptRight.y)**2)
                     ) : 9999;
 
-                    let alpha = activeCanvasMode === "ai" ? 0.065 : 0.045; // defined base grid
+                    let alpha = activeCanvasMode === "ai" ? 0.14 : 0.09; // defined base grid (more visible in all lighting)
                     if (distMouse < gravityDist) {
                         const glowFactor = (gravityDist - distMouse) / gravityDist;
-                        alpha += glowFactor * (activeCanvasMode === "ai" ? 0.18 : 0.08);
+                        alpha += glowFactor * (activeCanvasMode === "ai" ? 0.22 : 0.12);
                     }
                     
                     ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
@@ -425,10 +425,10 @@ function initSynapticCanvas() {
                         Math.sqrt((mouse.x - ptDown.x)**2 + (mouse.y - ptDown.y)**2)
                     ) : 9999;
 
-                    let alpha = activeCanvasMode === "ai" ? 0.065 : 0.045;
+                    let alpha = activeCanvasMode === "ai" ? 0.14 : 0.09;
                     if (distMouse < gravityDist) {
                         const glowFactor = (gravityDist - distMouse) / gravityDist;
-                        alpha += glowFactor * (activeCanvasMode === "ai" ? 0.18 : 0.08);
+                        alpha += glowFactor * (activeCanvasMode === "ai" ? 0.22 : 0.12);
                     }
 
                     ctx.strokeStyle = `rgba(234, 88, 12, ${alpha})`;
@@ -438,14 +438,12 @@ function initSynapticCanvas() {
                     ctx.stroke();
                 }
 
-                // Intersecting nodes (glow dots)
-                if (pt.glow > 0.02) {
-                    ctx.beginPath();
-                    ctx.arc(pt.x, pt.y, 1.2 + pt.glow * 1.5, 0, Math.PI * 2);
-                    const opacityScale = activeCanvasMode === "ai" ? 0.35 : 0.22;
-                    ctx.fillStyle = `rgba(234, 88, 12, ${pt.glow * opacityScale})`;
-                    ctx.fill();
-                }
+                // Draw Intersection node dot
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, 1.0 + pt.glow * 1.5, 0, Math.PI * 2);
+                const dotAlpha = activeCanvasMode === "ai" ? (0.12 + pt.glow * 0.45) : (0.08 + pt.glow * 0.28);
+                ctx.fillStyle = `rgba(234, 88, 12, ${dotAlpha})`;
+                ctx.fill();
             }
         }
 
@@ -622,8 +620,9 @@ function initSpecializationMorph() {
     const labelAI = document.getElementById("label-ai");
     const labelInfra = document.getElementById("label-infra");
     const wrapper = document.querySelector(".specialization-toggle-wrapper");
-    const indicatorMode = document.getElementById("projects-focus-mode");
-    const indicatorShortcut = document.getElementById("projects-toggle-shortcut");
+    const pTogglePill = document.getElementById("projects-toggle-btn");
+    const pLabelAI = document.getElementById("p-label-ai");
+    const pLabelInfra = document.getElementById("p-label-infra");
 
     let currentSpecialization = "ai"; // default state
 
@@ -712,16 +711,16 @@ function initSpecializationMorph() {
             window.setCanvasMode(newMode);
         }
 
-        // Update projects section indicator text
-        if (indicatorMode && indicatorShortcut) {
+        // Update projects section toggle pill state
+        if (pTogglePill && pLabelAI && pLabelInfra) {
             if (newMode === "infra") {
-                indicatorMode.innerText = "AI MOBILE APPLICATIONS";
-                indicatorShortcut.innerText = "(Click to swap to AI/ML Engineering Projects)";
-                indicatorMode.style.color = "var(--accent-amber)";
+                pTogglePill.classList.add("infra-active");
+                pLabelAI.classList.remove("active");
+                pLabelInfra.classList.add("active");
             } else {
-                indicatorMode.innerText = "AI / ML ENGINEERING";
-                indicatorShortcut.innerText = "(Click to swap to Mobile AI Projects)";
-                indicatorMode.style.color = "var(--accent-green)";
+                pTogglePill.classList.remove("infra-active");
+                pLabelAI.classList.add("active");
+                pLabelInfra.classList.remove("active");
             }
         }
     }
@@ -752,10 +751,9 @@ function initSpecializationMorph() {
         labelInfra.addEventListener("click", () => switchMode("infra"));
     }
 
-    // Wire up projects context indicator shortcut
-    const projectsIndicator = document.querySelector(".projects-context-indicator");
-    if (projectsIndicator) {
-        projectsIndicator.addEventListener("click", () => {
+    // Wire up projects context segmented toggle click
+    if (pTogglePill) {
+        pTogglePill.addEventListener("click", () => {
             const target = currentSpecialization === "ai" ? "infra" : "ai";
             switchMode(target);
         });

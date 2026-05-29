@@ -92,9 +92,12 @@
             <h2 class="section-title" id="projects-title">End-to-End ML Infrastructure</h2>
             <p class="section-desc" id="projects-desc">High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards.</p>
             <div class="projects-context-indicator">
-                <span class="indicator-prefix">// CURRENTLY VIEWING:</span>
-                <span class="indicator-focus-mode" id="projects-focus-mode">AI / ML ENGINEERING</span>
-                <span class="indicator-action-prompt" id="projects-toggle-shortcut">(Click to swap to Mobile AI Projects)</span>
+                <span class="indicator-prefix">// PROJECT FOCUS //</span>
+                <div class="projects-toggle-pill" id="projects-toggle-btn">
+                    <span class="projects-toggle-label active" id="p-label-ai" data-mode="ai">AI / ML Systems</span>
+                    <span class="projects-toggle-label" id="p-label-infra" data-mode="infra">Mobile AI</span>
+                    <div class="projects-toggle-slider"></div>
+                </div>
             </div>
             
             <div class="project-dashboard-list">
