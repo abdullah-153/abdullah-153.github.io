@@ -577,7 +577,7 @@ function measureRowHeight(row, mode) {
     
     metrics.forEach((m, idx) => {
         const boxIdx = idx + 1;
-        const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : "vi");
+        const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : (projectId === "vigilai" ? "vi" : "oc"));
         const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
         const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
         if (labelSpan && valueSpan) {
@@ -727,7 +727,7 @@ function initSpecializationMorph() {
             const metrics = JSON.parse(row.getAttribute(`data-${newMode}-metrics`));
             metrics.forEach((m, idx) => {
                 const boxIdx = idx + 1;
-                const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : "vi");
+                const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : (projectId === "vigilai" ? "vi" : "oc"));
                 const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
                 const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
 
@@ -2440,6 +2440,381 @@ function getProjectContent(projectId, mode) {
 
                     btnFetch.addEventListener("click", handleFetch);
                     activePlaygroundListeners.push({ element: btnFetch, event: "click", callback: handleFetch });
+                }
+            };
+        }
+    } else if (projectId === "project-opaque-ci") {
+        if (mode === "ai") {
+            // OpaqueCI Agent (AI/ML)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">AI Security & Review Systems</span>
+                            <span>// PROJECT_04</span>
+                        </div>
+                        <h2 class="detail-project-title">OpaqueCI Agent (Zero-Trust)</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Python</span>
+                            <span class="detail-tech-badge">FastAPI</span>
+                            <span class="detail-tech-badge">ChromaDB</span>
+                            <span class="detail-tech-badge">Llama.cpp</span>
+                            <span class="detail-tech-badge">Git API</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A secure, automated backend infrastructure designed to act as an autonomous Senior Security and Architecture Reviewer within private CI/CD pipelines. Evaluates code changes (.diff data) entirely on local hardware, ensuring zero leakage of proprietary intellectual property.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Security & Retrieval Architecture</h3>
+                                <div class="architecture-box">
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">1</div>
+                                        <div class="flow-step-body"><strong>Webhook Ingestion:</strong> Specialized reverse-proxy webhook server captures Git collaboration triggers (e.g., Pull Requests) and extracts raw structural diff payloads.</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">2</div>
+                                        <div class="flow-step-body"><strong>Contextual Retrieval (RAG):</strong> Vectorizes modified file segments using local embedding models and queries an offline ChromaDB instance populated with OWASP rules and internal coding standards.</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">3</div>
+                                        <div class="flow-step-body"><strong>Edge SLM Inference:</strong> Processes the code changes combined with retrieved guidelines inside an optimized local Small Language Model (SLM), executing deep logic and leak validation.</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">4</div>
+                                        <div class="flow-step-body"><strong>Collaborative Feedback:</strong> Automatically compiles the security reports and posts structured markdown reviews directly to the upstream PR timeline.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="detail-section-title">Core Capability Specs</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>Zero Cloud Leaks:</strong> Designed specifically for compliance-heavy, air-gapped developer environments. All raw source code remains local.</li>
+                                    <li><strong>Differentiated Review Engine:</strong> Combines syntactic parsing with ChromaDB semantic search to pull rules relevant strictly to the files modified (e.g., SQL patterns for DB files).</li>
+                                    <li><strong>Actionable PR Comments:</strong> Generates inline diff suggestions and architectural warnings categorizing items as Critical, Warning, or Optimization.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Inference & System Metrics</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Local SLM:</span>
+                                        <span class="spec-val">Llama-3-8B-Instruct (Q4_K_M)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Average Review Speed:</span>
+                                        <span class="spec-val spec-green">&lt; 15s / PR</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Offline Vector Database:</span>
+                                        <span class="spec-val">ChromaDB (Local SQLite backend)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Webhook Ingestion:</span>
+                                        <span class="spec-val">FastAPI + Asyncio</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">OpaqueCI Agent Sandbox</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green" id="oc-light-webhook"></span>
+                                        <span class="sandbox-light" id="oc-light-rag"></span>
+                                        <span class="sandbox-light" id="oc-light-slm"></span>
+                                        <span class="sandbox-light" id="oc-light-api"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">OpaqueCI Local Terminal</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Choose a mock Pull Request diff payload and trigger the autonomous local reviewer workflow.</p>
+                                    <div class="sandbox-controls-row">
+                                        <select id="oc-select-diff" class="sandbox-input" style="background:#fff; color:#1c1917; border: 1px solid var(--border-card);">
+                                            <option value="secrets">PR #12: Hardcoded credentials in DB config</option>
+                                            <option value="sql">PR #13: Unsanitized SQL query parameters</option>
+                                            <option value="clean">PR #14: Refactor user session timeout controller</option>
+                                        </select>
+                                        <button id="oc-btn-run" class="sandbox-btn-run">❯ Dispatch Webhook Event</button>
+                                    </div>
+                                    <div class="sandbox-terminal" id="oc-terminal-logs" style="min-height: 200px;">
+                                        <div class="terminal-line">// Webhook loop listening on port 8080...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const selectDiff = document.getElementById("oc-select-diff");
+                    const btnRun = document.getElementById("oc-btn-run");
+                    const terminal = document.getElementById("oc-terminal-logs");
+                    
+                    const lights = {
+                        webhook: document.getElementById("oc-light-webhook"),
+                        rag: document.getElementById("oc-light-rag"),
+                        slm: document.getElementById("oc-light-slm"),
+                        api: document.getElementById("oc-light-api")
+                    };
+
+                    const handleReview = () => {
+                        const selection = selectDiff.value;
+                        terminal.innerHTML = "";
+                        btnRun.disabled = true;
+                        
+                        // Reset lights
+                        Object.values(lights).forEach(l => { if (l) l.className = "sandbox-light"; });
+                        if (lights.webhook) lights.webhook.className = "sandbox-light green";
+
+                        printSimLog(terminal, ">>> [WEBHOOK RECV] Repository event: pull_request.opened", "info");
+                        
+                        setTimeout(() => {
+                            printSimLog(terminal, ">>> Fetching raw diff contents for PR...", "muted");
+                            
+                            let diffContent = "";
+                            if (selection === "secrets") {
+                                diffContent = `
+@@ -10,4 +10,4 @@
+-DB_HOST = os.environ.get("DATABASE_HOST")
++DB_HOST = "db-production.internal.opaque.ci"
++DB_USER = "admin_root"
++DB_PASS = "Sup3rS3cr3tP4ssw0rd!2026"`;
+                            } else if (selection === "sql") {
+                                diffContent = `
+@@ -25,4 +25,4 @@
+-query = "SELECT * FROM users WHERE username = %s"
+-cursor.execute(query, (username,))
++query = f"SELECT * FROM users WHERE username = '{username}'"
++cursor.execute(query)`;
+                            } else {
+                                diffContent = `
+@@ -48,4 +48,4 @@
+-session.timeout = 1800
++session.timeout = Math.max(300, config.getSessionLimit())`;
+                            }
+                            
+                            printSimLog(terminal, diffContent, "muted");
+                            
+                            // Stage 2: ChromaDB Retrieval
+                            setTimeout(() => {
+                                printSimLog(terminal, "--- STAGE 2: INITIATING CHROMADB RETRIEVAL ---", "info");
+                                if (lights.rag) lights.rag.className = "sandbox-light yellow";
+                                
+                                if (selection === "secrets") {
+                                    printSimLog(terminal, ">>> Vectorizing diff tokens using local 'all-MiniLM-L6-v2' model...", "muted");
+                                    printSimLog(terminal, "[CHROMADB MATCH] Query distance: 0.18. Retrieved rule: SEC-04 (Hardcoded Credentials In Codebase).", "warning");
+                                } else if (selection === "sql") {
+                                    printSimLog(terminal, ">>> Vectorizing diff tokens using local 'all-MiniLM-L6-v2' model...", "muted");
+                                    printSimLog(terminal, "[CHROMADB MATCH] Query distance: 0.22. Retrieved rule: OWASP-A03 (SQL Injection Guardrails).", "warning");
+                                } else {
+                                    printSimLog(terminal, ">>> Vectorizing diff tokens using local 'all-MiniLM-L6-v2' model...", "muted");
+                                    printSimLog(terminal, "[CHROMADB MATCH] Query distance: 0.54. No critical security exceptions found. Returning default structural review standard.", "success");
+                                }
+                                
+                                // Stage 3: SLM Inference
+                                setTimeout(() => {
+                                    printSimLog(terminal, "--- STAGE 3: RUNNING EDGE SLM INFERENCE ---", "info");
+                                    if (lights.slm) lights.slm.className = "sandbox-light yellow";
+                                    printSimLog(terminal, ">>> Loading Llama-3-8B-Instruct (4-bit GPU quant) into VRAM context...", "muted");
+                                    printSimLog(terminal, ">>> Analyzing diff semantics against retrieved rules...", "muted");
+                                    
+                                    let slmResult = "";
+                                    let status = "success";
+                                    if (selection === "secrets") {
+                                        slmResult = "[SLM SEVERITY: CRITICAL] Hardcoded plaintext DB password 'Sup3rS3cr3tP4ssw0rd!2026' exposed. Action: Extract password to environment variables.";
+                                        status = "error";
+                                    } else if (selection === "sql") {
+                                        slmResult = "[SLM SEVERITY: CRITICAL] String interpolation f-string detected in SQL statement. Vulnerable to SQL injection. Action: Revert back to parameterized execution.";
+                                        status = "error";
+                                    } else {
+                                        slmResult = "[SLM SEVERITY: OPTIMIZATION] Timeout parameter safely capped using config bounds. Design review holds no security warnings.";
+                                        status = "success";
+                                    }
+                                    
+                                    printSimLog(terminal, slmResult, status);
+                                    
+                                    // Stage 4: API Comment Posting
+                                    setTimeout(() => {
+                                        printSimLog(terminal, "--- STAGE 4: POSTING UPSTREAM FEEDBACK ---", "info");
+                                        if (lights.api) {
+                                            lights.api.className = status === "error" ? "sandbox-light red" : "sandbox-light green";
+                                        }
+                                        
+                                        printSimLog(terminal, ">>> Structuring Markdown report for GitHub Pull Request review API...", "muted");
+                                        printSimLog(terminal, ">>> Posting response payload to Git Provider API endpoint...", "muted");
+                                        printSimLog(terminal, "<<< Upstream API responded: 201 Created. PR comment successfully published inline.", "success");
+                                        printSimLog(terminal, "\nReview process completed in 4.2 seconds. Zero data bytes left the local network boundary.", "success");
+                                        
+                                        btnRun.disabled = false;
+                                    }, 1000);
+                                    
+                                }, 1000);
+                                
+                            }, 1000);
+                            
+                        }, 800);
+                    };
+                    
+                    btnRun.addEventListener("click", handleReview);
+                    activePlaygroundListeners.push({ element: btnRun, event: "click", callback: handleReview });
+                    
+                    // Initial trigger
+                    handleReview();
+                }
+            };
+        } else {
+            // OpaqueCI Companion (Mobile/Infra)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">Developer Security Utilities</span>
+                            <span>// PROJECT_04</span>
+                        </div>
+                        <h2 class="detail-project-title">OpaqueCI Companion (Developer HUD)</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Flutter</span>
+                            <span class="detail-tech-badge">Dart</span>
+                            <span class="detail-tech-badge">WebSockets</span>
+                            <span class="detail-tech-badge">SystemTelemetry</span>
+                            <span class="detail-tech-badge">Android/iOS</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A companion mobile dashboard application built in Flutter for OpaqueCI cluster administrators. Streams system logs, VRAM/CPU footprints, vector store integrity metrics, and real-time security alerts securely over private WebSocket connections.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Companion App Features</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>Hardware Monitor HUD:</strong> Displays real-time SLM loading states, active core allocation, memory bounds, and GPU temperature profiles.</li>
+                                    <li><strong>Cluster Event Log:</strong> Streams security exception reports and raw Git triggers from internal servers directly to verified mobile clients.</li>
+                                    <li><strong>Zero-Trust Authentication:</strong> Access controlled via hardware-validated FaceID and mutual TLS cert verification to ensure dashboard access is restricted to verified networks.</li>
+                                </ul>
+                            </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Infrastructure Specifications</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">App Framework:</span>
+                                        <span class="spec-val">Dart (Flutter)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Transport Stream:</span>
+                                        <span class="spec-val">Encrypted WebSockets (WSS)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Auth Layer:</span>
+                                        <span class="spec-val spec-green">mTLS + Device Biometrics</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Alert Response:</span>
+                                        <span class="spec-val">&lt; 10ms (Local push daemon)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">OpaqueCI Dashboard Telemetry</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green" id="oc-sdk-net"></span>
+                                        <span class="sandbox-light" id="oc-sdk-alerts"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">Mobile Companion HUD</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Simulate real-time cluster workloads and watch SLM resources update on the mobile companion stream.</p>
+                                    <div class="sandbox-controls-row" style="flex-direction: row; flex-wrap: wrap; gap: 8px;">
+                                        <button id="oc-sdk-btn-load" class="sandbox-btn-run" style="flex: 1; min-width: 120px;">Trigger Heavy PR Load</button>
+                                        <button id="oc-sdk-btn-disconnect" class="sandbox-btn-run" style="flex: 1; min-width: 120px; background-color: var(--accent-orange);">Toggle Connection</button>
+                                    </div>
+                                    <div class="stride-routine-output" id="oc-sdk-terminal-logs" style="font-family: var(--font-mono); font-size: 11px; min-height: 150px; background:#12100f; color:#eae6db; box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);">
+                                        <div class="terminal-line">// WSS Client connected to cluster gateway. Data streaming active.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const btnLoad = document.getElementById("oc-sdk-btn-load");
+                    const btnDisconnect = document.getElementById("oc-sdk-btn-disconnect");
+                    const terminal = document.getElementById("oc-sdk-terminal-logs");
+                    const lightNet = document.getElementById("oc-sdk-net");
+                    const lightAlerts = document.getElementById("oc-sdk-alerts");
+                    
+                    let online = true;
+                    let loadSimulator = null;
+                    
+                    if (lightNet) lightNet.className = "sandbox-light green";
+
+                    const appendLog = (text, type = "") => {
+                        printSimLog(terminal, text, type);
+                    };
+
+                    const handleLoad = () => {
+                        if (!online) {
+                            appendLog(">>> [TRANSPORT ERR] Websocket connection offline. Cannot fetch real-time telemetry.", "error");
+                            return;
+                        }
+                        
+                        btnLoad.disabled = true;
+                        appendLog(">>> [SIMULATE] Spawning heavy pipeline payload (5 concurrent PRs)...", "info");
+                        
+                        if (lightAlerts) lightAlerts.className = "sandbox-light red";
+                        
+                        let step = 0;
+                        const steps = [
+                            { log: ">>> CPU Usage spike: 18% -> 92% (Core allocations active)", type: "warning" },
+                            { log: ">>> VRAM Buffer loading: 4.8 GB -> 7.9 GB (Llama-3 model context lock)", type: "warning" },
+                            { log: ">>> ChromaDB read/write speed: 820 queries/s", type: "muted" },
+                            { log: ">>> Local GPU temp peaked at 76°C (Cooling fans active)", type: "warning" },
+                            { log: ">>> Parallel inference tasks complete. PR reviews generated.", type: "success" },
+                            { log: ">>> Resource profiles returned to steady state. CPU: 12%, VRAM: 4.8 GB.", type: "success" }
+                        ];
+                        
+                        loadSimulator = setInterval(() => {
+                            if (step < steps.length) {
+                                appendLog(steps[step].log, steps[step].type);
+                                step++;
+                            } else {
+                                clearInterval(loadSimulator);
+                                if (lightAlerts) lightAlerts.className = "sandbox-light";
+                                btnLoad.disabled = false;
+                            }
+                        }, 500);
+                        
+                        activePlaygroundIntervals.push(loadSimulator);
+                    };
+
+                    const handleDisconnect = () => {
+                        online = !online;
+                        if (loadSimulator) clearInterval(loadSimulator);
+                        if (lightAlerts) lightAlerts.className = "sandbox-light";
+                        btnLoad.disabled = false;
+
+                        if (online) {
+                            if (lightNet) lightNet.className = "sandbox-light green";
+                            appendLog(">>> WSS Server handshake successful. Connection established.", "success");
+                        } else {
+                            if (lightNet) lightNet.className = "sandbox-light red";
+                            appendLog(">>> [DISCONNECTED] Server socket closed. Client polling backoff active...", "error");
+                        }
+                    };
+
+                    btnLoad.addEventListener("click", handleLoad);
+                    btnDisconnect.addEventListener("click", handleDisconnect);
+
+                    activePlaygroundListeners.push(
+                        { element: btnLoad, event: "click", callback: handleLoad },
+                        { element: btnDisconnect, event: "click", callback: handleDisconnect }
+                    );
                 }
             };
         }

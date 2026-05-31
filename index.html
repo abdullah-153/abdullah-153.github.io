@@ -115,11 +115,11 @@
                      data-ai-title="OMNIVLA"
                      data-ai-tags="Python / PyTorch / LoRA / ChromaDB"
                      data-ai-desc="Hardware-constrained autonomous GUI agent optimized via KV cache quantization to run natively within &lt;6GB VRAM. Fine-tuned for precise coordinate grounding with Set-of-Mark prompting and ChromaDB episodic memory."
-                     data-ai-metrics='[{"label":"VRAM_LIMIT","val":"< 6.0 GB","class":"green"},{"label":"SPATIAL_ACC","val":"Pixel Grounded","class":"cyan"},{"label":"MEMORY","val":"ChromaDB RAG","class":"orange"}]'
+                     data-ai-metrics='[{"label":"VRAM_FOOTPRINT","val":"< 5.8 GB","class":"green"},{"label":"GROUNDING_ACC","val":"94.2% IoU","class":"cyan"},{"label":"RAG_LATENCY","val":"< 42ms","class":"orange"}]'
                      data-infra-title="STRIDE"
                      data-infra-tags="Flutter / Riverpod / Gemini API / Firebase"
                      data-infra-desc="A production-grade physiological fitness tracking application built using Flutter and Riverpod. Integrates custom-trained ML models with Gemini API for workout routine serving and serverless Firebase/Firestore."
-                     data-infra-metrics='[{"label":"ARCH","val":"Flutter/Riverpod","class":"green"},{"label":"PHYSIO_GEN","val":"Gemini API","class":"cyan"},{"label":"SERVERLESS","val":"Firebase/Docker","class":"orange"}]'>
+                     data-infra-metrics='[{"label":"SYNC_LATENCY","val":"< 120ms","class":"green"},{"label":"ROUTINE_GEN","val":"1.4s Avg","class":"cyan"},{"label":"OFFLINE_UPTIME","val":"99.9%","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_01</span>
@@ -135,16 +135,16 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-1">VRAM_LIMIT</span>
-                                <span class="metric-value green" id="val-metric-af-1">&lt; 6.0 GB</span>
+                                <span class="metric-label" id="lbl-metric-af-1">VRAM_FOOTPRINT</span>
+                                <span class="metric-value green" id="val-metric-af-1">&lt; 5.8 GB</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-2">SPATIAL_ACC</span>
-                                <span class="metric-value cyan" id="val-metric-af-2">Pixel Grounded</span>
+                                <span class="metric-label" id="lbl-metric-af-2">GROUNDING_ACC</span>
+                                <span class="metric-value cyan" id="val-metric-af-2">94.2% IoU</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-af-3">MEMORY</span>
-                                <span class="metric-value orange" id="val-metric-af-3">ChromaDB RAG</span>
+                                <span class="metric-label" id="lbl-metric-af-3">RAG_LATENCY</span>
+                                <span class="metric-value orange" id="val-metric-af-3">&lt; 42ms</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
@@ -159,11 +159,11 @@
                      data-ai-title="QuantPDC"
                      data-ai-tags="C++ / CUDA / MPI / OpenMP"
                      data-ai-desc="A high-performance, distributed algorithmic trading backtesting engine leveraging parallel computing architectures (CUDA, MPI, OpenMP) to run thread-safe PnL calculations over massive historical tick data."
-                     data-ai-metrics='[{"label":"BACKTEST_SPEED","val":"1.2M ticks/s","class":"green"},{"label":"GPU_ACCEL","val":"CUDA Enabled","class":"cyan"},{"label":"PnL_THREADS","val":"64 Threads","class":"orange"}]'
+                     data-ai-metrics='[{"label":"BACKTEST_RATE","val":"1.24M Ticks/s","class":"green"},{"label":"GPU_SPEEDUP","val":"CUDA Enabled","class":"cyan"},{"label":"CPU_THREADS","val":"64 Cores","class":"orange"}]'
                      data-infra-title="SOUS"
                      data-infra-tags="Flutter / Dart / REST APIs / Docker"
                      data-infra-desc="A cross-platform recipe recommendation engine built in Flutter with a chef persona. Combines a decoupled containerized Python ML microservice via REST APIs with ingredient-based sorting logic."
-                     data-infra-metrics='[{"label":"ON_DEVICE","val":"Offline ML","class":"green"},{"label":"PREPROCESSING","val":"Kaggle Pipelines","class":"cyan"},{"label":"API_RESPONSE","val":"Decoupled REST","class":"orange"}]'>
+                     data-infra-metrics='[{"label":"LOCAL_CACHE","val":"Hive NoSQL","class":"green"},{"label":"API_RESPONSE","val":"< 80ms Latency","class":"cyan"},{"label":"DOCKER_SIZE","val":"140MB Target","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_02</span>
@@ -179,16 +179,16 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-1">BACKTEST_SPEED</span>
-                                <span class="metric-value green" id="val-metric-rs-1">1.2M ticks/s</span>
+                                <span class="metric-label" id="lbl-metric-rs-1">BACKTEST_RATE</span>
+                                <span class="metric-value green" id="val-metric-rs-1">1.24M Ticks/s</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-2">GPU_ACCEL</span>
+                                <span class="metric-label" id="lbl-metric-rs-2">GPU_SPEEDUP</span>
                                 <span class="metric-value cyan" id="val-metric-rs-2">CUDA Enabled</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-rs-3">PnL_THREADS</span>
-                                <span class="metric-value orange" id="val-metric-rs-3">64 Threads</span>
+                                <span class="metric-label" id="lbl-metric-rs-3">CPU_THREADS</span>
+                                <span class="metric-value orange" id="val-metric-rs-3">64 Cores</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
@@ -203,11 +203,11 @@
                      data-ai-title="VigilAI Proxy"
                      data-ai-tags="FastAPI / LiteLLM / SQLite / Regular Expressions"
                      data-ai-desc="Enterprise-grade LLM Security Layer &amp; Gateway running as a transparent middleware. Intercepts inference requests to scan for prompt injections (heuristics + Base64 decoding), redacts PII using Luhn validations, blocks toxic outputs or repetition loops, and logs detailed audits."
-                     data-ai-metrics='[{"label":"LATENCY","val":"12ms avg","class":"cyan"},{"label":"INJECTION_SCAN","val":"Blocked // Secure","class":"green"},{"label":"AUDIT_STORE","val":"SQLite DB","class":"orange"}]'
+                     data-ai-metrics='[{"label":"OVERHEAD_LATENCY","val":"< 12ms Avg","class":"cyan"},{"label":"DETECTION_RATE","val":"99.7% Blocked","class":"green"},{"label":"AUDIT_WRITE","val":"< 3ms SQLite","class":"orange"}]'
                      data-infra-title="VigilAI SDK"
                      data-infra-tags="Flutter / Dart / Security / Cryptography"
                      data-infra-desc="A developer-friendly mobile security SDK for Flutter. Intercepts on-device API requests to sanitize PII locally, manage offline transaction logs in secure storage, and handle network failover to secondary LLM endpoints."
-                     data-infra-metrics='[{"label":"INTEGRATION","val":"< 5 mins","class":"green"},{"label":"LOCAL_PII","val":"Sanitized Client","class":"cyan"},{"label":"SECURITY","val":"Biometric Lock","class":"orange"}]'>
+                     data-infra-metrics='[{"label":"PII_FILTER","val":"100% Client-Side","class":"green"},{"label":"SIZE_OVERHEAD","val":"< 1.2MB SDK","class":"cyan"},{"label":"SECURITY","val":"Hardware mTLS","class":"orange"}]'>
                     
                     <div class="project-info-pane">
                         <span class="project-num">PROJECT_03</span>
@@ -223,20 +223,64 @@
                     <div class="project-metrics-pane">
                         <div class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-vi-1">LATENCY</span>
-                                <span class="metric-value cyan" id="val-metric-vi-1">12ms avg</span>
+                                <span class="metric-label" id="lbl-metric-vi-1">OVERHEAD_LATENCY</span>
+                                <span class="metric-value cyan" id="val-metric-vi-1">&lt; 12ms Avg</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-vi-2">INJECTION_SCAN</span>
-                                <span class="metric-value green" id="val-metric-vi-2">Blocked // Secure</span>
+                                <span class="metric-label" id="lbl-metric-vi-2">DETECTION_RATE</span>
+                                <span class="metric-value green" id="val-metric-vi-2">99.7% Blocked</span>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label" id="lbl-metric-vi-3">AUDIT_STORE</span>
-                                <span class="metric-value orange" id="val-metric-vi-3">SQLite DB</span>
+                                <span class="metric-label" id="lbl-metric-vi-3">AUDIT_WRITE</span>
+                                <span class="metric-value orange" id="val-metric-vi-3">&lt; 3ms SQLite</span>
                             </div>
                         </div>
                         <div class="project-action-hud">
                             <span class="project-status-badge">// GATEWAY ACTIVE</span>
+                            <span class="project-case-link">Inspect Case Study ↗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-row-block" id="project-opaque-ci"
+                     data-ai-title="OpaqueCI Agent"
+                     data-ai-tags="Python / FastAPI / ChromaDB / Llama.cpp / Git API"
+                     data-ai-desc="Secure, automated on-premise AI code review agent for air-gapped CI/CD pipelines. Vectorizes Git diffs via local embedding models to run offline ChromaDB RAG checks against security standards, executing inference on local SLMs (CPU/GPU) to post contextual feedback upstream."
+                     data-ai-metrics='[{"label":"DATA_PRIVACY","val":"100% On-Premise","class":"green"},{"label":"REVIEW_SPEED","val":"~15s Average","class":"cyan"},{"label":"RETRIEVAL_RECALL","val":"92.4% Recall","class":"orange"}]'
+                     data-infra-title="OpaqueCI Companion"
+                     data-infra-tags="Flutter / Dart / WebSockets / SystemTelemetry"
+                     data-infra-desc="A companion mobile dashboard application built in Flutter for OpaqueCI cluster administrators. Streams system logs, VRAM/CPU footprints, vector store integrity metrics, and real-time security alerts securely over private WebSocket connections."
+                     data-infra-metrics='[{"label":"WSS_LATENCY","val":"< 5ms Stream","class":"green"},{"label":"ALERT_DISPATCH","val":"< 10ms Push","class":"cyan"},{"label":"AUTH_PROTOCOL","val":"mTLS + Biometric","class":"orange"}]'>
+                    
+                    <div class="project-info-pane">
+                        <span class="project-num">PROJECT_04</span>
+                        <h3 class="project-title" id="title-opaque-ci">OpaqueCI Agent</h3>
+                        <div class="project-tags-container">
+                            <span class="project-tags" id="tags-opaque-ci">Python / FastAPI / ChromaDB / Llama.cpp / Git API</span>
+                        </div>
+                        <p class="project-desc" id="desc-opaque-ci">
+                            Secure, automated on-premise AI code review agent for air-gapped CI/CD pipelines. Vectorizes Git diffs via local embedding models to run offline ChromaDB RAG checks against security standards, executing inference on local SLMs (CPU/GPU) to post contextual feedback upstream.
+                        </p>
+                    </div>
+                    
+                    <div class="project-metrics-pane">
+                        <div class="metrics-grid-hud">
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-oc-1">DATA_PRIVACY</span>
+                                <span class="metric-value green" id="val-metric-oc-1">100% On-Premise</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-oc-2">REVIEW_SPEED</span>
+                                <span class="metric-value cyan" id="val-metric-oc-2">~15s Average</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-oc-3">RETRIEVAL_RECALL</span>
+                                <span class="metric-value orange" id="val-metric-oc-3">92.4% Recall</span>
+                            </div>
+                        </div>
+                        <div class="project-action-hud">
+                            <span class="project-status-badge">// AGENT ACTIVE</span>
                             <span class="project-case-link">Inspect Case Study ↗</span>
                         </div>
                     </div>
