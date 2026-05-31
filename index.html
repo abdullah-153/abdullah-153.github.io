@@ -204,6 +204,50 @@
                     </div>
                 </div>
 
+                <!-- Project 3 -->
+                <div class="project-row-block" id="project-vigilai"
+                     data-ai-title="VigilAI Proxy"
+                     data-ai-tags="FastAPI / LiteLLM / SQLite / Regular Expressions"
+                     data-ai-desc="Enterprise-grade LLM Security Layer &amp; Gateway running as a transparent middleware. Intercepts inference requests to scan for prompt injections (heuristics + Base64 decoding), redacts PII using Luhn validations, blocks toxic outputs or repetition loops, and logs detailed audits."
+                     data-ai-metrics='[{"label":"LATENCY","val":"12ms avg","class":"cyan"},{"label":"INJECTION_SCAN","val":"Blocked // Secure","class":"green"},{"label":"AUDIT_STORE","val":"SQLite DB","class":"orange"}]'
+                     data-infra-title="VigilAI SDK"
+                     data-infra-tags="Flutter / Dart / Security / Cryptography"
+                     data-infra-desc="A developer-friendly mobile security SDK for Flutter. Intercepts on-device API requests to sanitize PII locally, manage offline transaction logs in secure storage, and handle network failover to secondary LLM endpoints."
+                     data-infra-metrics='[{"label":"INTEGRATION","val":"< 5 mins","class":"green"},{"label":"LOCAL_PII","val":"Sanitized Client","class":"cyan"},{"label":"SECURITY","val":"Biometric Lock","class":"orange"}]'>
+                    
+                    <div class="project-info-pane">
+                        <span class="project-num">PROJECT_03</span>
+                        <h3 class="project-title" id="title-vigilai">VigilAI Proxy</h3>
+                        <div class="project-tags-container">
+                            <span class="project-tags" id="tags-vigilai">FastAPI / LiteLLM / SQLite / Regular Expressions</span>
+                        </div>
+                        <p class="project-desc" id="desc-vigilai">
+                            Enterprise-grade LLM Security Layer &amp; Gateway running as a transparent middleware. Intercepts inference requests to scan for prompt injections (heuristics + Base64 decoding), redacts PII using Luhn validations, blocks toxic outputs or repetition loops, and logs detailed audits.
+                        </p>
+                    </div>
+                    
+                    <div class="project-metrics-pane">
+                        <div class="metrics-grid-hud">
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-vi-1">LATENCY</span>
+                                <span class="metric-value cyan" id="val-metric-vi-1">12ms avg</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-vi-2">INJECTION_SCAN</span>
+                                <span class="metric-value green" id="val-metric-vi-2">Blocked // Secure</span>
+                            </div>
+                            <div class="metric-hud-box">
+                                <span class="metric-label" id="lbl-metric-vi-3">AUDIT_STORE</span>
+                                <span class="metric-value orange" id="val-metric-vi-3">SQLite DB</span>
+                            </div>
+                        </div>
+                        <div class="project-action-hud">
+                            <span class="project-status-badge">// GATEWAY ACTIVE</span>
+                            <span class="project-case-link">Inspect Case Study ↗</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -426,6 +470,22 @@
 
     </div>
     
+    <!-- Project Detail Modal (Glassmorphic Expand Panel) -->
+    <div id="project-detail-modal" class="project-detail-modal">
+        <div class="modal-backdrop-blur"></div>
+        <div class="project-detail-card-wrapper">
+            <div class="project-detail-card">
+                <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Case Study">
+                    <span class="close-icon">&times;</span>
+                    <span class="close-txt">// CLOSE</span>
+                </button>
+                <div id="project-detail-content" class="project-detail-content">
+                    <!-- Dynamically populated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Curriculum Vitae Prompt Box (Mock Download) -->
     <div id="cv-modal" class="cv-modal">
         <div class="cv-modal-content">

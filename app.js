@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initHeaderScroll();
     setupScrollReveals();
     initMobileNav();
+    initProjectModal();
 });
 
 // Re-stabilize layout heights once fonts are fully loaded
@@ -575,7 +576,7 @@ function measureRowHeight(row, mode) {
     
     metrics.forEach((m, idx) => {
         const boxIdx = idx + 1;
-        const prefixId = projectId === "agentic-flow" ? "af" : "rs";
+        const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : "vi");
         const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
         const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
         if (labelSpan && valueSpan) {
@@ -722,7 +723,7 @@ function initSpecializationMorph() {
             const metrics = JSON.parse(row.getAttribute(`data-${newMode}-metrics`));
             metrics.forEach((m, idx) => {
                 const boxIdx = idx + 1;
-                const prefixId = projectId === "agentic-flow" ? "af" : "rs";
+                const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : "vi");
                 const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
                 const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
 
@@ -1268,3 +1269,1044 @@ function initMobileNav() {
         if (isOpen) closeMenu();
     }, { passive: true });
 }
+
+/* ==========================================================================
+   7. Project Detailed Modal Controls & Interactive Playgrounds
+   ========================================================================== */
+
+let activePlaygroundIntervals = [];
+let activePlaygroundListeners = [];
+
+function clearPlaygroundIntervals() {
+    activePlaygroundIntervals.forEach(clearInterval);
+    activePlaygroundIntervals = [];
+    activePlaygroundListeners.forEach(item => {
+        if (item.element && item.event && item.callback) {
+            item.element.removeEventListener(item.event, item.callback);
+        }
+    });
+    activePlaygroundListeners = [];
+}
+
+function initProjectModal() {
+    const modal = document.getElementById("project-detail-modal");
+    const closeBtn = document.getElementById("modal-close-btn");
+    const backdrop = modal ? modal.querySelector(".modal-backdrop-blur") : null;
+    
+    if (!modal || !closeBtn || !backdrop) return;
+
+    // Attach click events to project cards
+    document.querySelectorAll(".project-row-block").forEach(card => {
+        card.addEventListener("click", () => {
+            openProjectDetail(card.id);
+        });
+    });
+
+    // Close handlers
+    closeBtn.addEventListener("click", closeProjectDetail);
+    backdrop.addEventListener("click", closeProjectDetail);
+    
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
+            closeProjectDetail();
+        }
+    });
+}
+
+function closeProjectDetail() {
+    const modal = document.getElementById("project-detail-modal");
+    if (!modal) return;
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+    clearPlaygroundIntervals();
+}
+
+function openProjectDetail(projectId) {
+    const modal = document.getElementById("project-detail-modal");
+    const contentContainer = document.getElementById("project-detail-content");
+    if (!modal || !contentContainer) return;
+
+    // Check active mode from global canvas state or query selection
+    const activeMode = window.activeCanvasMode || "ai"; 
+    
+    clearPlaygroundIntervals();
+    
+    // Generate content based on project and mode
+    const content = getProjectContent(projectId, activeMode);
+    contentContainer.innerHTML = content.html;
+    
+    // Open modal
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden"; // Freeze background scroll
+
+    // Initialize interactive playground
+    setTimeout(() => {
+        content.initPlayground();
+    }, 50);
+}
+
+// Print lines inside simulator terminals helper
+function printSimLog(consoleEl, text, type = "") {
+    if (!consoleEl) return;
+    const line = document.createElement("div");
+    line.className = `terminal-line ${type}`;
+    line.innerText = text;
+    consoleEl.appendChild(line);
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+}
+
+// Luhn Algorithm validation check
+function runLuhnCheck(cardStr) {
+    const cleanStr = cardStr.replace(/\D/g, "");
+    if (!cleanStr || cleanStr.length < 13) return false;
+    
+    let sum = 0;
+    let shouldDouble = false;
+    for (let i = cleanStr.length - 1; i >= 0; i--) {
+        let digit = parseInt(cleanStr.charAt(i), 10);
+        if (shouldDouble) {
+            digit *= 2;
+            if (digit > 9) digit -= 9;
+        }
+        sum += digit;
+        shouldDouble = !shouldDouble;
+    }
+    return (sum % 10 === 0);
+}
+
+// Base64 regex detector
+function detectBase64(str) {
+    const base64Regex = /\b[A-Za-z0-9+/]{8,}={0,2}\b/g;
+    const matches = str.match(base64Regex) || [];
+    for (const match of matches) {
+        try {
+            // Basic length and padding validation before trying to decode
+            if (match.length % 4 === 0) {
+                const decoded = atob(match);
+                if (decoded.trim().length > 3) {
+                    return { encoded: match, decoded: decoded };
+                }
+            }
+        } catch (e) {
+            // Ignore decoding failures
+        }
+    }
+    return null;
+}
+
+function getProjectContent(projectId, mode) {
+    if (projectId === "project-vigilai") {
+        if (mode === "ai") {
+            // VigilAI Proxy (AI/ML)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">AI/ML Infrastructure</span>
+                            <span>// PROJECT_03</span>
+                        </div>
+                        <h2 class="detail-project-title">VigilAI Proxy (ShieldGuard)</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Python</span>
+                            <span class="detail-tech-badge">FastAPI</span>
+                            <span class="detail-tech-badge">LiteLLM</span>
+                            <span class="detail-tech-badge">SQLAlchemy</span>
+                            <span class="detail-tech-badge">SQLite</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            An enterprise-grade LLM Security Layer and Observability Gateway designed to run as a transparent middleware proxy. Protects enterprise interfaces by filtering inbound inputs and sanitizing model completions in real-time.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Security Architecture</h3>
+                                <div class="architecture-box">
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">1</div>
+                                        <div class="flow-step-body"><strong>Pre-Routing Guardrails:</strong> Input string checks for PII leaks (Regex + Luhn checksum checks) and prompt injection blocks (keyword heuristics + recursive Base64 decoders).</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">2</div>
+                                        <div class="flow-step-body"><strong>LiteLLM Upstream Router:</strong> Clean query variables are forwarded to target LLM configurations (OpenAI, Claude) or offline simulator fallbacks.</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">3</div>
+                                        <div class="flow-step-body"><strong>Post-Routing Safety Classifiers:</strong> Model completions pass through shouting ratio indicators and repetition sequence loop monitors to prevent hallucination cycles.</div>
+                                    </div>
+                                    <div class="flow-step-visual">
+                                        <div class="flow-step-num">4</div>
+                                        <div class="flow-step-body"><strong>SQL Transaction Ledger:</strong> Telemetry metrics (latency, token costs, compliance exceptions) write to SQLAlchemy SQLite storage before returning.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="detail-section-title">Core Guardrail Rules</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>PII Sanitizer:</strong> Intercepts Email, IP Address, SSN patterns, and credit cards (validated via Luhn validation check to reduce false positive flags). Configured to Block or Redact.</li>
+                                    <li><strong>Prompt Injection Blocker:</strong> Catches overrides like "DAN mode active", "ignore previous instructions", and filters recursively through Base64 decoded segments.</li>
+                                    <li><strong>Hallucination Loop Guard:</strong> Flags completions if a phrase of 4 words repeats consecutively 3 or more times, mitigating LLM repetition lockups.</li>
+                                    <li><strong>Toxicity & Shouting Guard:</strong> Rejects completions where all-caps character ratios exceed 40% of words or contain explicit slurs.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">Developer HUD Sandbox</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green" id="hud-light-input"></span>
+                                        <span class="sandbox-light" id="hud-light-pii"></span>
+                                        <span class="sandbox-light" id="hud-light-inject"></span>
+                                        <span class="sandbox-light" id="hud-light-router"></span>
+                                        <span class="sandbox-light" id="hud-light-output"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">VigilAI Playground</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Input a query payload below. Test SSNs (000-12-3456), credit cards (e.g. 4111-1111-1111-1111), injections, Base64 hacks, or repetition sequences.</p>
+                                    <div class="sandbox-controls-row">
+                                        <input type="text" id="sandbox-query-input" class="sandbox-input" placeholder="Type prompt payload..." value="Can you audit SSN 000-12-3456 and email user@domain.com?">
+                                        <button id="sandbox-btn-run" class="sandbox-btn-run">❯ Execute Security Pipeline</button>
+                                    </div>
+                                    <div class="pipeline-visualizer">
+                                        <div class="pipeline-node passed" id="node-stage-input">
+                                            <div class="pipeline-node-icon">IN</div>
+                                            <div class="pipeline-node-label">Input</div>
+                                        </div>
+                                        <div class="pipeline-connector"></div>
+                                        <div class="pipeline-node" id="node-stage-pii">
+                                            <div class="pipeline-node-icon">PII</div>
+                                            <div class="pipeline-node-label">PII Scan</div>
+                                        </div>
+                                        <div class="pipeline-connector"></div>
+                                        <div class="pipeline-node" id="node-stage-inject">
+                                            <div class="pipeline-node-icon">INJ</div>
+                                            <div class="pipeline-node-label">Injection</div>
+                                        </div>
+                                        <div class="pipeline-connector"></div>
+                                        <div class="pipeline-node" id="node-stage-router">
+                                            <div class="pipeline-node-icon">LLM</div>
+                                            <div class="pipeline-node-label">Router</div>
+                                        </div>
+                                        <div class="pipeline-connector"></div>
+                                        <div class="pipeline-node" id="node-stage-output">
+                                            <div class="pipeline-node-icon">OUT</div>
+                                            <div class="pipeline-node-label">Safety</div>
+                                        </div>
+                                    </div>
+                                    <div class="sandbox-terminal" id="sandbox-terminal-logs">
+                                        <div class="terminal-line">// Pipeline initialized. Input query to inspect active guardrails.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const inputEl = document.getElementById("sandbox-query-input");
+                    const runBtn = document.getElementById("sandbox-btn-run");
+                    const terminal = document.getElementById("sandbox-terminal-logs");
+                    
+                    const nodes = {
+                        input: document.getElementById("node-stage-input"),
+                        pii: document.getElementById("node-stage-pii"),
+                        inject: document.getElementById("node-stage-inject"),
+                        router: document.getElementById("node-stage-router"),
+                        output: document.getElementById("node-stage-output")
+                    };
+                    const lights = {
+                        pii: document.getElementById("hud-light-pii"),
+                        inject: document.getElementById("hud-light-inject"),
+                        router: document.getElementById("hud-light-router"),
+                        output: document.getElementById("hud-light-output")
+                    };
+
+                    const handleScan = () => {
+                        let query = inputEl.value.trim();
+                        terminal.innerHTML = "";
+                        
+                        // Reset node states
+                        Object.values(nodes).forEach(node => node.className = "pipeline-node");
+                        Object.values(lights).forEach(l => l.className = "sandbox-light");
+                        nodes.input.classList.add("passed");
+
+                        if (!query) {
+                            printSimLog(terminal, ">>> [ERROR] Empty query payload rejected.", "error");
+                            return;
+                        }
+
+                        printSimLog(terminal, `>>> Receiving incoming payload connection: length ${query.length}`, "info");
+                        printSimLog(terminal, `>>> Raw String: "${query}"`, "muted");
+
+                        // 1. PII SCAN
+                        setTimeout(() => {
+                            printSimLog(terminal, "--- STAGE 1: INITIATING PRE-ROUTING PII SCAN ---", "info");
+                            
+                            const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+                            const ssnRegex = /\b\d{3}-\d{2}-\d{4}\b/g;
+                            const cardRegex = /\b(?:\d[ -]?){13,16}\b/g;
+                            const ipRegex = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/g;
+
+                            let hasPII = false;
+                            let redactedQuery = query;
+
+                            // Scan Emails
+                            const emailsFound = query.match(emailRegex) || [];
+                            if (emailsFound.length > 0) {
+                                hasPII = true;
+                                emailsFound.forEach(email => {
+                                    redactedQuery = redactedQuery.replace(email, "[REDACTED_EMAIL]");
+                                    printSimLog(terminal, `[MATCH] Sensitive Entity Detected: Email '${email}'`, "warning");
+                                });
+                            }
+
+                            // Scan IP Addresses
+                            const ipsFound = query.match(ipRegex) || [];
+                            if (ipsFound.length > 0) {
+                                hasPII = true;
+                                ipsFound.forEach(ip => {
+                                    redactedQuery = redactedQuery.replace(ip, "[REDACTED_IP]");
+                                    printSimLog(terminal, `[MATCH] Sensitive Entity Detected: IP Address '${ip}'`, "warning");
+                                });
+                            }
+
+                            // Scan SSN
+                            const ssnsFound = query.match(ssnRegex) || [];
+                            if (ssnsFound.length > 0) {
+                                hasPII = true;
+                                ssnsFound.forEach(ssn => {
+                                    redactedQuery = redactedQuery.replace(ssn, "[REDACTED_SSN]");
+                                    printSimLog(terminal, `[MATCH] Sensitive Entity Detected: SSN '${ssn}'`, "warning");
+                                });
+                            }
+
+                            // Scan Credit Cards with Luhn Check
+                            const cardsFound = query.match(cardRegex) || [];
+                            if (cardsFound.length > 0) {
+                                cardsFound.forEach(card => {
+                                    const cleanCard = card.replace(/[-\s]/g, "");
+                                    printSimLog(terminal, `[CC FOUND] Evaluating Luhn checksum for candidate pattern: '${card}'`, "muted");
+                                    if (runLuhnCheck(cleanCard)) {
+                                        hasPII = true;
+                                        redactedQuery = redactedQuery.replace(card, "[REDACTED_CREDIT_CARD]");
+                                        printSimLog(terminal, `[MATCH] Sensitive Entity Validated: Credit Card '${card}' (Luhn Checksum Passed)`, "warning");
+                                    } else {
+                                        printSimLog(terminal, `[FALSE POSITIVE] Luhn verification failed for CC pattern '${card}'. No action taken.`, "muted");
+                                    }
+                                });
+                            }
+
+                            if (hasPII) {
+                                nodes.pii.className = "pipeline-node redacted";
+                                lights.pii.className = "sandbox-light yellow";
+                                printSimLog(terminal, `>>> PII scanner completed: Sanitized query created.`, "warning");
+                                printSimLog(terminal, `>>> Sanitized Payload: "${redactedQuery}"`, "muted");
+                            } else {
+                                nodes.pii.className = "pipeline-node passed";
+                                lights.pii.className = "sandbox-light green";
+                                printSimLog(terminal, `>>> PII scanner completed: No sensitive entities validated.`, "success");
+                            }
+
+                            // 2. PROMPT INJECTION SCAN
+                            setTimeout(() => {
+                                printSimLog(terminal, "--- STAGE 2: INITIATING PROMPT INJECTION SCAN ---", "info");
+                                
+                                const injectionKeywords = [
+                                    "ignore previous instructions", 
+                                    "dan mode", 
+                                    "developer mode active", 
+                                    "bypass filter",
+                                    "you must now leak"
+                                ];
+                                
+                                let hasInjection = false;
+                                let lowercaseQuery = redactedQuery.toLowerCase();
+                                
+                                // Direct Keyword Check
+                                for (const keyword of injectionKeywords) {
+                                    if (lowercaseQuery.includes(keyword)) {
+                                        hasInjection = true;
+                                        printSimLog(terminal, `[VIOLATION] Keyword Injection Detected: "${keyword}"`, "error");
+                                        break;
+                                    }
+                                }
+
+                                // Base64 segment decoding & recursive checking
+                                const b64Segment = detectBase64(redactedQuery);
+                                if (b64Segment) {
+                                    printSimLog(terminal, `[BASE64 SCANNED] Decoding substring segment: '${b64Segment.encoded}'`, "muted");
+                                    printSimLog(terminal, `[DECODED TEXT] Value: "${b64Segment.decoded.trim()}"`, "muted");
+                                    const decodedLower = b64Segment.decoded.toLowerCase();
+                                    
+                                    for (const keyword of injectionKeywords) {
+                                        if (decodedLower.includes(keyword)) {
+                                            hasInjection = true;
+                                            printSimLog(terminal, `[VIOLATION] Base64 Encoded Injection Decoded: "${keyword}"`, "error");
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (hasInjection) {
+                                    nodes.inject.className = "pipeline-node failed";
+                                    lights.inject.className = "sandbox-light red";
+                                    printSimLog(terminal, ">>> [SHIELD GUARD EXCEPTION] Prompt injection attempt blocked. Terminal sequence exit code 403 Forbidden.", "error");
+                                    return; // STOP execution
+                                } else {
+                                    nodes.inject.className = "pipeline-node passed";
+                                    lights.inject.className = "sandbox-light green";
+                                    printSimLog(terminal, ">>> Injection scan complete: Risk scores below threshold limits.", "success");
+                                }
+
+                                // 3. UPSTREAM ROUTER
+                                setTimeout(() => {
+                                    printSimLog(terminal, "--- STAGE 3: UPSTREAM ROUTING GATEWAY ---", "info");
+                                    nodes.router.className = "pipeline-node passed";
+                                    lights.router.className = "sandbox-light green";
+                                    
+                                    let mockCompletion = "Upstream inference result: Operation performed successfully. Logging server metrics.";
+                                    
+                                    // Generate specific response based on input
+                                    if (redactedQuery.includes("[REDACTED_SSN]")) {
+                                        mockCompletion = "Upstream LLM Core: SSN records verified. Account database status looks secure.";
+                                    } else if (redactedQuery.includes("shout") || redactedQuery.includes("SHOUT")) {
+                                        mockCompletion = "WARNING DETECTED. SHOUTING MODE COMMENCED. THIS OUTPUT CONTAINS AGGRESSIVE TONAL OVERTONES.";
+                                    } else if (redactedQuery.includes("loop") || redactedQuery.includes("repeat")) {
+                                        mockCompletion = "Repetition error error error error error error error loop.";
+                                    }
+
+                                    printSimLog(terminal, `>>> LiteLLM Router: Transmitting query to upstream OpenAI target.`, "info");
+                                    printSimLog(terminal, `<<< Upstream output response payload received (Inference: 14ms).`, "muted");
+
+                                    // 4. POST-ROUTING SAFETY
+                                    setTimeout(() => {
+                                        printSimLog(terminal, "--- STAGE 4: POST-ROUTING SAFETY CLASSIFIERS ---", "info");
+                                        
+                                        // Shouting Ratio check
+                                        const totalWords = mockCompletion.split(/\s+/).length;
+                                        const shoutingWords = mockCompletion.split(/\s+/).filter(w => w === w.toUpperCase() && w.length > 2).length;
+                                        const shoutingRatio = shoutingWords / totalWords;
+
+                                        printSimLog(terminal, `[STATS] Shouting ratio: ${(shoutingRatio*100).toFixed(1)}% of output words.`, "muted");
+                                        if (shoutingRatio > 0.40) {
+                                            nodes.output.className = "pipeline-node failed";
+                                            lights.output.className = "sandbox-light red";
+                                            printSimLog(terminal, ">>> [SHIELD GUARD EXCEPTION] aggressive 'shouting' content flagged. Blocking response.", "error");
+                                            return;
+                                        }
+
+                                        // Repetition check (4 words repeating consecutively 3 or more times)
+                                        const words = mockCompletion.toLowerCase().replace(/[.,!?;]/g, "").split(/\s+/);
+                                        let hasRepetition = false;
+                                        
+                                        if (words.length >= 12) {
+                                            for (let i = 0; i <= words.length - 12; i++) {
+                                                const phrase = words.slice(i, i + 4).join(" ");
+                                                const repeat1 = words.slice(i + 4, i + 8).join(" ");
+                                                const repeat2 = words.slice(i + 8, i + 12).join(" ");
+                                                if (phrase === repeat1 && phrase === repeat2) {
+                                                    hasRepetition = true;
+                                                    printSimLog(terminal, `[VIOLATION] Hallucination sequence loop flagged: "${phrase}"`, "error");
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        if (hasRepetition) {
+                                            nodes.output.className = "pipeline-node failed";
+                                            lights.output.className = "sandbox-light red";
+                                            printSimLog(terminal, ">>> [SHIELD GUARD EXCEPTION] Hallucination loop guard triggered. Connection closed.", "error");
+                                            return;
+                                        }
+
+                                        nodes.output.className = "pipeline-node passed";
+                                        lights.output.className = "sandbox-light green";
+                                        printSimLog(terminal, ">>> Safety checks passed: Completion output secure.", "success");
+
+                                        // 5. TRANSACTION LOG LEDGER
+                                        setTimeout(() => {
+                                            printSimLog(terminal, "--- STAGE 5: SQL TRANSACTION LEDGER WRITING ---", "info");
+                                            printSimLog(terminal, `[SQL] INSERT INTO transactions (latency, total_tokens, violated_policies) VALUES (14, 182, 0);`, "muted");
+                                            printSimLog(terminal, ">>> SQLite Ledger commit complete. Secure response returned to client.", "success");
+                                            printSimLog(terminal, `\nFinal Completion: "${mockCompletion}"`, "success");
+                                        }, 180);
+
+                                    }, 180);
+
+                                }, 180);
+
+                            }, 180);
+
+                        }, 180);
+                    };
+
+                    runBtn.addEventListener("click", handleScan);
+                    activePlaygroundListeners.push({ element: runBtn, event: "click", callback: handleScan });
+                    
+                    // Run default scan on opening
+                    handleScan();
+                }
+            };
+        } else {
+            // VigilAI SDK (Mobile/Infra)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">AI Mobile Application focus</span>
+                            <span>// PROJECT_03</span>
+                        </div>
+                        <h2 class="detail-project-title">VigilAI Client SDK</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Flutter</span>
+                            <span class="detail-tech-badge">Dart</span>
+                            <span class="detail-tech-badge">SQLite</span>
+                            <span class="detail-tech-badge">Cryptography</span>
+                            <span class="detail-tech-badge">Android/iOS</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A lightweight, production-ready Flutter client SDK that integrates with the VigilAI ShieldGuard gateway. Pre-filters input inputs locally, acts as a thread-safe offline cache, and locks credentials behind secure biometrics.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Client-Side Integration</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>Local PII Sanitizer:</strong> Reduces cloud gateway traffic by stripping basic Email and Phone number patterns locally before shipping API payloads.</li>
+                                    <li><strong>Offline Logging Buffer:</strong> Stores client-side telemetry in an encrypted sqlite database during connection outages, auto-synchronizing records when network recovers.</li>
+                                    <li><strong>Failover Gateways:</strong> Features thread-safe failover configurations that auto-reroute requests to fallback LLM targets if primary proxy is unreachable.</li>
+                                    <li><strong>Biometric Lockups:</strong> Wraps local credentials and key variables inside hardware keystores gatekept by Face ID / Touch ID locks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">VigilAI Client SDK Telemetry</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green" id="sdk-light-net"></span>
+                                        <span class="sandbox-light" id="sdk-light-lock"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">VigilAI Mobile SDK console</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Click buttons to simulate on-device SDK operations, database buffers, or connection failures.</p>
+                                    <div class="sandbox-controls-row" style="flex-direction: row; flex-wrap: wrap; gap: 8px;">
+                                        <button id="sdk-btn-call" class="sandbox-btn-run" style="flex: 1; min-width: 110px;">Dispatch API Call</button>
+                                        <button id="sdk-btn-offline" class="sandbox-btn-run" style="flex: 1; min-width: 110px; background-color: var(--accent-orange);">Toggle Connection</button>
+                                        <button id="sdk-btn-lock" class="sandbox-btn-run" style="flex: 1; min-width: 110px; background-color: var(--text-disabled);">Test Secure Lock</button>
+                                    </div>
+                                    <div class="sandbox-terminal" id="sdk-terminal-logs">
+                                        <div class="terminal-line">// SDK client initialized. Logs streaming active.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const btnCall = document.getElementById("sdk-btn-call");
+                    const btnOffline = document.getElementById("sdk-btn-offline");
+                    const btnLock = document.getElementById("sdk-btn-lock");
+                    const terminal = document.getElementById("sdk-terminal-logs");
+                    const lightNet = document.getElementById("sdk-light-net");
+                    const lightLock = document.getElementById("sdk-light-lock");
+
+                    let networkOnline = true;
+                    let keystoreLocked = false;
+                    let localLogsBuffer = 0;
+
+                    const handleCall = () => {
+                        printSimLog(terminal, "--- SDK API DISPATCH TRIGGERED ---", "info");
+                        
+                        if (keystoreLocked) {
+                            printSimLog(terminal, ">>> [BLOCKED] Secure local Keystore locked. Authenticate biometric prompts first.", "error");
+                            return;
+                        }
+
+                        // Local sanitization check
+                        printSimLog(terminal, ">>> Sanitizing local inputs: regex check...", "muted");
+                        printSimLog(terminal, ">>> Input clear. No plain-text phone credentials detected.", "success");
+
+                        if (!networkOnline) {
+                            localLogsBuffer++;
+                            printSimLog(terminal, `>>> [OFFLINE] Network unreachable. Buffering transaction record locally in encrypted SQLite. (Buffer size: ${localLogsBuffer} entries)`, "warning");
+                            return;
+                        }
+
+                        printSimLog(terminal, ">>> Shipping API request bundle to https://gateway.vigilai.dev/v1/chat", "muted");
+                        printSimLog(terminal, "<<< 200 SECURE payload received from gateway. Sync Latency: 18ms.", "success");
+                    };
+
+                    const handleOfflineToggle = () => {
+                        networkOnline = !networkOnline;
+                        if (networkOnline) {
+                            lightNet.className = "sandbox-light green";
+                            printSimLog(terminal, ">>> SDK Network Status: ONLINE. Restoring tunnel connections.", "success");
+                            if (localLogsBuffer > 0) {
+                                printSimLog(terminal, `>>> [SYNC] Uploading ${localLogsBuffer} buffered transaction logs to gateway storage...`, "info");
+                                setTimeout(() => {
+                                    printSimLog(terminal, `>>> SQLite buffer cleared successfully. Sync complete.`, "success");
+                                    localLogsBuffer = 0;
+                                }, 800);
+                            }
+                        } else {
+                            lightNet.className = "sandbox-light red";
+                            printSimLog(terminal, ">>> SDK Network Status: OFFLINE. Fallback offline SQLite ledger active.", "warning");
+                        }
+                    };
+
+                    const handleLockToggle = () => {
+                        keystoreLocked = !keystoreLocked;
+                        if (keystoreLocked) {
+                            lightLock.className = "sandbox-light red";
+                            btnLock.innerText = "Unlock Keystore";
+                            printSimLog(terminal, ">>> SDK Secure Storage: LOCKED. Local encryption keys encrypted behind hardware biometric locks.", "warning");
+                        } else {
+                            lightLock.className = "sandbox-light";
+                            btnLock.innerText = "Lock Keystore";
+                            printSimLog(terminal, ">>> SDK Secure Storage: UNLOCKED. Authenticating device keychain credentials (FaceID verified).", "success");
+                        }
+                    };
+
+                    btnCall.addEventListener("click", handleCall);
+                    btnOffline.addEventListener("click", handleOfflineToggle);
+                    btnLock.addEventListener("click", handleLockToggle);
+
+                    activePlaygroundListeners.push(
+                        { element: btnCall, event: "click", callback: handleCall },
+                        { element: btnOffline, event: "click", callback: handleOfflineToggle },
+                        { element: btnLock, event: "click", callback: handleLockToggle }
+                    );
+                }
+            };
+        }
+    } else if (projectId === "project-agentic-flow") {
+        if (mode === "ai") {
+            // OMNIVLA (AI/ML)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">AI/ML Systems Focus</span>
+                            <span>// PROJECT_01</span>
+                        </div>
+                        <h2 class="detail-project-title">OMNIVLA GUI Agent</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Python</span>
+                            <span class="detail-tech-badge">PyTorch</span>
+                            <span class="detail-tech-badge">LoRA</span>
+                            <span class="detail-tech-badge">ChromaDB</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A hardware-constrained autonomous GUI agent optimized using KV cache quantization pipelines to run natively within &lt;6GB VRAM configurations. Fine-tuned for pixel grounding and visual actions.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Model Specifications</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>KV Cache Quantization:</strong> Implements 4-bit KV Cache quantization techniques to reduce activation footprints, allowing long sequence lengths on small memory cards.</li>
+                                    <li><strong>Set-of-Mark Grounding:</strong> Fine-tuned layout parser translates screen coordinate inputs into numbered tags, enabling the LLM to select coordinates precisely.</li>
+                                    <li><strong>ChromaDB Episodic Buffer:</strong> Stores visual execution paths inside vector space embeddings to retrieve historical solutions during repetitive screen tasks.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">Coordinate Grounding Screen</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">Grounding HUD View</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Hover over screen elements to trigger coordinate predictions from the Set-of-Mark grounding model.</p>
+                                    <div class="grounding-screen-box">
+                                        <div class="grounding-screen-bg"></div>
+                                        <div class="grounding-so-mark" style="top: 20px; left: 20px; width: 140px; height: 32px;" data-id="0">
+                                            <span class="grounding-so-tag">[0] Search Bar</span>
+                                        </div>
+                                        <div class="grounding-so-mark" style="top: 80px; left: 20px; width: 80px; height: 32px;" data-id="1">
+                                            <span class="grounding-so-tag">[1] Login Btn</span>
+                                        </div>
+                                        <div class="grounding-so-mark" style="top: 80px; left: 120px; width: 180px; height: 90px;" data-id="2">
+                                            <span class="grounding-so-tag">[2] Data Card Grid</span>
+                                        </div>
+                                    </div>
+                                    <div class="sandbox-terminal" id="grounding-terminal-logs" style="min-height: 100px;">
+                                        <div class="terminal-line">// Grounding visual matrix ready. Hover elements above.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const terminal = document.getElementById("grounding-terminal-logs");
+                    const marks = document.querySelectorAll(".grounding-so-mark");
+                    
+                    const hoverCoords = {
+                        "0": "[x: 0.15, y: 0.08, w: 0.42, h: 0.10]",
+                        "1": "[x: 0.12, y: 0.28, w: 0.22, h: 0.10]",
+                        "2": "[x: 0.38, y: 0.42, w: 0.54, h: 0.36]"
+                    };
+
+                    marks.forEach(mark => {
+                        const idx = mark.getAttribute("data-id");
+                        const handleMouseEnter = () => {
+                            printSimLog(terminal, `OMNIVLA Predictor: Set-of-Mark [${idx}] Hovered. Grounding bounding coordinates ${hoverCoords[idx]}`, "success");
+                        };
+                        mark.addEventListener("mouseenter", handleMouseEnter);
+                        activePlaygroundListeners.push({ element: mark, event: "mouseenter", callback: handleMouseEnter });
+                    });
+                }
+            };
+        } else {
+            // STRIDE (Mobile/Infra)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">Mobile AI Systems Focus</span>
+                            <span>// PROJECT_01</span>
+                        </div>
+                        <h2 class="detail-project-title">STRIDE Fitness Engine</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Flutter</span>
+                            <span class="detail-tech-badge">Riverpod</span>
+                            <span class="detail-tech-badge">Gemini API</span>
+                            <span class="detail-tech-badge">Firebase</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A production-grade physiological fitness tracking application built using Flutter. Employs Gemini API routines and serverless Firebase infrastructure for real-time training scheduling.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">App Architecture</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>State Management:</strong> Governed by Dart Riverpod framework, executing unidirectional data bindings for fast UI reactivity.</li>
+                                    <li><strong>Firebase Ledger:</strong> Persists local physiological statistics to cloud Firestore targets using secure offline synchronization handlers.</li>
+                                    <li><strong>Routine serving:</strong> Interfaces dynamic prompts with Gemini API models, serving personalized workout cycles on-the-fly.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">Gemini API Routine Generator</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">Gemini API client</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Adjust workout limits to generate client workout templates dynamically.</p>
+                                    <div class="sandbox-controls-row">
+                                        <div class="stride-slider-row">
+                                            <div class="stride-slider-labels">
+                                                <span class="stride-slider-label-txt">Workout Duration:</span>
+                                                <span class="stride-slider-val" id="stride-val-dur">30 min</span>
+                                            </div>
+                                            <input type="range" id="stride-input-dur" class="stride-slider" min="10" max="90" value="30">
+                                        </div>
+                                        <button id="stride-btn-gen" class="sandbox-btn-run">❯ Dispatch Gemini Prompt</button>
+                                    </div>
+                                    <div class="stride-routine-output" id="stride-routine-logs">
+                                        // Awaiting routine request...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const sliderDur = document.getElementById("stride-input-dur");
+                    const labelDur = document.getElementById("stride-val-dur");
+                    const btnGen = document.getElementById("stride-btn-gen");
+                    const consoleEl = document.getElementById("stride-routine-logs");
+
+                    const handleSlider = () => {
+                        labelDur.innerText = `${sliderDur.value} min`;
+                    };
+
+                    const handleGen = () => {
+                        consoleEl.innerHTML = "";
+                        const duration = sliderDur.value;
+                        
+                        const lines = [
+                            `Generating personalized routine target for ${duration} minutes...`,
+                            `API payload routed to Gemini-1.5-Flash Core...`,
+                            `[ROUTINE CREATED]`,
+                            `- 0-5m: Dynamic stretching (warmup)`,
+                            `- 5-${duration - 5}m: Tonal cardio circuits (Intensity: High)`,
+                            `- ${duration - 5}-${duration}m: Static flexibility cooldown`,
+                            `Writing training blocks to Firestore database... Done.`
+                        ];
+
+                        let currentLine = 0;
+                        const streamInterval = setInterval(() => {
+                            if (currentLine < lines.length) {
+                                const p = document.createElement("div");
+                                p.innerText = lines[currentLine];
+                                p.style.marginBottom = "4px";
+                                consoleEl.appendChild(p);
+                                consoleEl.scrollTop = consoleEl.scrollHeight;
+                                currentLine++;
+                            } else {
+                                clearInterval(streamInterval);
+                            }
+                        }, 250);
+
+                        activePlaygroundIntervals.push(streamInterval);
+                    };
+
+                    sliderDur.addEventListener("input", handleSlider);
+                    btnGen.addEventListener("click", handleGen);
+
+                    activePlaygroundListeners.push(
+                        { element: sliderDur, event: "input", callback: handleSlider },
+                        { element: btnGen, event: "click", callback: handleGen }
+                    );
+                }
+            };
+        }
+    } else if (projectId === "project-rag-search") {
+        if (mode === "ai") {
+            // QuantPDC (AI/ML)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">Parallel Systems Focus</span>
+                            <span>// PROJECT_02</span>
+                        </div>
+                        <h2 class="detail-project-title">QuantPDC Backtesting Engine</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">C++</span>
+                            <span class="detail-tech-badge">CUDA</span>
+                            <span class="detail-tech-badge">MPI</span>
+                            <span class="detail-tech-badge">OpenMP</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A high-performance algorithmic trading backtesting engine leveraging parallel computing architectures (CUDA, MPI, OpenMP) to run thread-safe PnL calculations over massive historical tick data.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">Parallel Acceleration</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>OpenMP Multi-threading:</strong> Spawns parallel calculations across CPU threads, processing multiple trading strategies concurrently in shared memory.</li>
+                                    <li><strong>CUDA Kernel Speedups:</strong> Accelerates large scale matrix operations on historical price tick records using parallel GPU kernels.</li>
+                                    <li><strong>MPI Distributed Sync:</strong> Coordinates backtesting partitions across separate node clusters, reducing completion times for massive tick files.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">Parallel Execution HUD</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">Parallel Thread HUD</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <div class="backtest-stats-row">
+                                        <div class="backtest-stat-mini">
+                                            <span class="backtest-stat-label">Inference Mode</span>
+                                            <span class="backtest-stat-val">CUDA GPU</span>
+                                        </div>
+                                        <div class="backtest-stat-mini">
+                                            <span class="backtest-stat-label">Throughput</span>
+                                            <span class="backtest-stat-val">1.2M ticks/s</span>
+                                        </div>
+                                        <div class="backtest-stat-mini">
+                                            <span class="backtest-stat-label">Thread Count</span>
+                                            <span class="backtest-stat-val">64 Cores</span>
+                                        </div>
+                                    </div>
+                                    <div class="backtest-thread-monitor">
+                                        <span class="backtest-monitor-title">Shared Memory Thread Map (OpenMP)</span>
+                                        <div class="backtest-threads-grid" id="threads-grid">
+                                            <!-- Generated via JS -->
+                                        </div>
+                                    </div>
+                                    <div class="backtest-progress-track">
+                                        <div class="backtest-progress-fill" id="backtest-progress"></div>
+                                    </div>
+                                    <div class="sandbox-terminal" id="backtest-terminal-logs" style="min-height: 100px;">
+                                        <div class="terminal-line">// Parallel backtester initialized. Click launch below.</div>
+                                    </div>
+                                    <button id="backtest-btn-run" class="sandbox-btn-run">❯ Launch Backtest Engine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const grid = document.getElementById("threads-grid");
+                    const progressFill = document.getElementById("backtest-progress");
+                    const terminal = document.getElementById("backtest-terminal-logs");
+                    const btnRun = document.getElementById("backtest-btn-run");
+
+                    // Generate thread cells
+                    grid.innerHTML = "";
+                    for (let i = 0; i < 32; i++) {
+                        const cell = document.createElement("div");
+                        cell.className = "thread-cell";
+                        grid.appendChild(cell);
+                    }
+
+                    const handleBacktest = () => {
+                        btnRun.disabled = true;
+                        progressFill.style.width = "0%";
+                        terminal.innerHTML = "";
+                        printSimLog(terminal, ">>> Initiating C++ backtesting sequence...", "info");
+                        printSimLog(terminal, ">>> Distributing historical tick database partitions using MPI...", "muted");
+                        printSimLog(terminal, ">>> Initializing OpenMP thread pool (32 concurrent workers)...", "info");
+
+                        const cells = grid.querySelectorAll(".thread-cell");
+                        cells.forEach(c => c.className = "thread-cell");
+
+                        let progress = 0;
+                        let cellIdx = 0;
+
+                        const runInterval = setInterval(() => {
+                            progress += 6.25;
+                            progressFill.style.width = `${progress}%`;
+                            
+                            // Light up thread cells in batches
+                            const batchEnd = Math.min(cellIdx + 4, cells.length);
+                            for (let idx = cellIdx; idx < batchEnd; idx++) {
+                                cells[idx].className = "thread-cell calculating";
+                                setTimeout(() => {
+                                    cells[idx].className = "thread-cell complete";
+                                }, 300);
+                            }
+                            cellIdx = batchEnd;
+
+                            printSimLog(terminal, `Processing block [Tick ${progress * 10000} - ${(progress + 6.25) * 10000}]. P&L calculates...`, "muted");
+
+                            if (progress >= 100) {
+                                clearInterval(runInterval);
+                                btnRun.disabled = false;
+                                printSimLog(terminal, ">>> backtesting sequence completed in 320ms.", "success");
+                                printSimLog(terminal, ">>> Total processed: 1.2M ticks. Strategy returns: +14.82% PnL.", "success");
+                            }
+                        }, 120);
+
+                        activePlaygroundIntervals.push(runInterval);
+                    };
+
+                    btnRun.addEventListener("click", handleBacktest);
+                    activePlaygroundListeners.push({ element: btnRun, event: "click", callback: handleBacktest });
+                }
+            };
+        } else {
+            // SOUS (Mobile/Infra)
+            return {
+                html: `
+                    <div class="detail-header-section">
+                        <div class="detail-badge-row">
+                            <span class="detail-category-tag">Cross-Platform UI focus</span>
+                            <span>// PROJECT_02</span>
+                        </div>
+                        <h2 class="detail-project-title">SOUS Recipe Gateway</h2>
+                        <div class="detail-tags-container">
+                            <span class="detail-tech-badge">Flutter</span>
+                            <span class="detail-tech-badge">Dart</span>
+                            <span class="detail-tech-badge">REST API</span>
+                            <span class="detail-tech-badge">Docker</span>
+                        </div>
+                        <p class="detail-project-desc">
+                            A decoupled cross-platform recipe recommendation application built in Flutter, querying dynamic recipe vectors served via containerized FastAPI Python services.
+                        </p>
+                    </div>
+                    <div class="project-detail-grid">
+                        <div class="detail-left-pane">
+                            <div>
+                                <h3 class="detail-section-title">App Architecture</h3>
+                                <ul class="detail-bullet-list">
+                                    <li><strong>Microservice Decohesion:</strong> Employs containerized Docker files to serving ingredient vector databases separately from client logic.</li>
+                                    <li><strong>Flutter Frontend:</strong> Features responsive material grid interfaces, managing REST caching targets locally on Android and iOS.</li>
+                                    <li><strong>Custom Sorting:</strong> Executes ingredient intersection math client-side, reducing server query overhead.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="detail-right-pane">
+                            <h3 class="detail-section-title">Chef Persona Query Sandbox</h3>
+                            <div class="interactive-sandbox-container">
+                                <div class="sandbox-title-bar">
+                                    <div class="sandbox-status-lights">
+                                        <span class="sandbox-light green"></span>
+                                    </div>
+                                    <span class="sandbox-tab-name">FastAPI Endpoint Console</span>
+                                </div>
+                                <div class="sandbox-body">
+                                    <p class="sandbox-desc">// Input ingredient checklist parameters to fetch menu templates.</p>
+                                    <div class="sandbox-controls-row">
+                                        <input type="text" id="sous-input-ing" class="sandbox-input" placeholder="Type ingredients (e.g. Tomatoes, Eggs, Cheese)..." value="Tomatoes, Eggs, Cheese">
+                                        <button id="sous-btn-fetch" class="sandbox-btn-run">❯ Fetch FastAPI Recommendations</button>
+                                    </div>
+                                    <div class="stride-routine-output" id="sous-output-logs">
+                                        // Awaiting query...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                initPlayground: () => {
+                    const inputIng = document.getElementById("sous-input-ing");
+                    const btnFetch = document.getElementById("sous-btn-fetch");
+                    const consoleEl = document.getElementById("sous-output-logs");
+
+                    const handleFetch = () => {
+                        consoleEl.innerHTML = "";
+                        const rawVal = inputIng.value.trim();
+                        if (!rawVal) {
+                            consoleEl.innerText = "// Error: Ingredients field cannot be empty.";
+                            return;
+                        }
+
+                        consoleEl.innerText = "Querying containerized recipe embeddings via REST API...";
+                        
+                        setTimeout(() => {
+                            consoleEl.innerHTML = "";
+                            const headerEl = document.createElement("div");
+                            headerEl.innerText = `>>> FastAPI: Decoupled model returned matching nodes for [${rawVal}]:`;
+                            headerEl.style.fontWeight = "700";
+                            headerEl.style.color = "var(--accent-orange)";
+                            headerEl.style.marginBottom = "8px";
+                            consoleEl.appendChild(headerEl);
+
+                            const suggestion = document.createElement("div");
+                            suggestion.innerHTML = `
+                                <strong>Tomato & Cheese Frittata</strong> (Match: 94%)<br>
+                                <em>Cooking duration: 15 mins</em><br>
+                                <ol style="margin-left: 20px; margin-top: 6px;">
+                                    <li>Whisk eggs inside a bowl, seasoning with salt.</li>
+                                    <li>Dice fresh tomatoes and sauté in skillet.</li>
+                                    <li>Pour eggs, sprinkle cheese, and bake until golden.</li>
+                                </ol>
+                            `;
+                            consoleEl.appendChild(suggestion);
+                        }, 700);
+                    };
+
+                    btnFetch.addEventListener("click", handleFetch);
+                    activePlaygroundListeners.push({ element: btnFetch, event: "click", callback: handleFetch });
+                }
+            };
+        }
+    }
+}
+
