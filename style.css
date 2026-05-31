@@ -161,19 +161,19 @@ body.cursor-hover #custom-cursor-dot {
 }
 
 /* Global Liquid Glow Spotlight & Overlay System */
-.skill-card-module, .btn, .chip, .metric-hud-box, .project-row-block, .specialization-toggle-bar, .back-to-top-btn, .nav-link, .footer-link-port, .logo-monogram-box {
+.skill-card-module, .btn, .chip, .metric-hud-box, .specialization-toggle-bar, .back-to-top-btn, .nav-link, .footer-link-port, .logo-monogram-box {
     position: relative !important;
     overflow: hidden !important;
     z-index: 1;
 }
 
 /* Ensure children render above the background liquid-glow overlay */
-.skill-card-module > *, .btn > *, .chip > *, .metric-hud-box > *, .project-row-block > *, .specialization-toggle-bar > *, .back-to-top-btn > *, .nav-link > *, .footer-link-port > *, .logo-monogram-box > * {
+.skill-card-module > *, .btn > *, .chip > *, .metric-hud-box > *, .specialization-toggle-bar > *, .back-to-top-btn > *, .nav-link > *, .footer-link-port > *, .logo-monogram-box > * {
     position: relative;
     z-index: 2;
 }
 
-.skill-card-module::before, .btn::before, .chip::before, .metric-hud-box::before, .project-row-block::before, .specialization-toggle-bar::before, .back-to-top-btn::before, .nav-link::before, .footer-link-port::before, .logo-monogram-box::before {
+.skill-card-module::before, .btn::before, .chip::before, .metric-hud-box::before, .specialization-toggle-bar::before, .back-to-top-btn::before, .nav-link::before, .footer-link-port::before, .logo-monogram-box::before {
     content: '';
     position: absolute;
     top: 0;
@@ -187,7 +187,7 @@ body.cursor-hover #custom-cursor-dot {
     z-index: 0;
 }
 
-.skill-card-module:hover::before, .btn:hover::before, .chip:hover::before, .metric-hud-box:hover::before, .project-row-block:hover::before, .specialization-toggle-bar:hover::before, .back-to-top-btn:hover::before, .nav-link:hover::before, .footer-link-port:hover::before, .logo-monogram-box:hover::before {
+.skill-card-module:hover::before, .btn:hover::before, .chip:hover::before, .metric-hud-box:hover::before, .specialization-toggle-bar:hover::before, .back-to-top-btn:hover::before, .nav-link:hover::before, .footer-link-port:hover::before, .logo-monogram-box:hover::before {
     opacity: 1;
 }
 
@@ -196,11 +196,11 @@ body.cursor-hover #custom-cursor-dot {
    has no mouseleave to cancel it, leaving persistent orange blobs on screen. ── */
 @media (hover: none) {
     .skill-card-module::before, .btn::before, .chip::before, .metric-hud-box::before,
-    .project-row-block::before, .specialization-toggle-bar::before,
+    .specialization-toggle-bar::before,
     .back-to-top-btn::before, .nav-link::before, .footer-link-port::before,
     .logo-monogram-box::before,
     .skill-card-module:hover::before, .btn:hover::before, .chip:hover::before,
-    .metric-hud-box:hover::before, .project-row-block:hover::before,
+    .metric-hud-box:hover::before,
     .specialization-toggle-bar:hover::before, .back-to-top-btn:hover::before,
     .nav-link:hover::before, .footer-link-port:hover::before,
     .logo-monogram-box:hover::before {
@@ -934,7 +934,10 @@ h1, h2, h3, h4 {
 }
 
 .project-row-block:hover {
-    background-color: rgba(234, 88, 12, 0.015);
+    background-color: rgba(234, 88, 12, 0.008);
+}
+.project-row-block:hover .project-title {
+    color: var(--accent-orange);
 }
 
 /* Info Pane - Left Column */
@@ -2179,7 +2182,6 @@ h1, h2, h3, h4 {
 }
 
 .hero-section:hover .hero-title,
-.project-row-block:hover .project-title,
 .skill-card-module:hover .skill-card-name,
 .header-brand-badge:hover .logo-name,
 .section-container:hover .section-title {
