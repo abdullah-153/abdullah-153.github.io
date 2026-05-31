@@ -252,6 +252,7 @@ function initTextScramble() {
    2. Dual-Mode Spacetime & Data Pipeline Canvas
    ========================================== */
 let activeCanvasMode = "ai"; // "ai" (gravity warp) vs "infra" (data flow)
+window.activeCanvasMode = "ai";
 
 function initSynapticCanvas() {
     const canvas = document.getElementById("bg-canvas");
@@ -672,6 +673,7 @@ function initSpecializationMorph() {
     function switchMode(newMode) {
         if (newMode === currentSpecialization) return;
         currentSpecialization = newMode;
+        window.activeCanvasMode = newMode;
 
         // 1. Move slider knob visually
         if (newMode === "infra") {
@@ -1449,6 +1451,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>Toxicity & Shouting Guard:</strong> Rejects completions where all-caps character ratios exceed 40% of words or contain explicit slurs.</li>
                                 </ul>
                             </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Telemetry & System Specs</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Core Language:</span>
+                                        <span class="spec-val">Python (FastAPI)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Average Latency:</span>
+                                        <span class="spec-val spec-green">&lt; 15ms</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Injection Blocker:</span>
+                                        <span class="spec-val">Heuristics & Base64</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">PII Validation:</span>
+                                        <span class="spec-val">Luhn Algorithm</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="detail-right-pane">
                             <h3 class="detail-section-title">Developer HUD Sandbox</h3>
@@ -1780,6 +1803,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>Biometric Lockups:</strong> Wraps local credentials and key variables inside hardware keystores gatekept by Face ID / Touch ID locks.</li>
                                 </ul>
                             </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Telemetry & Client Specs</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Framework:</span>
+                                        <span class="spec-val">Dart (Flutter SDK)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Offline Database:</span>
+                                        <span class="spec-val">Encrypted SQLite</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Device Credential:</span>
+                                        <span class="spec-val spec-green">Biometric Keystore</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Sync Protocol:</span>
+                                        <span class="spec-val">Unidirectional REST</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="detail-right-pane">
                             <h3 class="detail-section-title">VigilAI Client SDK Telemetry</h3>
@@ -1914,6 +1958,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>ChromaDB Episodic Buffer:</strong> Stores visual execution paths inside vector space embeddings to retrieve historical solutions during repetitive screen tasks.</li>
                                 </ul>
                             </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Inference & Vector Specs</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">GPU Environment:</span>
+                                        <span class="spec-val">Ubuntu / CUDA C</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Memory Cap:</span>
+                                        <span class="spec-val spec-green">&lt; 5.8 GB VRAM</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Cache Pipeline:</span>
+                                        <span class="spec-val">4-bit KV cache</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Episodic Store:</span>
+                                        <span class="spec-val">ChromaDB RAG</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="detail-right-pane">
                             <h3 class="detail-section-title">Coordinate Grounding Screen</h3>
@@ -1995,6 +2060,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>Firebase Ledger:</strong> Persists local physiological statistics to cloud Firestore targets using secure offline synchronization handlers.</li>
                                     <li><strong>Routine serving:</strong> Interfaces dynamic prompts with Gemini API models, serving personalized workout cycles on-the-fly.</li>
                                 </ul>
+                            </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Application Matrix Specs</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">State Framework:</span>
+                                        <span class="spec-val">Riverpod Providers</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Routine Model:</span>
+                                        <span class="spec-val">Gemini-1.5-Flash</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Cloud Sync:</span>
+                                        <span class="spec-val spec-green">Firebase Offline</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Platform:</span>
+                                        <span class="spec-val">Android / iOS</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="detail-right-pane">
@@ -2107,6 +2193,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>CUDA Kernel Speedups:</strong> Accelerates large scale matrix operations on historical price tick records using parallel GPU kernels.</li>
                                     <li><strong>MPI Distributed Sync:</strong> Coordinates backtesting partitions across separate node clusters, reducing completion times for massive tick files.</li>
                                 </ul>
+                            </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">High Performance Computing</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Compiler Target:</span>
+                                        <span class="spec-val">GCC / NVCC C++17</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Calculated Rate:</span>
+                                        <span class="spec-val spec-green">1.2M ticks/sec</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Host Threading:</span>
+                                        <span class="spec-val">OpenMP (64 Cores)</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">GPU Streaming:</span>
+                                        <span class="spec-val">CUDA Kernels</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="detail-right-pane">
@@ -2239,6 +2346,27 @@ function getProjectContent(projectId, mode) {
                                     <li><strong>Flutter Frontend:</strong> Features responsive material grid interfaces, managing REST caching targets locally on Android and iOS.</li>
                                     <li><strong>Custom Sorting:</strong> Executes ingredient intersection math client-side, reducing server query overhead.</li>
                                 </ul>
+                            </div>
+                            <div class="tech-spec-ledger">
+                                <h3 class="detail-section-title">Client-Server Metrics</h3>
+                                <div class="spec-ledger-grid">
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">UI Library:</span>
+                                        <span class="spec-val">Flutter Material 3</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Microservice:</span>
+                                        <span class="spec-val">Dockerized FastAPI</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Local Cache:</span>
+                                        <span class="spec-val spec-green">Hive NoSQL Store</span>
+                                    </div>
+                                    <div class="spec-ledger-row">
+                                        <span class="spec-key">Sync Protocol:</span>
+                                        <span class="spec-val">REST Decoupled</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="detail-right-pane">
