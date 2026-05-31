@@ -68,21 +68,24 @@
                 Hello, I'm <strong>Abdullah Khan</strong>. I design production-grade RAG pipelines, fine-tune open-source LLMs, and configure distributed vector databases like ChromaDB. Focused on robust server-side ML engineering.
             </p>
 
-            <!-- Specialization Morphing Toggle Slider -->
-            <div class="specialization-toggle-wrapper">
-                <span class="toggle-label label-left active" id="label-ai">
-                    <span class="desktop-only">AI / ML ENGINEERING</span>
-                    <span class="mobile-only">AI / ML ENG</span>
-                </span>
-                <div class="specialization-toggle-bar" id="spec-toggle-bar" title="Drag or click to toggle specialization focus">
-                    <div class="toggle-slider-handle" id="spec-slider-handle"></div>
+            <!-- Unified Specialization Focus Pill Toggle -->
+            <div class="specialization-toggle-container">
+                <span class="toggle-lead-txt">// SELECT SPECIALIZATION MATRIX:</span>
+                <div class="unified-toggle-pill" id="spec-toggle-bar" title="Toggle specialization focus">
+                    <span class="unified-toggle-label active" id="label-ai" data-mode="ai">
+                        <span class="pulse-dot"></span>
+                        <span class="desktop-only">AI / ML Engineering</span>
+                        <span class="mobile-only">AI / ML</span>
+                    </span>
+                    <span class="unified-toggle-label" id="label-infra" data-mode="infra">
+                        <span class="pulse-dot"></span>
+                        <span class="desktop-only">Mobile AI Apps</span>
+                        <span class="mobile-only">Mobile AI</span>
+                    </span>
+                    <div class="unified-toggle-slider" id="spec-slider-handle"></div>
                 </div>
-                <span class="toggle-label label-right" id="label-infra">
-                    <span class="desktop-only">AI MOBILE APPLICATIONS</span>
-                    <span class="mobile-only">AI MOBILE</span>
-                </span>
             </div>
-            <div class="toggle-helper-text">// Toggling shifts all projects and skill matrices automatically</div>
+            <div class="toggle-helper-text">// Click options above to shift all projects and skill matrices automatically</div>
 
             <div class="hero-actions">
                 <a href="#projects-section" class="btn btn-primary">
@@ -105,12 +108,20 @@
             <div class="section-tag">01. PRODUCTION SHARDS</div>
             <h2 class="section-title" id="projects-title">End-to-End ML Infrastructure</h2>
             <p class="section-desc" id="projects-desc">High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards.</p>
-            <div class="projects-context-indicator">
-                <span class="indicator-prefix">// PROJECT FOCUS //</span>
-                <div class="projects-toggle-pill" id="projects-toggle-btn">
-                    <span class="projects-toggle-label active" id="p-label-ai" data-mode="ai">AI / ML Systems</span>
-                    <span class="projects-toggle-label" id="p-label-infra" data-mode="infra">Mobile AI</span>
-                    <div class="projects-toggle-slider"></div>
+            <div class="projects-context-indicator-wrapper">
+                <span class="toggle-lead-txt">// SELECT PROJECT DOMAIN:</span>
+                <div class="unified-toggle-pill" id="projects-toggle-btn" title="Toggle project focus">
+                    <span class="unified-toggle-label active" id="p-label-ai" data-mode="ai">
+                        <span class="pulse-dot"></span>
+                        <span class="desktop-only">AI / ML Systems</span>
+                        <span class="mobile-only">AI / ML</span>
+                    </span>
+                    <span class="unified-toggle-label" id="p-label-infra" data-mode="infra">
+                        <span class="pulse-dot"></span>
+                        <span class="desktop-only">Mobile AI Systems</span>
+                        <span class="mobile-only">Mobile AI</span>
+                    </span>
+                    <div class="unified-toggle-slider" id="projects-slider-handle"></div>
                 </div>
             </div>
             
@@ -474,11 +485,11 @@
     <div id="project-detail-modal" class="project-detail-modal">
         <div class="modal-backdrop-blur"></div>
         <div class="project-detail-card-wrapper">
+            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Case Study">
+                <span class="close-icon">&times;</span>
+                <span class="close-txt">// CLOSE</span>
+            </button>
             <div class="project-detail-card">
-                <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Case Study">
-                    <span class="close-icon">&times;</span>
-                    <span class="close-txt">// CLOSE</span>
-                </button>
                 <div id="project-detail-content" class="project-detail-content">
                     <!-- Dynamically populated via JS -->
                 </div>

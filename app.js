@@ -663,7 +663,7 @@ function initSpecializationMorph() {
     const sliderHandle = document.getElementById("spec-slider-handle");
     const labelAI = document.getElementById("label-ai");
     const labelInfra = document.getElementById("label-infra");
-    const wrapper = document.querySelector(".specialization-toggle-wrapper");
+    const wrapper = document.getElementById("spec-toggle-bar");
     const pTogglePill = document.getElementById("projects-toggle-btn");
     const pLabelAI = document.getElementById("p-label-ai");
     const pLabelInfra = document.getElementById("p-label-infra");
@@ -782,18 +782,24 @@ function initSpecializationMorph() {
 
     // Wire up events
     if (toggleBar) {
-        toggleBar.addEventListener("click", () => {
+        toggleBar.addEventListener("click", (e) => {
             const target = currentSpecialization === "ai" ? "infra" : "ai";
             switchMode(target);
         });
     }
 
     if (labelAI) {
-        labelAI.addEventListener("click", () => switchMode("ai"));
+        labelAI.addEventListener("click", (e) => {
+            e.stopPropagation(); // prevent bubble to toggleBar
+            switchMode("ai");
+        });
     }
 
     if (labelInfra) {
-        labelInfra.addEventListener("click", () => switchMode("infra"));
+        labelInfra.addEventListener("click", (e) => {
+            e.stopPropagation(); // prevent bubble to toggleBar
+            switchMode("infra");
+        });
     }
 
     // Wire up the projects-context segmented toggle
