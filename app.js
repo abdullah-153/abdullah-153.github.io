@@ -676,14 +676,16 @@ function initSpecializationMorph() {
         window.activeCanvasMode = newMode;
 
         // 1. Move slider knob visually
-        if (newMode === "infra") {
-            wrapper.classList.add("infra-active");
-            labelAI.classList.remove("active");
-            labelInfra.classList.add("active");
-        } else {
-            wrapper.classList.remove("infra-active");
-            labelAI.classList.add("active");
-            labelInfra.classList.remove("active");
+        if (wrapper && labelAI && labelInfra) {
+            if (newMode === "infra") {
+                wrapper.classList.add("infra-active");
+                labelAI.classList.remove("active");
+                labelInfra.classList.add("active");
+            } else {
+                wrapper.classList.remove("infra-active");
+                labelAI.classList.add("active");
+                labelInfra.classList.remove("active");
+            }
         }
 
         // 2. Scramble primary text contents and brand name logo
