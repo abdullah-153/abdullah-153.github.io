@@ -1054,11 +1054,18 @@ h1, h2, h3, h4 {
 .skills-grid-col {
     padding: 32px;
     border-right: 1px solid var(--border-card);
+    border-bottom: 1px solid var(--border-card);
     transition: opacity 0.4s ease, filter 0.4s ease, background-color 0.4s ease;
 }
 
-.skills-grid-col:last-child {
+/* Remove right border on the 3rd column of every row */
+.skills-grid-col:nth-child(3n) {
     border-right: none;
+}
+
+/* Remove bottom border on the last row */
+.skills-grid-col:nth-child(n+4) {
+    border-bottom: none;
 }
 
 /* Specialization highlighters: fade state when inactive */
@@ -2003,13 +2010,13 @@ h1, h2, h3, h4 {
     }
     
     .skills-grid-col {
-        border-right: none;
-        border-bottom: 1px solid var(--border-card);
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-card) !important;
         padding: 24px;
     }
     
     .skills-grid-col:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
     }
     
     .api-workspace-grid {

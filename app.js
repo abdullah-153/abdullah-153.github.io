@@ -610,249 +610,15 @@ function measureRowHeight(row, mode) {
 }
 
 function stabilizeLayoutHeights() {
-    const titleEl = document.getElementById("hero-title");
-    const subEl = document.getElementById("hero-subtitle");
-    const projectsTitleEl = document.getElementById("projects-title");
-    const projectsDescEl = document.getElementById("projects-desc");
-
-    // Add +8px safety margin to handle any wrap variations during transitions
-    if (titleEl) {
-        titleEl.style.minHeight = "";
-        const h1 = measureHeight(titleEl, morphData.title.ai);
-        const h2 = measureHeight(titleEl, morphData.title.infra);
-        titleEl.style.minHeight = `${Math.max(h1, h2) + 8}px`;
-    }
-    if (subEl) {
-        subEl.style.minHeight = "";
-        const h1 = measureHeight(subEl, morphData.subtitle.ai);
-        const h2 = measureHeight(subEl, morphData.subtitle.infra);
-        subEl.style.minHeight = `${Math.max(h1, h2) + 8}px`;
-    }
-    if (projectsTitleEl) {
-        projectsTitleEl.style.minHeight = "";
-        const h1 = measureHeight(projectsTitleEl, morphData.projectsTitle.ai);
-        const h2 = measureHeight(projectsTitleEl, morphData.projectsTitle.infra);
-        projectsTitleEl.style.minHeight = `${Math.max(h1, h2) + 8}px`;
-    }
-    if (projectsDescEl) {
-        projectsDescEl.style.minHeight = "";
-        const h1 = measureHeight(projectsDescEl, morphData.projectsDesc.ai);
-        const h2 = measureHeight(projectsDescEl, morphData.projectsDesc.infra);
-        projectsDescEl.style.minHeight = `${Math.max(h1, h2) + 8}px`;
-    }
-
-    // Stabilize full project row blocks directly (handles internal tags & descriptions together)
-    document.querySelectorAll(".project-row-block").forEach(row => {
-        row.style.height = "";
-        const h1 = measureRowHeight(row, "ai");
-        const h2 = measureRowHeight(row, "infra");
-        row.style.height = `${Math.max(h1, h2) + 6}px`;
-    });
-}
-
-function measureHeight(el, text) {
-    const originalHTML = el.innerHTML;
-    el.innerText = text;
-    const height = el.clientHeight;
-    el.innerHTML = originalHTML;
-    return height;
+    // Layout heights are now handled natively via responsive CSS layout grid
 }
 
 function initSpecializationMorph() {
-    const toggleBar = document.getElementById("spec-toggle-bar");
-    const sliderHandle = document.getElementById("spec-slider-handle");
-    const labelAI = document.getElementById("label-ai");
-    const labelInfra = document.getElementById("label-infra");
-    const wrapper = document.getElementById("spec-toggle-bar");
-    const pTogglePill = document.getElementById("projects-toggle-btn");
-    const pLabelAI = document.getElementById("p-label-ai");
-    const pLabelInfra = document.getElementById("p-label-infra");
-
-    let currentSpecialization = "ai"; // default state
-
-    function switchMode(newMode) {
-        if (newMode === currentSpecialization) return;
-        currentSpecialization = newMode;
-        window.activeCanvasMode = newMode;
-
-        // 1. Move slider knob visually
-        if (wrapper && labelAI && labelInfra) {
-            if (newMode === "infra") {
-                wrapper.classList.add("infra-active");
-                labelAI.classList.remove("active");
-                labelInfra.classList.add("active");
-            } else {
-                wrapper.classList.remove("infra-active");
-                labelAI.classList.add("active");
-                labelInfra.classList.remove("active");
-            }
-        }
-
-        // 2. Scramble primary text contents and brand name logo
-        const titleEl = document.getElementById("hero-title");
-        const subEl = document.getElementById("hero-subtitle");
-        const projectsTitleEl = document.getElementById("projects-title");
-        const projectsDescEl = document.getElementById("projects-desc");
-        const logoNameEl = document.querySelector(".logo-name");
-
-        if (titleEl) getOrCreateScrambler(titleEl).setText(morphData.title[newMode]);
-        if (subEl) getOrCreateScrambler(subEl).setText(morphData.subtitle[newMode]);
-        if (projectsTitleEl) getOrCreateScrambler(projectsTitleEl).setText(morphData.projectsTitle[newMode]);
-        if (projectsDescEl) getOrCreateScrambler(projectsDescEl).setText(morphData.projectsDesc[newMode]);
-        if (logoNameEl) getOrCreateScrambler(logoNameEl).setText("ABDULLAH.KHAN");
-
-        // 3. Scramble Projects Metadata & Swap HUD metrics
-        document.querySelectorAll(".project-row-block").forEach(row => {
-            const projectId = row.id.replace("project-", "");
-            const titleEl = document.getElementById(`title-${projectId}`);
-            const tagsEl = document.getElementById(`tags-${projectId}`);
-            const descEl = document.getElementById(`desc-${projectId}`);
-
-            const newTitle = row.getAttribute(`data-${newMode}-title`);
-            const newTags = row.getAttribute(`data-${newMode}-tags`);
-            const newDesc = row.getAttribute(`data-${newMode}-desc`);
-
-            if (titleEl) getOrCreateScrambler(titleEl).setText(newTitle);
-            if (tagsEl) getOrCreateScrambler(tagsEl).setText(newTags);
-            if (descEl) {
-                // Fade desc text out, replace, and fade in for smooth visual transition
-                descEl.style.opacity = 0;
-                setTimeout(() => {
-                    descEl.innerText = newDesc;
-                    descEl.style.opacity = 1;
-                }, 180);
-            }
-
-            // Swap HUD metrics boxes with scramble animation
-            const metrics = JSON.parse(row.getAttribute(`data-${newMode}-metrics`));
-            metrics.forEach((m, idx) => {
-                const boxIdx = idx + 1;
-                const prefixId = projectId === "agentic-flow" ? "af" : (projectId === "rag-search" ? "rs" : (projectId === "vigilai" ? "vi" : "oc"));
-                const labelSpan = document.getElementById(`lbl-metric-${prefixId}-${boxIdx}`);
-                const valueSpan = document.getElementById(`val-metric-${prefixId}-${boxIdx}`);
-
-                if (labelSpan && valueSpan) {
-                    getOrCreateScrambler(labelSpan).setText(m.label);
-                    getOrCreateScrambler(valueSpan).setText(m.val);
-                    
-                    // Instantly apply the class name so the colors match the new value
-                    valueSpan.className = `metric-value ${m.class}`;
-                }
-            });
-        });
-
-        // 4. Glow target columns in Skills Matrix grid (using classList to preserve scroll reveals)
-        document.querySelectorAll(".skills-grid-col").forEach(col => {
-            const colSpec = col.getAttribute("data-specialization");
-            if (colSpec === "both" || colSpec === newMode) {
-                col.classList.add("active-focus");
-                col.classList.remove("inactive-focus");
-            } else {
-                col.classList.remove("active-focus");
-                col.classList.add("inactive-focus");
-            }
-        });
-
-        // 5. Update canvas graphics engine mode
-        if (window.setCanvasMode) {
-            window.setCanvasMode(newMode);
-        }
-
-        // Update projects section toggle pill state
-        if (pTogglePill && pLabelAI && pLabelInfra) {
-            if (newMode === "infra") {
-                pTogglePill.classList.add("infra-active");
-                pLabelAI.classList.remove("active");
-                pLabelInfra.classList.add("active");
-            } else {
-                pTogglePill.classList.remove("infra-active");
-                pLabelAI.classList.add("active");
-                pLabelInfra.classList.remove("active");
-            }
-        }
-    }
-
-    // Set initial focus highlight state for ML Engineering skills (ai)
+    // Specialization morphing is disabled. Ensure all skill matrix columns are fully highlighted.
     document.querySelectorAll(".skills-grid-col").forEach(col => {
-        const colSpec = col.getAttribute("data-specialization");
-        if (colSpec === "ai" || colSpec === "both") {
-            col.classList.add("active-focus");
-        } else {
-            col.classList.add("inactive-focus");
-        }
+        col.classList.add("active-focus");
+        col.classList.remove("inactive-focus");
     });
-
-    // Wire up events
-    if (toggleBar) {
-        toggleBar.addEventListener("click", (e) => {
-            const target = currentSpecialization === "ai" ? "infra" : "ai";
-            switchMode(target);
-        });
-    }
-
-    if (labelAI) {
-        labelAI.addEventListener("click", (e) => {
-            e.stopPropagation(); // prevent bubble to toggleBar
-            switchMode("ai");
-        });
-    }
-
-    if (labelInfra) {
-        labelInfra.addEventListener("click", (e) => {
-            e.stopPropagation(); // prevent bubble to toggleBar
-            switchMode("infra");
-        });
-    }
-
-    // Wire up the projects-context segmented toggle
-    // The pill wraps two labels. We attach click handlers only to the labels
-    // to avoid double-firing when a label is clicked (label click would also
-    // bubble up to a pill-level handler and toggle back to the wrong state).
-    if (pLabelAI) {
-        pLabelAI.addEventListener("click", (e) => {
-            e.stopPropagation(); // prevent bubble to pill
-            switchMode("ai");
-            flashToggleBorder();
-            pTogglePill && pTogglePill.blur();
-        });
-    }
-
-    if (pLabelInfra) {
-        pLabelInfra.addEventListener("click", (e) => {
-            e.stopPropagation(); // prevent bubble to pill
-            switchMode("infra");
-            flashToggleBorder();
-            pTogglePill && pTogglePill.blur();
-        });
-    }
-
-    // Clicking the pill itself (slider bar / gap between labels) still toggles
-    if (pTogglePill) {
-        pTogglePill.addEventListener("click", (e) => {
-            // Only fire if the click was NOT on a label (labels stop propagation above)
-            const target = currentSpecialization === "ai" ? "infra" : "ai";
-            switchMode(target);
-            flashToggleBorder();
-            pTogglePill.blur();
-        });
-    }
-
-    // Brief border flash on toggle — adds a class that animates in then fades out
-    function flashToggleBorder() {
-        if (!pTogglePill) return;
-        pTogglePill.classList.remove("toggle-flash");
-        // Force reflow so re-adding the class restarts the animation from frame 0
-        void pTogglePill.offsetWidth;
-        pTogglePill.classList.add("toggle-flash");
-    }
-
-    // Auto-remove the flash class once its animation finishes so the pill
-    // is in a clean resting state before the next interaction
-    if (pTogglePill) {
-        pTogglePill.addEventListener("animationend", () => {
-            pTogglePill.classList.remove("toggle-flash");
-        });
-    }
 }
 
 
@@ -897,8 +663,8 @@ function initCVDownload() {
     
     function triggerFileDownload() {
         const a = document.createElement("a");
-        a.href = "./resume.pdf";
-        a.download = "Muhammad_Abdullah_Khan_Resume.pdf";
+        a.href = "./Abdullah-khan_ML_DS.pdf";
+        a.download = "Abdullah-khan_ML_DS.pdf";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1406,7 +1172,7 @@ function detectBase64(str) {
 
 function getProjectContent(projectId, mode) {
     if (projectId === "project-vigilai") {
-        if (mode === "ai") {
+        if (true) {
             // VigilAI Proxy (AI/ML)
             return {
                 html: `
@@ -1935,8 +1701,8 @@ function getProjectContent(projectId, mode) {
                 }
             };
         }
-    } else if (projectId === "project-agentic-flow") {
-        if (mode === "ai") {
+    } else if (projectId === "project-omnivla") {
+        if (true) {
             // OMNIVLA (AI/ML)
             return {
                 html: `
@@ -2039,7 +1805,9 @@ function getProjectContent(projectId, mode) {
                     });
                 }
             };
-        } else {
+        }
+    } else if (projectId === "project-stride") {
+        if (true) {
             // STRIDE (Mobile/Infra)
             return {
                 html: `
@@ -2171,280 +1939,9 @@ function getProjectContent(projectId, mode) {
                 }
             };
         }
-    } else if (projectId === "project-rag-search") {
-        if (mode === "ai") {
-            // QuantPDC (AI/ML)
-            return {
-                html: `
-                    <div class="detail-header-section">
-                        <div class="detail-badge-row">
-                            <span class="detail-category-tag">Parallel Systems Focus</span>
-                            <span>// PROJECT_02</span>
-                        </div>
-                        <h2 class="detail-project-title">QuantPDC Backtesting Engine</h2>
-                        <div class="detail-tags-container">
-                            <span class="detail-tech-badge">C++</span>
-                            <span class="detail-tech-badge">CUDA</span>
-                            <span class="detail-tech-badge">MPI</span>
-                            <span class="detail-tech-badge">OpenMP</span>
-                        </div>
-                        <p class="detail-project-desc">
-                            A high-performance algorithmic trading backtesting engine leveraging parallel computing architectures (CUDA, MPI, OpenMP) to run thread-safe PnL calculations over massive historical tick data.
-                        </p>
-                    </div>
-                    <div class="project-detail-grid">
-                        <div class="detail-left-pane">
-                            <div>
-                                <h3 class="detail-section-title">Parallel Acceleration</h3>
-                                <ul class="detail-bullet-list">
-                                    <li><strong>OpenMP Multi-threading:</strong> Spawns parallel calculations across CPU threads, processing multiple trading strategies concurrently in shared memory.</li>
-                                    <li><strong>CUDA Kernel Speedups:</strong> Accelerates large scale matrix operations on historical price tick records using parallel GPU kernels.</li>
-                                    <li><strong>MPI Distributed Sync:</strong> Coordinates backtesting partitions across separate node clusters, reducing completion times for massive tick files.</li>
-                                </ul>
-                            </div>
-                            <div class="tech-spec-ledger">
-                                <h3 class="detail-section-title">High Performance Computing</h3>
-                                <div class="spec-ledger-grid">
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Compiler Target:</span>
-                                        <span class="spec-val">GCC / NVCC C++17</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Calculated Rate:</span>
-                                        <span class="spec-val spec-green">1.2M ticks/sec</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Host Threading:</span>
-                                        <span class="spec-val">OpenMP (64 Cores)</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">GPU Streaming:</span>
-                                        <span class="spec-val">CUDA Kernels</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-right-pane">
-                            <h3 class="detail-section-title">Parallel Execution HUD</h3>
-                            <div class="interactive-sandbox-container">
-                                <div class="sandbox-title-bar">
-                                    <div class="sandbox-status-lights">
-                                        <span class="sandbox-light green"></span>
-                                    </div>
-                                    <span class="sandbox-tab-name">Parallel Thread HUD</span>
-                                </div>
-                                <div class="sandbox-body">
-                                    <div class="backtest-stats-row">
-                                        <div class="backtest-stat-mini">
-                                            <span class="backtest-stat-label">Inference Mode</span>
-                                            <span class="backtest-stat-val">CUDA GPU</span>
-                                        </div>
-                                        <div class="backtest-stat-mini">
-                                            <span class="backtest-stat-label">Throughput</span>
-                                            <span class="backtest-stat-val">1.2M ticks/s</span>
-                                        </div>
-                                        <div class="backtest-stat-mini">
-                                            <span class="backtest-stat-label">Thread Count</span>
-                                            <span class="backtest-stat-val">64 Cores</span>
-                                        </div>
-                                    </div>
-                                    <div class="backtest-thread-monitor">
-                                        <span class="backtest-monitor-title">Shared Memory Thread Map (OpenMP)</span>
-                                        <div class="backtest-threads-grid" id="threads-grid">
-                                            <!-- Generated via JS -->
-                                        </div>
-                                    </div>
-                                    <div class="backtest-progress-track">
-                                        <div class="backtest-progress-fill" id="backtest-progress"></div>
-                                    </div>
-                                    <div class="sandbox-terminal" id="backtest-terminal-logs" style="min-height: 100px;">
-                                        <div class="terminal-line">// Parallel backtester initialized. Click launch below.</div>
-                                    </div>
-                                    <button id="backtest-btn-run" class="sandbox-btn-run">❯ Launch Backtest Engine</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                initPlayground: () => {
-                    const grid = document.getElementById("threads-grid");
-                    const progressFill = document.getElementById("backtest-progress");
-                    const terminal = document.getElementById("backtest-terminal-logs");
-                    const btnRun = document.getElementById("backtest-btn-run");
 
-                    // Generate thread cells
-                    grid.innerHTML = "";
-                    for (let i = 0; i < 32; i++) {
-                        const cell = document.createElement("div");
-                        cell.className = "thread-cell";
-                        grid.appendChild(cell);
-                    }
-
-                    const handleBacktest = () => {
-                        btnRun.disabled = true;
-                        progressFill.style.width = "0%";
-                        terminal.innerHTML = "";
-                        printSimLog(terminal, ">>> Initiating C++ backtesting sequence...", "info");
-                        printSimLog(terminal, ">>> Distributing historical tick database partitions using MPI...", "muted");
-                        printSimLog(terminal, ">>> Initializing OpenMP thread pool (32 concurrent workers)...", "info");
-
-                        const cells = grid.querySelectorAll(".thread-cell");
-                        cells.forEach(c => c.className = "thread-cell");
-
-                        let progress = 0;
-                        let cellIdx = 0;
-
-                        const runInterval = setInterval(() => {
-                            progress += 6.25;
-                            progressFill.style.width = `${progress}%`;
-                            
-                            // Light up thread cells in batches
-                            const batchEnd = Math.min(cellIdx + 4, cells.length);
-                            for (let idx = cellIdx; idx < batchEnd; idx++) {
-                                cells[idx].className = "thread-cell calculating";
-                                setTimeout(() => {
-                                    cells[idx].className = "thread-cell complete";
-                                }, 300);
-                            }
-                            cellIdx = batchEnd;
-
-                            printSimLog(terminal, `Processing block [Tick ${progress * 10000} - ${(progress + 6.25) * 10000}]. P&L calculates...`, "muted");
-
-                            if (progress >= 100) {
-                                clearInterval(runInterval);
-                                btnRun.disabled = false;
-                                printSimLog(terminal, ">>> backtesting sequence completed in 320ms.", "success");
-                                printSimLog(terminal, ">>> Total processed: 1.2M ticks. Strategy returns: +14.82% PnL.", "success");
-                            }
-                        }, 120);
-
-                        activePlaygroundIntervals.push(runInterval);
-                    };
-
-                    btnRun.addEventListener("click", handleBacktest);
-                    activePlaygroundListeners.push({ element: btnRun, event: "click", callback: handleBacktest });
-                }
-            };
-        } else {
-            // SOUS (Mobile/Infra)
-            return {
-                html: `
-                    <div class="detail-header-section">
-                        <div class="detail-badge-row">
-                            <span class="detail-category-tag">Cross-Platform UI focus</span>
-                            <span>// PROJECT_02</span>
-                        </div>
-                        <h2 class="detail-project-title">SOUS Recipe Gateway</h2>
-                        <div class="detail-tags-container">
-                            <span class="detail-tech-badge">Flutter</span>
-                            <span class="detail-tech-badge">Dart</span>
-                            <span class="detail-tech-badge">REST API</span>
-                            <span class="detail-tech-badge">Docker</span>
-                        </div>
-                        <p class="detail-project-desc">
-                            A decoupled cross-platform recipe recommendation application built in Flutter, querying dynamic recipe vectors served via containerized FastAPI Python services.
-                        </p>
-                    </div>
-                    <div class="project-detail-grid">
-                        <div class="detail-left-pane">
-                            <div>
-                                <h3 class="detail-section-title">App Architecture</h3>
-                                <ul class="detail-bullet-list">
-                                    <li><strong>Microservice Decohesion:</strong> Employs containerized Docker files to serving ingredient vector databases separately from client logic.</li>
-                                    <li><strong>Flutter Frontend:</strong> Features responsive material grid interfaces, managing REST caching targets locally on Android and iOS.</li>
-                                    <li><strong>Custom Sorting:</strong> Executes ingredient intersection math client-side, reducing server query overhead.</li>
-                                </ul>
-                            </div>
-                            <div class="tech-spec-ledger">
-                                <h3 class="detail-section-title">Client-Server Metrics</h3>
-                                <div class="spec-ledger-grid">
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">UI Library:</span>
-                                        <span class="spec-val">Flutter Material 3</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Microservice:</span>
-                                        <span class="spec-val">Dockerized FastAPI</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Local Cache:</span>
-                                        <span class="spec-val spec-green">Hive NoSQL Store</span>
-                                    </div>
-                                    <div class="spec-ledger-row">
-                                        <span class="spec-key">Sync Protocol:</span>
-                                        <span class="spec-val">REST Decoupled</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="detail-right-pane">
-                            <h3 class="detail-section-title">Chef Persona Query Sandbox</h3>
-                            <div class="interactive-sandbox-container">
-                                <div class="sandbox-title-bar">
-                                    <div class="sandbox-status-lights">
-                                        <span class="sandbox-light green"></span>
-                                    </div>
-                                    <span class="sandbox-tab-name">FastAPI Endpoint Console</span>
-                                </div>
-                                <div class="sandbox-body">
-                                    <p class="sandbox-desc">// Input ingredient checklist parameters to fetch menu templates.</p>
-                                    <div class="sandbox-controls-row">
-                                        <input type="text" id="sous-input-ing" class="sandbox-input" placeholder="Type ingredients (e.g. Tomatoes, Eggs, Cheese)..." value="Tomatoes, Eggs, Cheese">
-                                        <button id="sous-btn-fetch" class="sandbox-btn-run">❯ Fetch FastAPI Recommendations</button>
-                                    </div>
-                                    <div class="stride-routine-output" id="sous-output-logs">
-                                        // Awaiting query...
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `,
-                initPlayground: () => {
-                    const inputIng = document.getElementById("sous-input-ing");
-                    const btnFetch = document.getElementById("sous-btn-fetch");
-                    const consoleEl = document.getElementById("sous-output-logs");
-
-                    const handleFetch = () => {
-                        consoleEl.innerHTML = "";
-                        const rawVal = inputIng.value.trim();
-                        if (!rawVal) {
-                            consoleEl.innerText = "// Error: Ingredients field cannot be empty.";
-                            return;
-                        }
-
-                        consoleEl.innerText = "Querying containerized recipe embeddings via REST API...";
-                        
-                        setTimeout(() => {
-                            consoleEl.innerHTML = "";
-                            const headerEl = document.createElement("div");
-                            headerEl.innerText = `>>> FastAPI: Decoupled model returned matching nodes for [${rawVal}]:`;
-                            headerEl.style.fontWeight = "700";
-                            headerEl.style.color = "var(--accent-orange)";
-                            headerEl.style.marginBottom = "8px";
-                            consoleEl.appendChild(headerEl);
-
-                            const suggestion = document.createElement("div");
-                            suggestion.innerHTML = `
-                                <strong>Tomato & Cheese Frittata</strong> (Match: 94%)<br>
-                                <em>Cooking duration: 15 mins</em><br>
-                                <ol style="margin-left: 20px; margin-top: 6px;">
-                                    <li>Whisk eggs inside a bowl, seasoning with salt.</li>
-                                    <li>Dice fresh tomatoes and sauté in skillet.</li>
-                                    <li>Pour eggs, sprinkle cheese, and bake until golden.</li>
-                                </ol>
-                            `;
-                            consoleEl.appendChild(suggestion);
-                        }, 700);
-                    };
-
-                    btnFetch.addEventListener("click", handleFetch);
-                    activePlaygroundListeners.push({ element: btnFetch, event: "click", callback: handleFetch });
-                }
-            };
-        }
     } else if (projectId === "project-opaque-ci") {
-        if (mode === "ai") {
+        if (true) {
             // OpaqueCI Agent (AI/ML)
             return {
                 html: `
