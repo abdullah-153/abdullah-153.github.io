@@ -39,9 +39,10 @@
             </div>
             <nav class="header-nav">
                 <a href="#projects-section" class="nav-link"><span class="nav-index">01.</span> Projects</a>
-                <a href="#skills-section" class="nav-link"><span class="nav-index">02.</span> Skills</a>
-                <a href="#contact-section" class="nav-link"><span class="nav-index">03.</span> Contact</a>
-                <a href="#" class="btn-cv-download" id="btn-cv-download"><span class="btn-prompt">$</span> Download CV <span class="btn-cursor">_</span></a>
+                <a href="#experience-section" class="nav-link"><span class="nav-index">02.</span> Experience</a>
+                <a href="#skills-section" class="nav-link"><span class="nav-index">03.</span> Skills</a>
+                <a href="#contact-section" class="nav-link"><span class="nav-index">04.</span> Contact</a>
+                <a href="#" class="btn-cv-download" id="btn-cv-download"><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
             </nav>
             <!-- Mobile hamburger button (hidden on desktop) -->
             <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
@@ -54,9 +55,10 @@
         <!-- Mobile slide-down nav overlay -->
         <div class="mobile-nav-overlay" id="mobile-nav-overlay">
             <a href="#projects-section" class="mobile-nav-link" data-close-menu>Projects</a>
+            <a href="#experience-section" class="mobile-nav-link" data-close-menu>Experience</a>
             <a href="#skills-section" class="mobile-nav-link" data-close-menu>Skills</a>
             <a href="#contact-section" class="mobile-nav-link" data-close-menu>Contact</a>
-            <a href="#" class="mobile-nav-link mobile-cv-link" id="mobile-btn-cv-download"><span class="btn-prompt">$</span> Download CV <span class="btn-cursor">_</span></a>
+            <a href="#" class="mobile-nav-link mobile-cv-link" id="mobile-btn-cv-download"><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
         </div>
 
         <!-- Hero Hook -->
@@ -271,11 +273,83 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
+        <section id="experience-section" class="section-container">
+            <div class="section-tag">02. WORK TELEMETRY</div>
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-desc">Timeline of engineering roles specializing in machine learning backend operations and software quality systems.</p>
+            
+            <div class="experience-timeline">
+                
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="role-title-box">
+                            <h3 class="role-title">Backend AI Engineer Intern</h3>
+                            <span class="company-name">@ FlyRank AI</span>
+                        </div>
+                        <div class="role-meta">
+                            <span class="role-duration">05/2026 – 06/2026</span>
+                            <span class="role-location">Remote (Chicago, IL)</span>
+                        </div>
+                    </div>
+                    <ul class="role-details">
+                        <li>Built a local model serving system using <strong>vLLM</strong>, enabling the backend to automatically swap out custom-trained models on a single GPU to minimize hardware costs.</li>
+                        <li>Created an intelligent query router that automatically directs user requests to SQL databases, vector search indexes, or web APIs depending on user intent.</li>
+                        <li>Automated the data ingestion pipeline by building an agent that parses raw PDFs and structures the data into vector databases for fast retrieval.</li>
+                    </ul>
+                    <div class="timeline-skills-container">
+                        <span class="timeline-skills-label">Skills Stack //</span>
+                        <div class="timeline-skills-list">
+                            <span class="timeline-skill-badge">vLLM</span>
+                            <span class="timeline-skill-badge">Python</span>
+                            <span class="timeline-skill-badge">FastAPI</span>
+                            <span class="timeline-skill-badge">Agentic Workflows</span>
+                            <span class="timeline-skill-badge">SQL Databases</span>
+                            <span class="timeline-skill-badge">Vector DBs (ChromaDB/LanceDB)</span>
+                            <span class="timeline-skill-badge">RAG</span>
+                            <span class="timeline-skill-badge">Model Serving</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="role-title-box">
+                            <h3 class="role-title">Web3 QA Analyst</h3>
+                            <span class="company-name">@ QUBIC</span>
+                        </div>
+                        <div class="role-meta">
+                            <span class="role-duration">11/2023 – 03/2024</span>
+                            <span class="role-location">Remote (Dubai, UAE)</span>
+                        </div>
+                    </div>
+                    <ul class="role-details">
+                        <li>Wrote automated Python scripts to test system integrations and APIs, reducing manual regression testing cycles from 2 days to under 3 hours.</li>
+                        <li>Created and executed load-testing scripts across 50+ Web3 endpoints to locate and document critical system bottlenecks.</li>
+                    </ul>
+                    <div class="timeline-skills-container">
+                        <span class="timeline-skills-label">Skills Stack //</span>
+                        <div class="timeline-skills-list">
+                            <span class="timeline-skill-badge">Python</span>
+                            <span class="timeline-skill-badge">QA Automation</span>
+                            <span class="timeline-skill-badge">API Testing</span>
+                            <span class="timeline-skill-badge">Load Testing</span>
+                            <span class="timeline-skill-badge">Web3 Systems</span>
+                            <span class="timeline-skill-badge">Regression Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- Skills Section -->
         <section id="skills-section" class="section-container">
             <div class="section-tag">02. SYSTEM COEFFICIENTS</div>
             <h2 class="section-title">Technical Skills Matrix</h2>
-            <p class="section-desc">Key engineering proficiencies classified by CV domain areas. Built on robust software engineering practices and advanced machine learning infrastructure.</p>
+            <p class="section-desc">Key engineering proficiencies classified by expertise areas. Built on robust software engineering practices and advanced machine learning infrastructure.</p>
             
             <div class="skills-dashboard-grid">
                 
@@ -588,8 +662,8 @@
     <!-- Curriculum Vitae Prompt Box (Mock Download) -->
     <div id="cv-modal" class="cv-modal">
         <div class="cv-modal-content">
-            <h3 class="modal-title">Retrieve CV Payload</h3>
-            <p class="modal-desc">Simulating download stream for 'abdullah_khan_resume.pdf'...</p>
+            <h3 class="modal-title">Retrieve Resume Payload</h3>
+            <p class="modal-desc">Simulating download stream for 'Muhammad_Abdullah_Khan_AI_ENG.pdf'...</p>
             <div class="modal-progress-bar"><div class="fill" id="cv-download-progress"></div></div>
             <div class="modal-actions">
                 <button class="btn btn-primary" id="btn-cv-confirm">Close Dialog</button>

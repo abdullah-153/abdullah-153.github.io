@@ -663,8 +663,8 @@ function initCVDownload() {
     
     function triggerFileDownload() {
         const a = document.createElement("a");
-        a.href = "./Abdullah-khan_ML_DS.pdf";
-        a.download = "Abdullah-khan_ML_DS.pdf";
+        a.href = "./Muhammad_Abdullah_Khan_AI_ENG.pdf";
+        a.download = "Muhammad_Abdullah_Khan_AI_ENG.pdf";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
