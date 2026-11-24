@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Abdullah Khan — Software Engineer | Applied AI & Data Science Engineer</title>
-    <meta name="description" content="Applied AI Engineer focused on fine-tuning open-source machine learning models, semantic RAG pipelines, autonomous computer vision agents, and backend ML infrastructure.">
+    <title>Muhammad Abdullah Khan | Full Stack &amp; AI Engineer</title>
+    <meta name="description" content="Muhammad Abdullah Khan is a Full Stack and AI Engineer building production SaaS, agentic AI systems, and cloud infrastructure.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ea580c'/%3E%3Ctext x='50%25' y='62%25' font-family='Space Grotesk, sans-serif' font-weight='700' font-size='15' fill='%23ffffff' text-anchor='middle' dominant-baseline='middle'%3EAK%3C/text%3E%3C/svg%3E">
 </head>
-<body class="structured-portfolio">
+<body class="structured-portfolio" id="top">
 
     <!-- Custom Interactive Cursor -->
-    <div id="custom-cursor-dot"></div>
-    <div id="custom-cursor-ring"></div>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div id="custom-cursor-dot" aria-hidden="true"></div>
+    <div id="custom-cursor-ring" aria-hidden="true"></div>
 
     <!-- Ambient Grid Canvas Background -->
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
     
     <!-- Ambient Radial Glows (Background Visuals) -->
     <div class="radial-glow glow-top-left"></div>
@@ -30,22 +31,22 @@
         
         <!-- Header -->
         <header class="portfolio-header">
-            <div class="header-brand-badge">
+            <a href="#top" class="header-brand-badge" aria-label="Abdullah Khan, back to top">
                 <div class="logo-monogram-box">
                     <span class="logo-monogram">AK</span>
                 </div>
                 <span class="logo-divider">//</span>
                 <span class="logo-name" data-scramble="ABDULLAH.KHAN">ABDULLAH.KHAN</span>
-            </div>
-            <nav class="header-nav">
-                <a href="#projects-section" class="nav-link"><span class="nav-index">01.</span> Projects</a>
-                <a href="#experience-section" class="nav-link"><span class="nav-index">02.</span> Experience</a>
-                <a href="#skills-section" class="nav-link"><span class="nav-index">03.</span> Skills</a>
-                <a href="#contact-section" class="nav-link"><span class="nav-index">04.</span> Contact</a>
-                <a href="#" class="btn-cv-download" id="btn-cv-download"><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
+            </a>
+            <nav class="header-nav" aria-label="Main navigation">
+                <a href="#projects-section" class="nav-link">Projects</a>
+                <a href="#experience-section" class="nav-link">Experience</a>
+                <a href="#skills-section" class="nav-link">Skills</a>
+                <a href="#contact-section" class="nav-link">Contact</a>
+                <a href="./resume.pdf" download="Muhammad_Abdullah_Khan_Full_Stack_AI_Engineer_Resume.pdf" class="btn-cv-download"><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
             </nav>
             <!-- Mobile hamburger button (hidden on desktop) -->
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="mobile-nav-overlay" aria-expanded="false">
                 <span class="burger-bar"></span>
                 <span class="burger-bar"></span>
                 <span class="burger-bar"></span>
@@ -53,565 +54,339 @@
         </header>
 
         <!-- Mobile slide-down nav overlay -->
-        <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <nav class="mobile-nav-overlay" id="mobile-nav-overlay" aria-label="Mobile navigation" inert>
             <a href="#projects-section" class="mobile-nav-link" data-close-menu>Projects</a>
             <a href="#experience-section" class="mobile-nav-link" data-close-menu>Experience</a>
             <a href="#skills-section" class="mobile-nav-link" data-close-menu>Skills</a>
             <a href="#contact-section" class="mobile-nav-link" data-close-menu>Contact</a>
-            <a href="#" class="mobile-nav-link mobile-cv-link" id="mobile-btn-cv-download"><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
-        </div>
+            <a href="./resume.pdf" download="Muhammad_Abdullah_Khan_Full_Stack_AI_Engineer_Resume.pdf" class="mobile-nav-link mobile-cv-link" data-close-menu><span class="btn-prompt">$</span> Download Resume <span class="btn-cursor">_</span></a>
+        </nav>
 
+        <main id="main-content" tabindex="-1">
         <!-- Hero Hook -->
         <section class="hero-section">
             <h1 class="hero-title" id="hero-title">
-                I architect end-to-end LLM pipelines and fine-tuned ML engines.
+                Full Stack &amp; AI Engineer
             </h1>
             <p class="hero-subtitle" id="hero-subtitle">
-                Hello, I'm <strong>Muhammad Abdullah Khan</strong>. I am an Applied AI Engineer focused on fine-tuning open-source machine learning models for high performance on constrained hardware, building autonomous computer vision agents, and deploying high-availability ML pipelines.
+                I’m <strong>Muhammad Abdullah Khan</strong>. I build production SaaS and agentic AI systems, from rental operations and AI contact centers to conversational workflows and real-time copilots.
             </p>
 
 
 
             <div class="hero-actions">
                 <a href="#projects-section" class="btn btn-primary">
-                    <span class="btn-text">Inspect Projects</span>
+                    <span class="btn-text">View Projects</span>
                     <span class="btn-arrow">↓</span>
                 </a>
                 <a href="#contact-section" class="btn btn-secondary">
-                    <span class="btn-text">Get In Touch</span>
-                    <span class="btn-tag">// CONNECT</span>
+                    <span class="btn-text">Get in Touch</span>
                 </a>
                 <div class="social-chips">
-                    <a href="https://github.com/abdullah-153" target="_blank" class="chip">GitHub ↗</a>
-                    <a href="https://www.linkedin.com/in/muhammad-abdullah-khan-331914214/" target="_blank" class="chip">LinkedIn ↗</a>
+                    <a href="https://github.com/abdullah-153" target="_blank" rel="noopener noreferrer" class="chip">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/muhammad-abdullah-khan-331914214/" target="_blank" rel="noopener noreferrer" class="chip">LinkedIn ↗</a>
                 </div>
             </div>
         </section>
 
-        <!-- Projects Section -->
-        <section id="projects-section" class="section-container">
-            <div class="section-tag">01. PRODUCTION SHARDS</div>
-            <h2 class="section-title" id="projects-title">End-to-End ML Infrastructure</h2>
-            <p class="section-desc" id="projects-desc">High-performance server-side LLM systems, custom RAG search pipelines, and vector database orchestration shards.</p>
+        <section id="projects-section" class="section-container" tabindex="-1" aria-labelledby="projects-title">
+            <h2 class="section-title" id="projects-title">Featured Projects</h2>
+            <p class="section-desc">Production systems I built at Automataize and an open-source computer-use agent.</p>
             <div class="project-dashboard-list">
-                
-                <!-- Project 1: OmniVLA -->
-                <div class="project-row-block" id="project-omnivla">
+                <article class="project-row-block" id="project-helix">
                     <div class="project-info-pane">
-                        <span class="project-num">PROJECT_01</span>
-                        <h3 class="project-title" id="title-omnivla">OmniVLA</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-omnivla">Python / PyTorch / PEFT / LoRA / ChromaDB / AST Parsing</span>
-                        </div>
-                        <p class="project-desc" id="desc-omnivla">
-                            Hardware-constrained autonomous GUI agent optimized for low-VRAM environments. Utilizes UI tree parsing and coordinate grounding for automated screen navigation and task automation. Developed a dedicated, responsive web interface to showcase performance metrics.
-                        </p>
+                        <p class="project-status-badge">Automataize · Production</p>
+                        <h3 class="project-title">Helix</h3>
+                        <p class="project-type">Rental operations and AI contact center</p>
+                        <p class="project-desc">I built a multi-tenant platform that brings car rental reservations, customer records, ticketing, and contact center operations into one workspace.</p>
+                        <div class="project-tags-container"><span class="project-tags">Next.js / Node.js / Python / AWS</span></div>
                     </div>
-                    
                     <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
+                        <dl class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label">VRAM_FOOTPRINT</span>
-                                <span class="metric-value green">&lt; 6.0 GB</span>
+                                <dt class="metric-label">Daily calls</dt>
+                                <dd class="metric-value green">2,000+</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">GROUNDING_ACC</span>
-                                <span class="metric-value cyan">94.2% IoU</span>
+                                <dt class="metric-label">Tickets per client</dt>
+                                <dd class="metric-value cyan">300K+</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">COMPUTE</span>
-                                <span class="metric-value orange">Local SLM</span>
+                                <dt class="metric-label">Monthly savings per company</dt>
+                                <dd class="metric-value orange">~$3K</dd>
                             </div>
-                        </div>
+                        </dl>
                         <div class="project-action-hud">
-                            <span class="project-status-badge">// ACTIVE DEV</span>
-                            <span class="project-case-link">Inspect Case Study ↗</span>
+                            <button type="button" class="project-case-link" data-case-study="helix" aria-label="Read the Helix case study" aria-haspopup="dialog">Case study <span aria-hidden="true">→</span></button>
+                            <a href="https://helix.automataize.com/" target="_blank" rel="noopener noreferrer" class="project-case-link" aria-label="Helix product site">Product site <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 2: VigilAI Proxy -->
-                <div class="project-row-block" id="project-vigilai">
+                <article class="project-row-block" id="project-fleethq">
                     <div class="project-info-pane">
-                        <span class="project-num">PROJECT_02</span>
-                        <h3 class="project-title" id="title-vigilai">VigilAI Proxy</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-vigilai">Python / FastAPI / LiteLLM / Security Gateway / SQLite</span>
-                        </div>
-                        <p class="project-desc" id="desc-vigilai">
-                            LLM Security Gateway and telemetry dashboard middleware proxy. Scans prompts for injections, filters model outputs, redacts PII using Luhn validations, routes multi-provider API requests, and logs detailed transaction telemetry.
-                        </p>
+                        <p class="project-status-badge">Automataize · Production</p>
+                        <h3 class="project-title">FleetHQ</h3>
+                        <p class="project-type">AI command interface and MCP</p>
+                        <p class="project-desc">I built FleetHQ’s AI interface so rental operators can manage bookings, fleet operations, and reporting through a single conversation.</p>
+                        <div class="project-tags-container"><span class="project-tags">Django REST Framework / MCP / OAuth / LLM agents</span></div>
                     </div>
-                    
                     <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
+                        <dl class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label">OVERHEAD_LATENCY</span>
-                                <span class="metric-value green">&lt; 12ms Avg</span>
+                                <dt class="metric-label">Native-backed tools</dt>
+                                <dd class="metric-value green">150+</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">DETECTION_RATE</span>
-                                <span class="metric-value cyan">99.7% Blocked</span>
+                                <dt class="metric-label">Integrations with guidance</dt>
+                                <dd class="metric-value cyan">20+</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">TELEMETRY</span>
-                                <span class="metric-value orange">Chart.js HUD</span>
+                                <dt class="metric-label">Organizations on FleetHQ</dt>
+                                <dd class="metric-value orange">50+</dd>
                             </div>
-                        </div>
+                        </dl>
                         <div class="project-action-hud">
-                            <span class="project-status-badge">// GATEWAY ACTIVE</span>
-                            <span class="project-case-link">Inspect Case Study ↗</span>
+                            <button type="button" class="project-case-link" data-case-study="fleethq" aria-label="Read the FleetHQ case study" aria-haspopup="dialog">Case study <span aria-hidden="true">→</span></button>
+                            <a href="https://fleethq.io/" target="_blank" rel="noopener noreferrer" class="project-case-link" aria-label="FleetHQ product site">Product site <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 3: OpaqueCI -->
-                <div class="project-row-block" id="project-opaque-ci">
+                <article class="project-row-block" id="project-clopal">
                     <div class="project-info-pane">
-                        <span class="project-num">PROJECT_03</span>
-                        <h3 class="project-title" id="title-opaque-ci">OpaqueCI</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-opaque-ci">Python / LanceDB / Semantic RAG / Tree-sitter / Local LLMs</span>
-                        </div>
-                        <p class="project-desc" id="desc-opaque-ci">
-                            On-premise AI agent that automates security and style audits for Git pull requests. Utilizes semantic RAG pipelines and AST parsing context (Tree-sitter) with a monochromatic console to monitor live vulnerability distributions.
-                        </p>
+                        <p class="project-status-badge">Automataize · Production</p>
+                        <h3 class="project-title">Clopal</h3>
+                        <p class="project-type">Real-time AI copilot for calls and meetings</p>
+                        <p class="project-desc">I built a live copilot that retrieves caller context and company knowledge to help agents answer questions and decide what to do during a call.</p>
+                        <div class="project-tags-container"><span class="project-tags">Hybrid RAG / BM25 / Multilingual embeddings / Twilio</span></div>
                     </div>
-                    
                     <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
+                        <dl class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label">DATA_PRIVACY</span>
-                                <span class="metric-value green">100% On-Prem</span>
+                                <dt class="metric-label">Supported languages</dt>
+                                <dd class="metric-value green">7</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">REVIEW_SPEED</span>
-                                <span class="metric-value cyan">~15s Average</span>
+                                <dt class="metric-label">Replay median latency</dt>
+                                <dd class="metric-value cyan">1.67 s</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">PARSING</span>
-                                <span class="metric-value orange">Tree-sitter</span>
+                                <dt class="metric-label">Replay retrieval checks</dt>
+                                <dd class="metric-value orange">105/105</dd>
                             </div>
-                        </div>
+                        </dl>
                         <div class="project-action-hud">
-                            <span class="project-status-badge">// AGENT ACTIVE</span>
-                            <span class="project-case-link">Inspect Case Study ↗</span>
+                            <button type="button" class="project-case-link" data-case-study="clopal" aria-label="Read the Clopal case study" aria-haspopup="dialog">Case study <span aria-hidden="true">→</span></button>
+                            <a href="https://clopal.io/" target="_blank" rel="noopener noreferrer" class="project-case-link" aria-label="Clopal product site">Product site <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project 4: Stride -->
-                <div class="project-row-block" id="project-stride">
+                <article class="project-row-block" id="project-omnivla">
                     <div class="project-info-pane">
-                        <span class="project-num">PROJECT_04</span>
-                        <h3 class="project-title" id="title-stride">Stride</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-stride">Flutter / Riverpod / Gemini API / Firebase / ML microservices</span>
-                        </div>
-                        <p class="project-desc" id="desc-stride">
-                            AI-driven physiological fitness tracking cross-platform app. Integrates custom machine learning models with the Gemini API to autonomously generate and serve dynamic routines, backed by a serverless Firebase and Docker infrastructure.
-                        </p>
+                        <p class="project-status-badge">Personal project</p>
+                        <h3 class="project-title">OmniVLA</h3>
+                        <p class="project-type">Local multimodal computer-use agent</p>
+                        <p class="project-desc">I built a multimodal agent that plans a task, interacts with a graphical interface, and checks the result on local hardware.</p>
+                        <div class="project-tags-container"><span class="project-tags">Python / LangGraph / Qwen 3.5 4B / Holo 3.1 9B</span></div>
                     </div>
-                    
                     <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
+                        <dl class="metrics-grid-hud">
                             <div class="metric-hud-box">
-                                <span class="metric-label">SYNC_LATENCY</span>
-                                <span class="metric-value green">&lt; 120ms</span>
+                                <dt class="metric-label">Test hardware</dt>
+                                <dd class="metric-value green">4 GB VRAM</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">ROUTINE_GEN</span>
-                                <span class="metric-value cyan">1.4s Avg</span>
+                                <dt class="metric-label">Inference per step</dt>
+                                <dd class="metric-value cyan">&lt;30 s</dd>
                             </div>
                             <div class="metric-hud-box">
-                                <span class="metric-label">INFRASTRUCTURE</span>
-                                <span class="metric-value orange">Firebase/Docker</span>
+                                <dt class="metric-label">Execution</dt>
+                                <dd class="metric-value orange">Local</dd>
                             </div>
-                        </div>
+                        </dl>
                         <div class="project-action-hud">
-                            <span class="project-status-badge">// PRODUCTION STABLE</span>
-                            <span class="project-case-link">Inspect Case Study ↗</span>
+                            <button type="button" class="project-case-link" data-case-study="omnivla" aria-label="Read the OmniVLA case study" aria-haspopup="dialog">Case study <span aria-hidden="true">→</span></button>
+                            <a href="https://github.com/abdullah-153/OmniVLA" target="_blank" rel="noopener noreferrer" class="project-case-link" aria-label="OmniVLA on GitHub">GitHub <span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
+                </article>
+            </div>
+            <div class="earlier-projects">
+                <h3>Earlier projects</h3>
+                <div class="earlier-project-links">
+                    <a href="https://github.com/abdullah-153/OpaqueCI" target="_blank" rel="noopener noreferrer" class="chip">OpaqueCI <span aria-hidden="true">↗</span></a>
+                    <a href="https://github.com/abdullah-153/VigilAI-Proxy" target="_blank" rel="noopener noreferrer" class="chip">VigilAI Proxy <span aria-hidden="true">↗</span></a>
+                    <a href="https://github.com/abdullah-153/Stride" target="_blank" rel="noopener noreferrer" class="chip">Stride <span aria-hidden="true">↗</span></a>
                 </div>
-
-                <!-- Project 5: ShiftsSaga -->
-                <div class="project-row-block" id="project-shiftssaga">
-                    <div class="project-info-pane">
-                        <span class="project-num">PROJECT_05</span>
-                        <h3 class="project-title" id="title-shiftssaga">ShiftsSaga</h3>
-                        <div class="project-tags-container">
-                            <span class="project-tags" id="tags-shiftssaga">Full-Stack CRM / HTML & CSS / JavaScript / Agentic workflows</span>
-                        </div>
-                        <p class="project-desc" id="desc-shiftssaga">
-                            A highly responsive CRM and landing page optimized for lead generation and user engagement. Architected a backend CRM admin panel to manage user data, track recruiter interactions, and streamline internal operations.
-                        </p>
-                    </div>
-                    
-                    <div class="project-metrics-pane">
-                        <div class="metrics-grid-hud">
-                            <div class="metric-hud-box">
-                                <span class="metric-label">PROTOTYPING</span>
-                                <span class="metric-value green">Agentic workflow</span>
-                            </div>
-                            <div class="metric-hud-box">
-                                <span class="metric-label">LOAD_TIME</span>
-                                <span class="metric-value cyan">&lt; 1.2s</span>
-                            </div>
-                            <div class="metric-hud-box">
-                                <span class="metric-label">INTEGRATION</span>
-                                <span class="metric-value orange">CRM Dashboard</span>
-                            </div>
-                        </div>
-                        <div class="project-action-hud">
-                            <span class="project-status-badge">// DEPLOYED</span>
-                            <span class="project-case-link">Inspect Case Study ↗</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience-section" class="section-container">
-            <div class="section-tag">02. WORK TELEMETRY</div>
-            <h2 class="section-title">Professional Experience</h2>
-            <p class="section-desc">Timeline of engineering roles specializing in machine learning backend operations and software quality systems.</p>
-            
+        <section id="experience-section" class="section-container" tabindex="-1" aria-labelledby="experience-title">
+            <h2 class="section-title" id="experience-title">Professional Experience</h2>
             <div class="experience-timeline">
-                
-                <!-- Experience 1 -->
-                <div class="timeline-item">
+                <article class="timeline-item">
                     <div class="timeline-header">
                         <div class="role-title-box">
-                            <h3 class="role-title">Backend AI Engineer Intern</h3>
+                            <h3 class="role-title">Full Stack AI Engineer</h3>
+                            <span class="company-name">@ Automataize</span>
+                        </div>
+                        <div class="role-meta"><span class="role-duration"><time datetime="2026-06">Jun 2026</time> – Present</span><span class="role-location">Remote (US)</span></div>
+                    </div>
+                    <p class="role-summary">Built and delivered <a href="#project-helix">Helix</a>, the <a href="#project-fleethq">FleetHQ AI interface</a>, and <a href="#project-clopal">Clopal</a>. Owned work across product interfaces, backend services, AI systems, and deployment.</p>
+                    <div class="timeline-skills-list">
+                        <span class="timeline-skill-badge">Next.js</span>
+                        <span class="timeline-skill-badge">Django REST Framework</span>
+                        <span class="timeline-skill-badge">AWS</span>
+                        <span class="timeline-skill-badge">MCP</span>
+                        <span class="timeline-skill-badge">Hybrid RAG</span>
+                        <span class="timeline-skill-badge">CI/CD</span>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="role-title-box">
+                            <h3 class="role-title">Full Stack Engineer (Contract)</h3>
+                            <span class="company-name">@ Arbeitly.de</span>
+                        </div>
+                        <div class="role-meta"><span class="role-location">Remote (Germany)</span></div>
+                    </div>
+                    <p class="role-summary">Fixed subscription, SSO, onboarding, API, and integration issues. Built three-stage job matching with deterministic rules, vector search, and an LLM, and added rate-limit-safe batch scoring, nightly checks, and 700+ unit and end-to-end tests.</p>
+                    <div class="timeline-skills-list">
+                        <span class="timeline-skill-badge">SSO</span>
+                        <span class="timeline-skill-badge">Vector search</span>
+                        <span class="timeline-skill-badge">LLM scoring</span>
+                        <span class="timeline-skill-badge">Unit and E2E testing</span>
+                    </div>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="role-title-box">
+                            <h3 class="role-title">Software Engineering Intern</h3>
+                            <span class="company-name">@ Appverse</span>
+                        </div>
+                        <div class="role-meta"><span class="role-duration"><time datetime="2026-04">Apr</time>–<time datetime="2026-06">Jun 2026</time></span></div>
+                    </div>
+                    <p class="role-summary">Contributed to software development in a part-time internship.</p>
+                </article>
+
+                <article class="timeline-item">
+                    <div class="timeline-header">
+                        <div class="role-title-box">
+                            <h3 class="role-title">Backend AI Engineering Intern</h3>
                             <span class="company-name">@ FlyRank AI</span>
                         </div>
-                        <div class="role-meta">
-                            <span class="role-duration">05/2026 – 06/2026</span>
-                            <span class="role-location">Remote (Chicago, IL)</span>
-                        </div>
+                        <div class="role-meta"><span class="role-duration">2 months</span></div>
                     </div>
-                    <ul class="role-details">
-                        <li>Built a local model serving system using <strong>vLLM</strong>, enabling the backend to automatically swap out custom-trained models on a single GPU to minimize hardware costs.</li>
-                        <li>Created an intelligent query router that automatically directs user requests to SQL databases, vector search indexes, or web APIs depending on user intent.</li>
-                        <li>Automated the data ingestion pipeline by building an agent that parses raw PDFs and structures the data into vector databases for fast retrieval.</li>
-                    </ul>
-                    <div class="timeline-skills-container">
-                        <span class="timeline-skills-label">Skills Stack //</span>
-                        <div class="timeline-skills-list">
-                            <span class="timeline-skill-badge">vLLM</span>
-                            <span class="timeline-skill-badge">Python</span>
-                            <span class="timeline-skill-badge">FastAPI</span>
-                            <span class="timeline-skill-badge">Agentic Workflows</span>
-                            <span class="timeline-skill-badge">SQL Databases</span>
-                            <span class="timeline-skill-badge">Vector DBs (ChromaDB/LanceDB)</span>
-                            <span class="timeline-skill-badge">RAG</span>
-                            <span class="timeline-skill-badge">Model Serving</span>
-                        </div>
-                    </div>
-                </div>
+                    <p class="role-summary">Benchmarked scenario-trained models and evaluated retrieval-augmented generation pipelines.</p>
+                </article>
 
-                <!-- Experience 2 -->
-                <div class="timeline-item">
+                <article class="timeline-item">
                     <div class="timeline-header">
                         <div class="role-title-box">
-                            <h3 class="role-title">Web3 QA Analyst</h3>
-                            <span class="company-name">@ QUBIC</span>
+                            <h3 class="role-title">QA Analyst</h3>
+                            <span class="company-name">@ Qubic</span>
                         </div>
-                        <div class="role-meta">
-                            <span class="role-duration">11/2023 – 03/2024</span>
-                            <span class="role-location">Remote (Dubai, UAE)</span>
-                        </div>
+                        <div class="role-meta"><span class="role-duration">3 months</span></div>
                     </div>
-                    <ul class="role-details">
-                        <li>Wrote automated Python scripts to test system integrations and APIs, reducing manual regression testing cycles from 2 days to under 3 hours.</li>
-                        <li>Created and executed load-testing scripts across 50+ Web3 endpoints to locate and document critical system bottlenecks.</li>
-                    </ul>
-                    <div class="timeline-skills-container">
-                        <span class="timeline-skills-label">Skills Stack //</span>
-                        <div class="timeline-skills-list">
-                            <span class="timeline-skill-badge">Python</span>
-                            <span class="timeline-skill-badge">QA Automation</span>
-                            <span class="timeline-skill-badge">API Testing</span>
-                            <span class="timeline-skill-badge">Load Testing</span>
-                            <span class="timeline-skill-badge">Web3 Systems</span>
-                            <span class="timeline-skill-badge">Regression Testing</span>
-                        </div>
-                    </div>
-                </div>
-
+                    <p class="role-summary">Tested consensus mechanisms and live workflows, reproduced issues, and verified fixes.</p>
+                </article>
+            </div>
+            <div class="education-summary">
+                <h3>Education</h3>
+                <p><strong>BS Software Engineering</strong><br>COMSATS University Islamabad, Lahore Campus</p>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills-section" class="section-container">
-            <div class="section-tag">02. SYSTEM COEFFICIENTS</div>
-            <h2 class="section-title">Technical Skills Matrix</h2>
-            <p class="section-desc">Key engineering proficiencies classified by expertise areas. Built on robust software engineering practices and advanced machine learning infrastructure.</p>
-            
+        <section id="skills-section" class="section-container" tabindex="-1" aria-labelledby="skills-title">
+            <h2 class="section-title" id="skills-title">Technical Skills</h2>
             <div class="skills-dashboard-grid">
-                
-                <!-- Group 1 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">01 // Agentic Dev & Orchestration</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="multi-agent">
-                            <span class="skill-tag-prefix">[ops]</span>
-                            <h4 class="skill-card-name">Multi-Agent Architectures</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="agentic-proto">
-                            <span class="skill-tag-prefix">[ops]</span>
-                            <h4 class="skill-card-name">Agentic Prototyping</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="langgraph-mcp">
-                            <span class="skill-tag-prefix">[ops]</span>
-                            <h4 class="skill-card-name">LangGraph & MCP Integration</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="ai-cicd">
-                            <span class="skill-tag-prefix">[ops]</span>
-                            <h4 class="skill-card-name">AI-Driven CI/CD</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="workflow-automation">
-                            <span class="skill-tag-prefix">[ops]</span>
-                            <h4 class="skill-card-name">Autonomous Workflows</h4>
-                        </div>
-                    </div>
+                <div class="skills-grid-col active-focus">
+                    <h3 class="skills-col-title">Languages &amp; Full Stack</h3>
+                    <ul class="skills-cards-wrapper">
+                        <li class="skill-card-module"><span class="skill-card-name">Python · TypeScript · JavaScript · SQL</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Next.js · React · Node.js</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Django REST Framework · FastAPI</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">REST · GraphQL</span></li>
+                    </ul>
                 </div>
 
-                <!-- Group 2 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">02 // LLM Safety & Orchestration</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="local-model">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">Local Model (Ollama/llama.cpp)</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="api-routing">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">Multi-Model API Routing</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="guardrails">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">Enterprise AI Guardrails</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="injection-defense">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">Prompt Injection Defense</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="pii-redaction">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">PII Redaction</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="hallucination-mitigation">
-                            <span class="skill-tag-prefix">[sec]</span>
-                            <h4 class="skill-card-name">Hallucination Mitigation</h4>
-                        </div>
-                    </div>
+                <div class="skills-grid-col active-focus">
+                    <h3 class="skills-col-title">AI &amp; Integrations</h3>
+                    <ul class="skills-cards-wrapper">
+                        <li class="skill-card-module"><span class="skill-card-name">LLM agents · LangGraph · tool calling</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Claude and Gemini APIs</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">MCP · OAuth · Twilio · WebSockets</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">RAG · BM25 · embeddings · weighted RRF</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Retrieval and model evaluation</span></li>
+                    </ul>
                 </div>
 
-                <!-- Group 3 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">03 // ML Infra & Data Engineering</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="fastapi">
-                            <span class="skill-tag-prefix">[db]</span>
-                            <h4 class="skill-card-name">Python & FastAPI Serving</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="postgres">
-                            <span class="skill-tag-prefix">[db]</span>
-                            <h4 class="skill-card-name">PostgreSQL Database</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="secure-proxy">
-                            <span class="skill-tag-prefix">[db]</span>
-                            <h4 class="skill-card-name">Secure Proxy Architecture</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="ha-scaling">
-                            <span class="skill-tag-prefix">[db]</span>
-                            <h4 class="skill-card-name">High-Availability Scaling</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="pipeline-arch">
-                            <span class="skill-tag-prefix">[db]</span>
-                            <h4 class="skill-card-name">ML Pipeline System Arch</h4>
-                        </div>
-                    </div>
+                <div class="skills-grid-col active-focus">
+                    <h3 class="skills-col-title">Cloud &amp; Engineering</h3>
+                    <ul class="skills-cards-wrapper">
+                        <li class="skill-card-module"><span class="skill-card-name">PostgreSQL · pgvector</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">AWS EC2 · RDS · S3</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Docker · Git · GitHub</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">CI/CD · automated deployments</span></li>
+                        <li class="skill-card-module"><span class="skill-card-name">Unit and end-to-end testing</span></li>
+                    </ul>
                 </div>
-
-                <!-- Group 4 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">04 // Core ML & Computer Vision</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="pytorch">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">PyTorch Deep Learning</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="peft-lora">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">PEFT / LoRA Fine-Tuning</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="quantization">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">Model Quantization</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="vla-models">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">Vision-Language-Action</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="visual-grounding">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">Visual Grounding</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="preprocessing-pipeline">
-                            <span class="skill-tag-prefix">[ml]</span>
-                            <h4 class="skill-card-name">Algorithmic Data Pipelines</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group 5 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">05 // NLP & Semantic RAG</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="rag-flow">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">Retrieval-Augmented Gen</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="semantic-search">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">Semantic Search & Index</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="embedding-pipelines">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">Text Embedding Pipelines</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="vector-dbs">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">ChromaDB & LanceDB</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="context-mgmt">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">Context Window Mgmt</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="ast-parsing">
-                            <span class="skill-tag-prefix">[nlp]</span>
-                            <h4 class="skill-card-name">AST Parsing & Tree-sitter</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Group 6 -->
-                <div class="skills-grid-col" data-specialization="ai">
-                    <h3 class="skills-col-title">06 // Software Engineering</h3>
-                    <div class="skills-cards-wrapper">
-                        <div class="skill-card-module" data-node="system-arch">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">System Architecture</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="req-analysis">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Requirements Analysis</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="legacy-reeng">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Legacy Re-engineering</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="refactoring">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Code Optimization</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="qa">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Quality Assurance & Test</h4>
-                        </div>
-                        <div class="skill-card-module" data-node="sdlc">
-                            <span class="skill-tag-prefix">[eng]</span>
-                            <h4 class="skill-card-name">Full-Cycle SDLC</h4>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact-section" class="section-container">
-            <div class="section-tag">03. REQUEST INFERENCE</div>
-            <h2 class="section-title">Contact API Client</h2>
-            <p class="section-desc">Transmit a POST request payload. The server response streams back in real-time.</p>
-            
+        <section id="contact-section" class="section-container" tabindex="-1" aria-labelledby="contact-title">
+            <h2 class="section-title" id="contact-title">Get in Touch</h2>
+            <p class="section-desc">Write a message here and send it from your email app, or contact me directly.</p>
             <div class="contact-card-box">
-                <!-- Mac-Style Window Top Bar -->
                 <div class="window-header-bar">
-                    <div class="window-controls">
+                    <div class="window-controls" aria-hidden="true">
                         <span class="ctrl-dot close"></span>
                         <span class="ctrl-dot minimize"></span>
                         <span class="ctrl-dot expand"></span>
                     </div>
-                    <div class="window-path">// api.abdullahkhan.dev/v1/contact</div>
+                    <div class="window-path">contact</div>
                     <div class="window-space"></div>
                 </div>
-                
                 <div class="api-workspace-grid">
-                    <!-- Left Editor Pane -->
-                    <div class="editor-pane">
+                    <div class="editor-pane" hidden id="contact-composer">
                         <div class="pane-tab-bar">
-                            <div class="editor-tab active">
-                                <span class="tab-icon">{}</span>
-                                <span class="tab-name">INPUT: request.json</span>
-                            </div>
+                            <div class="editor-tab active"><span class="tab-icon" aria-hidden="true">{}</span><span class="tab-name">Compose email</span></div>
                         </div>
-                        <form id="contact-form" class="api-form" onsubmit="event.preventDefault();">
+                        <form id="contact-form" class="api-form">
                             <div class="code-editor-client">
-                                <div class="line-numbers">
-                                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
-                                </div>
+                                <div class="line-numbers" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
                                 <div class="editor-contents">
-                                    <div>{</div>
-                                    <div class="line-indent"><span class="json-key">"name"</span>: <input type="text" id="form-name" placeholder="&quot;Your Name&quot;" required></div>
-                                    <div class="line-indent"><span class="json-key">"email"</span>: <input type="email" id="form-email" placeholder="&quot;your.email@org.com&quot;" required></div>
-                                    <div class="line-indent"><span class="json-key">"subject"</span>: <input type="text" id="form-subject" placeholder="&quot;Collaboration Opportunity&quot;"></div>
-                                    <div class="line-indent payload-line"><span class="json-key">"payload"</span>: <textarea id="form-message" placeholder="&quot;Write message block...&quot;" required></textarea></div>
-                                    <div class="line-indent">
-                                        <span class="json-key">"recruiter"</span>: 
-                                        <div class="custom-select-container">
-                                            <div class="custom-select-trigger" id="select-recruiter-trigger">true</div>
-                                            <div class="custom-select-options" id="select-recruiter-options">
-                                                <div class="custom-select-option selected" data-value="true">true</div>
-                                                <div class="custom-select-option" data-value="false">false</div>
-                                            </div>
-                                            <input type="hidden" id="form-mode" value="true">
-                                        </div>
-                                    </div>
-                                    <div>}</div>
+                                    <div aria-hidden="true">{</div>
+                                    <div class="line-indent"><label class="json-key" for="form-name">Name</label><input type="text" id="form-name" name="name" autocomplete="name" required></div>
+                                    <div class="line-indent"><label class="json-key" for="form-email">Email</label><input type="email" id="form-email" name="email" autocomplete="email" required></div>
+                                    <div class="line-indent"><label class="json-key" for="form-subject">Subject</label><input type="text" id="form-subject" name="subject"></div>
+                                    <div class="line-indent"><label class="json-key" for="form-message">Message</label><textarea id="form-message" name="message" rows="4" required></textarea></div>
+                                    <div aria-hidden="true">}</div>
                                 </div>
                             </div>
-                            <button class="btn btn-submit" id="btn-send-message">
-                                <span class="btn-terminal-dot"></span>
-                                <span class="btn-label">Execute POST Request</span>
-                                <span class="btn-cmd">v1/dispatch</span>
-                            </button>
+                            <button class="btn btn-submit" type="submit"><span class="btn-terminal-dot" aria-hidden="true"></span><span class="btn-label">Open email draft</span></button>
                         </form>
                     </div>
-                    
-                    <!-- Right Console Pane -->
-                    <div class="editor-pane">
+                    <div class="editor-pane contact-direct">
                         <div class="pane-tab-bar">
-                            <div class="editor-tab active">
-                                <span class="tab-icon">❯_</span>
-                                <span class="tab-name">OUTPUT: response.log</span>
-                                <span class="http-status-label" id="response-status">200 READY</span>
-                            </div>
+                            <div class="editor-tab active"><span class="tab-icon" aria-hidden="true">❯_</span><span class="tab-name">Direct contact</span></div>
                         </div>
                         <div class="api-response-panel">
-                            <div class="response-console-logs" id="api-log-output">
-                                <div class="console-line">// Connection open. Click 'Execute POST Request' to dispatch message block.</div>
+                            <div class="response-console-logs">
+                                <a id="contact-email" href="mailto:ak1399er@gmail.com">ak1399er@gmail.com</a>
+                                <a href="tel:+923265313186">+92 326 5313186</a>
+                                <p id="contact-status" role="status"></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        </main>
 
         <!-- Footer -->
         <footer class="portfolio-footer">
@@ -627,49 +402,93 @@
                 <div class="footer-grid-cell">
                     <span class="cell-label">ESTABLISHED_SOCKETS</span>
                     <div class="footer-links">
-                        <a href="https://github.com/abdullah-153" target="_blank" class="footer-link-port"><span class="port-num">P_443:</span> GitHub</a>
-                        <a href="https://www.linkedin.com/in/muhammad-abdullah-khan-331914214/" target="_blank" class="footer-link-port"><span class="port-num">P_80:</span> LinkedIn</a>
+                        <a href="https://github.com/abdullah-153" target="_blank" rel="noopener noreferrer" class="footer-link-port"><span class="port-num">P_443:</span> GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammad-abdullah-khan-331914214/" target="_blank" rel="noopener noreferrer" class="footer-link-port"><span class="port-num">P_80:</span> LinkedIn</a>
                         <a href="mailto:ak1399er@gmail.com" class="footer-link-port"><span class="port-num">P_25:</span> Email</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom-bar">
                 <div class="copyright-text">© 2026 ABDULLAH.KHAN. ALL RIGHTS RESERVED.</div>
-                <a href="#" class="back-to-top-btn" id="btn-back-to-top">
-                    <span class="btn-prompt">./</span>execute_top.sh <span class="btn-arrow">↑</span>
+                <a href="#top" class="back-to-top-btn">
+                    Back to top <span class="btn-arrow" aria-hidden="true">↑</span>
                 </a>
             </div>
         </footer>
 
     </div>
     
-    <!-- Project Detail Modal (Glassmorphic Expand Panel) -->
-    <div id="project-detail-modal" class="project-detail-modal">
-        <div class="modal-backdrop-blur"></div>
+    <dialog id="project-detail-modal" class="project-detail-modal" aria-labelledby="case-study-title">
+        <div class="modal-backdrop-blur" aria-hidden="true"></div>
         <div class="project-detail-card-wrapper">
-            <button class="modal-close-btn" id="modal-close-btn" aria-label="Close Case Study">
-                <span class="close-icon">&times;</span>
-                <span class="close-txt">// CLOSE</span>
+            <button class="modal-close-btn" id="modal-close-btn" type="button" aria-label="Close case study" autofocus>
+                <span class="close-icon" aria-hidden="true">&times;</span>
+                <span class="close-txt">Close</span>
             </button>
             <div class="project-detail-card">
-                <div id="project-detail-content" class="project-detail-content">
-                    <!-- Dynamically populated via JS -->
-                </div>
+                <div id="project-detail-content" class="project-detail-content"></div>
             </div>
         </div>
-    </div>
+    </dialog>
 
-    <!-- Curriculum Vitae Prompt Box (Mock Download) -->
-    <div id="cv-modal" class="cv-modal">
-        <div class="cv-modal-content">
-            <h3 class="modal-title">Retrieve Resume Payload</h3>
-            <p class="modal-desc">Simulating download stream for 'Muhammad_Abdullah_Khan_AI_ENG.pdf'...</p>
-            <div class="modal-progress-bar"><div class="fill" id="cv-download-progress"></div></div>
-            <div class="modal-actions">
-                <button class="btn btn-primary" id="btn-cv-confirm">Close Dialog</button>
-            </div>
+    <template id="case-study-helix">
+        <div class="detail-header-section">
+            <p class="detail-category-tag">Automataize · Production</p>
+            <h2 class="detail-project-title" id="case-study-title">Helix</h2>
+            <p class="detail-project-desc">Rental operations and AI contact center</p>
         </div>
-    </div>
+        <h3 class="detail-section-title">What I built</h3>
+        <ul class="detail-bullet-list">
+                <li>Built the platform independently in two months for three US rental companies with about 105 agents combined.</li>
+                <li>Unified IVR, skills- and intent-based routing, concurrent calls, transfers, live monitoring, messaging, and email. Added AI call summaries, automated quality assurance, and agentic resolutions.</li>
+                <li>Migrated 200K+ historical Zendesk tickets and brought unified CRM search across tickets, customers, calls, and reservations to about 300 ms.</li>
+            <li>Saved each company about $3,000 a month compared with its previous Zendesk setup.</li>
+                <li>Owned full-stack engineering, AWS infrastructure, automated testing, and GitHub CI/CD.</li>
+        </ul>
+    </template>
+
+    <template id="case-study-fleethq">
+        <div class="detail-header-section">
+            <p class="detail-category-tag">Automataize · Production</p>
+            <h2 class="detail-project-title" id="case-study-title">FleetHQ</h2>
+            <p class="detail-project-desc">AI command interface and MCP</p>
+        </div>
+        <h3 class="detail-section-title">What I built</h3>
+        <ul class="detail-bullet-list">
+                <li>Built the conversational UI and Django REST Framework orchestration as the sole engineer for the AI system.</li>
+                <li>Connected the assistant to native workflows with OAuth-secured MCP, permission checks, action approvals, knowledge retrieval, and quotas.</li>
+                <li>Kept AI capabilities aligned with native app releases so the assistant could support new product workflows.</li>
+        </ul>
+    </template>
+
+    <template id="case-study-clopal">
+        <div class="detail-header-section">
+            <p class="detail-category-tag">Automataize · Production</p>
+            <h2 class="detail-project-title" id="case-study-title">Clopal</h2>
+            <p class="detail-project-desc">Real-time AI copilot for calls and meetings</p>
+        </div>
+        <h3 class="detail-section-title">What I built</h3>
+        <ul class="detail-bullet-list">
+                <li>Supported Zoom, Teams, Google Meet, browser tab capture, and Twilio or API streams.</li>
+                <li>Combined BM25 and multilingual embeddings with weighted reciprocal rank fusion and contextual passage expansion for libraries of about 2,000 pages.</li>
+                <li>In a 105-run replay, retrieved the expected evidence in 105 of 105 checks. Transcript-commit-to-server-answer latency was 1.67 s median and 2.18 s p95.</li>
+                <li>Delivered recordings, post-call analysis, knowledge-based agent QA, and approved follow-up actions across email, calendars, and CRM workflows.</li>
+        </ul>
+    </template>
+
+    <template id="case-study-omnivla">
+        <div class="detail-header-section">
+            <p class="detail-category-tag">Personal project</p>
+            <h2 class="detail-project-title" id="case-study-title">OmniVLA</h2>
+            <p class="detail-project-desc">Local multimodal computer-use agent</p>
+        </div>
+        <h3 class="detail-section-title">What I built</h3>
+        <ul class="detail-bullet-list">
+                <li>Coordinated planning, visual execution, and verification in a LangGraph planner–executor–critic loop.</li>
+                <li>Used quantized Qwen 3.5 4B and Holo 3.1 9B with retrieval-augmented memory for task context.</li>
+                <li>Optimized local inference to under 30 seconds per step on hardware with 4 GB of VRAM.</li>
+        </ul>
+    </template>
 
     <!-- Scripts -->
     <script type="module" src="app.js"></script>
